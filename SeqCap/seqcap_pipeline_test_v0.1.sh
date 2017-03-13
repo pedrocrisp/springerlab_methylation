@@ -22,6 +22,8 @@ refdir=/home/springer/pcrisp/ws/refseqs/maize
 #get job ID - CHECK
 ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST} | cut -f 3)"
 
+echo 'analyzing sample ${ID}'
+
 #load modules
 module load python2/2.7.8
 module load samtools
