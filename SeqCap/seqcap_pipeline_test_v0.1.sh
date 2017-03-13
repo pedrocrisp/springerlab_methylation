@@ -7,7 +7,7 @@
 #PBS -M pcrisp@umn.edu
 
 #dir structure
-workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei
+workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis
 log_folder=${workingdir}/logs_${timestamp}
 fastqcfolder=${workingdir}/fastqc
 trimmed=${workingdir}/trimmed
