@@ -17,7 +17,7 @@
 #OnTargetCoverage=${workingdir}/OnTargetCoverage
 
 #reference file dir
-refdir=/home/springer/pcrisp/ws/refseqs
+refdir=/home/springer/pcrisp/ws/refseqs/maize
 
 #get job ID - CHECK
 ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST} | cut -f 3)"
@@ -40,7 +40,7 @@ cd $workingdir
         --phred33 \
         --fastqc \
         --fastqc_args "--noextract --outdir $fastqcfolder" \
-        -o $trimmedfolder --paired "${readsdir}/${ID}_R2_001.fastq" "${readsdir}/${ID}_R2_001.fastq"
+        -o $trimmedfolder --paired "${readsdir}/${ID}_R1_001.fastq" "${readsdir}/${ID}_R2_001.fastq"
 
         # align adapter trimmed datasets to B73 genome
         bsmap \
