@@ -40,7 +40,7 @@ cd $workingdir
         --phred33 \
         --fastqc \
         --fastqc_args "--noextract --outdir $fastqcfolder" \
-        -o $trimmedfolder --paired "${workingdir}/${ID}_R2_001.fastq" "${workingdir}/${ID}_R2_001.fastq"
+        -o $trimmedfolder --paired "${workingdir}/reads/${ID}_R2_001.fastq" "${workingdir}/reads/${ID}_R2_001.fastq"
 
         # align adapter trimmed datasets to B73 genome
         bsmap \
