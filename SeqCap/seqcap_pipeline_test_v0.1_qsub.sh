@@ -36,7 +36,7 @@ cat $0 > "$log_folder/runner.log"
 
 #run script and pass args
 #bash $script $workingdir $log_folder $fastqcfolder $trimmed $alignfolder $BSMAPratio_folder $TempOut $OnTargetCoverage
-qsub -t 1-8 -v LIST=${workingdir}/samples.txt $script_to_qsub
+qsub -t 1-8 -v LIST=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/samples.txt $script_to_qsub
 
 #to run
 #bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/seqcap_pipeline_test_v0.1_qsub.sh
