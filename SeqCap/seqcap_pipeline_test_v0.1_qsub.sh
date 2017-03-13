@@ -8,7 +8,7 @@ workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei
 analysis_dir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis
 mkdir $analysis_dir
 
-log_folder=${analysis_dir}/logs
+log_folder=${analysis_dir}/logs_${timestamp}
 mkdir $log_folder
 
 fastqcfolder=${analysis_dir}/fastqc
@@ -37,7 +37,11 @@ cat $0 > "$log_folder/runner.log"
 
 #run script and pass args
 #bash $script $workingdir $log_folder $fastqcfolder $trimmed $alignfolder $BSMAPratio_folder $TempOut $OnTargetCoverage
-qsub -t 1-8 -v LIST=${workingdir}/samples.txt $script_to_qsub
+qsub -t 1-8 \
+-o ${log_folder}/testpipeline_SeqCap_1_Mei_o \
+-e ${log_folder}/testpipeline_SeqCap_1_Mei_e \
+-v LIST=${workingdir}/samples.txt,readsdir=$readsdir,workingdir=$workingdir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmed=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
+$script_to_qsub
 
 #to run
 #bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/seqcap_pipeline_test_v0.1_qsub.sh
