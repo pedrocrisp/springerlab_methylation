@@ -1,20 +1,37 @@
 #!/bin/bash
 
-#script path and cat a record of what was run
-script_dir=/home/springer/pcrisp/gitrepos/springerlab_methylation/
-qsub_script=${script_dir}/seqcap_pipeline_test_v0.1.sh
-cat $script > "$logdir/script.log"
-cat $0 > "$logdir/runner.log"
-
+#make folder structure
 timestamp=$(date +%Y%m%d-%H%M%S)
 
-logdir="./logs/${outdir}.${timestamp}"
-mkdir $logdir
-
-#make log folder
 workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei
-log_folder=${workingdir}/logs
+
+log_folder=${workingdir}/logs_${timestamp}
+mkdir $log_folder
+
 fastqcfolder=${workingdir}/fastqc
+mkdir $fastqcfolder
+
+trimmed=${workingdir}/trimmed
+mkdir $trimmed
+
+alignfolder=${workingdir}/bsmaped
+mkdir $alignfolder
+
+BSMAPratio_folder=${workingdir}/BSMAPratio
+mkdir $BSMAPratio_folder
+
+TempOut=${workingdir}/TempOut
+mkdir $TempOut
+
+OnTargetCoverage=${workingdir}/OnTargetCoverage
+mkdir $OnTargetCoverage
+
+#script path and cat a record of what was run
+script_dir=/home/springer/pcrisp/gitrepos/springerlab_methylation/
+script_to_qsub=${script_dir}/seqcap_pipeline_test_v0.1.sh
+cat $script_to_qsub > "$log_folder/script.log"
+cat $0 > "$log_folder/runner.log"
 
 #run script and pass args
-bash $script $workingdir $log_folder $fastqcfolder
+#bash $script $workingdir $log_folder $fastqcfolder $trimmed $alignfolder $BSMAPratio_folder $TempOut $OnTargetCoverage
+qsub $script_to_qsub
