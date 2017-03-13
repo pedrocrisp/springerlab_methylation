@@ -40,7 +40,7 @@ cat $0 > "$log_folder/runner.log"
 qsub -t 1-8 \
 -o ${log_folder}/testpipeline_SeqCap_1_Mei_o \
 -e ${log_folder}/testpipeline_SeqCap_1_Mei_e \
--v LIST=${workingdir}/samples.txt,readsdir=$readsdir,workingdir=$workingdir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmed=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
+-v LIST=${workingdir}/samples.txt,workingdir=$readsdir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmed=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
 $script_to_qsub
 
 #to run
