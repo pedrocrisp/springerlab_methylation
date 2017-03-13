@@ -3,7 +3,9 @@
 #make folder structure
 timestamp=$(date +%Y%m%d-%H%M%S)
 
-workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei
+mkdir analysis
+
+workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis
 
 log_folder=${workingdir}/logs_${timestamp}
 mkdir $log_folder
