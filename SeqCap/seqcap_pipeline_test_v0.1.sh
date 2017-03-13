@@ -6,14 +6,18 @@
 #PBS -r n
 #PBS -M pcrisp@umn.edu
 
-#args passed
-workingdir=$1
-log_folder=$2 
-fastqcfolder=$3
-trimmedfolder=$4
-alignedfolder=$5
-$BSMAPratio_folder=$6
-TempOut=$7
+#dir structure
+workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei
+log_folder=${workingdir}/logs_${timestamp}
+fastqcfolder=${workingdir}/fastqc
+trimmed=${workingdir}/trimmed
+alignfolder=${workingdir}/bsmaped
+BSMAPratio_folder=${workingdir}/BSMAPratio
+TempOut=${workingdir}/TempOut
+OnTargetCoverage=${workingdir}/OnTargetCoverage
+
+#reference file dir
+refdir=/home/springer/pcrisp/ws/refseqs
 
 #get job ID - CHECK
 ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST} | cut -f 3)"
@@ -42,7 +46,7 @@ cd $workingdir
         bsmap \
         -a "${trimmedfolder}/${ID}_R1_001_val_1.fq" \
         -b "${trimmedfolder}/${ID}_R2_001_val_2.fq" \
-        -d /work/02297/qingli/db/AGPV4_20170119/Zea_mays.AGPv4.dna.toplevel.fa \
+        -d "${refdir}/AGPV4_20170119/Zea_mays.AGPv4.dna.toplevel.fa" \
         -o "${alignedfolder}/${ID}.bam" \
         -v 5 \
         -r 0 \
@@ -66,8 +70,8 @@ cd $workingdir
         java -jar /home/springer/pcrisp/software/picard.jar CalculateHsMetrics \
         "I=./BAM/"$i"_sorted_MarkDup.bam" \
         "O=./HsMetrics/"$i"_HsMetrics_noDuplicate.txt" \
-        BI=./REFfile/seqcapv2_onTarget-for-picard.bed \
-        TARGET_INTERVALS=./REFfile/seqcapv2_onTarget-for-picard.bed
+        BI=${refdir}/seqcapv2_onTarget-for-picard.bed \
+        TARGET_INTERVALS="${refdir}/seqcapv2_onTarget-for-picard.bed
 
         # keep properly paired reads
         bamtools filter \
@@ -86,7 +90,7 @@ cd $workingdir
         # extract methylation information
         python /home/springer/pcrisp/software/bsmap-2.90/methratio.py \
         -o "$BSMAPratio_folder/${ID}" \
-        -d /work/02297/qingli/db/AGPV4_20170119/Zea_mays.AGPv4.dna.toplevel.fa \
+        -d ${refdir}/AGPV4_20170119/Zea_mays.AGPv4.dna.toplevel.fa \
         -u \
         -z \
         -r "${alignedfolder}/${ID}_sorted_MarkDup_pairs_clipOverlap.bam"
@@ -106,7 +110,7 @@ cd $workingdir
         ## summarize read count, only use uniquley mapped and properly paried reads
         bedtools intersect \
         -abam "${alignedfolder}/${ID}_sorted_MarkDup_pairs_clipOverlap.bam" \
-        -b ./REFfile/BSseqcapv2_specific_regions.bed \
+        -b .${refdir}/BSseqcapv2_specific_regions.bed \
         -bed \
         -wa \
         -wb > "${TempOut}/${ID}_specific_region_pairs_clipOverlap.txt"
@@ -118,7 +122,7 @@ cd $workingdir
         # count methylated and unmethylated Cytosine per region
         bedtools intersect \
         -a "$BSMAPratio_folder/${ID}_BSMAP_out.txt" \
-        -b ./REFfile/BSseqcapv2_specific_regions.bed \
+        -b ${refdir}/BSseqcapv2_specific_regions.bed \
         -wa \
         -wb > "${TempOut}/${ID}_BSMAP_out_ontarget.txt"
         
