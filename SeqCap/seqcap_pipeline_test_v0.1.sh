@@ -7,6 +7,7 @@
 #PBS -M pcrisp@umn.edu
 
 #dir structure
+readsdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/reads
 workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis
 log_folder=${workingdir}/logs_${timestamp}
 fastqcfolder=${workingdir}/fastqc
@@ -40,7 +41,7 @@ cd $workingdir
         --phred33 \
         --fastqc \
         --fastqc_args "--noextract --outdir $fastqcfolder" \
-        -o $trimmedfolder --paired "${workingdir}/reads/${ID}_R2_001.fastq" "${workingdir}/reads/${ID}_R2_001.fastq"
+        -o $trimmedfolder --paired "${readsdir}/${ID}_R2_001.fastq" "${readsdir}/${ID}_R2_001.fastq"
 
         # align adapter trimmed datasets to B73 genome
         bsmap \
