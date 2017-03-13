@@ -27,7 +27,7 @@ OnTargetCoverage=${workingdir}/OnTargetCoverage
 mkdir $OnTargetCoverage
 
 #script path and cat a record of what was run
-script_dir=/home/springer/pcrisp/gitrepos/springerlab_methylation/
+script_dir=/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap
 script_to_qsub=${script_dir}/seqcap_pipeline_test_v0.1.sh
 cat $script_to_qsub > "$log_folder/script.log"
 cat $0 > "$log_folder/runner.log"
@@ -37,4 +37,4 @@ cat $0 > "$log_folder/runner.log"
 qsub -t 1-8 -v LIST=${workingdir}/samples.txt $script_to_qsub
 
 #to run
-#bash /home/springer/pcrisp/gitrepos/springerlab_methylation/seqcap_pipeline_test_v0.1_qsub.sh
+#bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/seqcap_pipeline_test_v0.1_qsub.sh
