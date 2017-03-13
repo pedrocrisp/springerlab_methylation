@@ -1,22 +1,20 @@
 #!/bin/bash
 #PBS -l walltime=01:00:00,nodes=1:ppn=1,mem=5gb
-#PBS -o /scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis/logs/20170313_testpipeline_SeqCap_1_Mei_o
-#PBS -e /scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis/logs/20170313_testpipeline_SeqCap_1_Mei_e
 #PBS -N 20170313_testpipeline_SeqCap_1_Mei
 #PBS -r n
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
 
 #dir structure
-readsdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/reads
-workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis
-log_folder=${workingdir}/logs_${timestamp}
-fastqcfolder=${workingdir}/fastqc
-trimmed=${workingdir}/trimmed
-alignfolder=${workingdir}/bsmaped
-BSMAPratio_folder=${workingdir}/BSMAPratio
-TempOut=${workingdir}/TempOut
-OnTargetCoverage=${workingdir}/OnTargetCoverage
+#readsdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/reads
+#workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis
+#log_folder=${workingdir}/logs_${timestamp}
+#fastqcfolder=${workingdir}/fastqc
+#trimmed=${workingdir}/trimmed
+#alignfolder=${workingdir}/bsmaped
+#BSMAPratio_folder=${workingdir}/BSMAPratio
+#TempOut=${workingdir}/TempOut
+#OnTargetCoverage=${workingdir}/OnTargetCoverage
 
 #reference file dir
 refdir=/home/springer/pcrisp/ws/refseqs
