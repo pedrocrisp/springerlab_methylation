@@ -5,6 +5,9 @@
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
 
+set -x
+set -e
+
 #dir structure
 #readsdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/reads
 #workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis
@@ -22,7 +25,7 @@ refdir=/home/springer/pcrisp/ws/refseqs/maize
 #get job ID - CHECK
 ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST} | cut -f 3)"
 
-echo 'analyzing sample ${ID}'
+echo $ID
 
 #load modules
 module load python2/2.7.8
