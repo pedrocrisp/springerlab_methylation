@@ -46,7 +46,7 @@ cd $workingdir
         bsmap \
         -a "${trimmedfolder}/${ID}_R1_001_val_1.fq" \
         -b "${trimmedfolder}/${ID}_R2_001_val_2.fq" \
-        -d "${refdir}/AGPV4_20170119/Zea_mays.AGPv4.dna.toplevel.fa" \
+        -d "${refdir}/Zea_mays.AGPv4.dna.toplevel.fa" \
         -o "${alignedfolder}/${ID}.bam" \
         -v 5 \
         -r 0 \
@@ -90,7 +90,7 @@ cd $workingdir
         # extract methylation information
         python /home/springer/pcrisp/software/bsmap-2.90/methratio.py \
         -o "$BSMAPratio_folder/${ID}" \
-        -d ${refdir}/AGPV4_20170119/Zea_mays.AGPv4.dna.toplevel.fa \
+        -d ${refdir}/Zea_mays.AGPv4.dna.toplevel.fa \
         -u \
         -z \
         -r "${alignedfolder}/${ID}_sorted_MarkDup_pairs_clipOverlap.bam"
