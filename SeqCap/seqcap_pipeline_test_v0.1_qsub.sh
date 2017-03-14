@@ -1,6 +1,6 @@
 #!/bin/bash
-set -x
-#set -e
+#set -x
+set -e
 
 usage="USAGE:
 seqcap_pipeline_test_v0.1_qsub.sh <sample_list.txt>"
@@ -12,7 +12,7 @@ then
 echo $usage
 exit -1
 else
-echo 'Submitting samples listed in $2 for methylome analysis'
+echo "Submitting samples listed in \$2 for methylome analysis"
 fi
 
 #number of samples
@@ -22,8 +22,9 @@ then
 qsub_t=1
 else
 qsub_t="1-${number_of_samples}"
+fi
 
-echo 'number of samples is $qsub_t'
+echo "number of samples is \$qsub_t"
 ########## Run #################
 
 
