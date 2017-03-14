@@ -6,7 +6,7 @@ set -e
 timestamp=$(date +%Y%m%d-%H%M%S)
 
 #get workingdir
-pbs_pwd=pwd
+pbs_pwd=$(pwd)
 echo $pbs_pwd
 
 workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei
