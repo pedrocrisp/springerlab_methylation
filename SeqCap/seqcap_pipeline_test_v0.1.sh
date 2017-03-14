@@ -53,11 +53,13 @@ cd $workingdir
         # -v 5: allow 5 mismatches (could also use -v 0.05 = 5% of read length)
         # -p 8: 8 threads/cores
         # -q 20: trim to q20
+        
+        #-o "${alignfolder}/${ID}.bam" \
         bsmap \
         -a "${trimmedfolder}/${ID}_R1_001_val_1.fq" \
         -b "${trimmedfolder}/${ID}_R2_001_val_2.fq" \
         -d "${refdir}/Zea_mays.AGPv4.dna.toplevel.fa" \
-        -o "${alignfolder}/${ID}.bam" \
+        -o ./${ID}.bam \
         -v 5 \
         -r 0 \
         -p 8 \
