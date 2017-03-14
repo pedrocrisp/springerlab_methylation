@@ -40,7 +40,7 @@ cat $0 > "$log_folder/runner.log"
 #run script and pass args
 #bash $script $workingdir $log_folder $fastqcfolder $trimmed $alignfolder $BSMAPratio_folder $TempOut $OnTargetCoverage
 qsub -t 1-8 \
--d $pbs_pwd\
+-d $pbs_pwd \
 -o ${log_folder}/testpipeline_SeqCap_1_Mei_o \
 -e ${log_folder}/testpipeline_SeqCap_1_Mei_e \
 -v LIST=${workingdir}/samples.txt,readsdir=${workingdir}/reads,workingdir=$analysis_dir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmedfolder=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
