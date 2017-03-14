@@ -1,6 +1,21 @@
 #!/bin/bash
 set -x
-set -e
+#set -e
+
+usage="USAGE:
+seqcap_pipeline_test_v0.1_qsub.sh <sample_list.txt>"
+
+######### Setup ################
+sample_list=$1
+if [ "$#" -lt "1" ]
+then
+echo $usage
+exit -1
+else
+echo 'Submitting samples listed in $2 for methylome analysis'
+fi
+########## Run #################
+
 
 #make folder structure
 timestamp=$(date +%Y%m%d-%H%M%S)
@@ -46,7 +61,7 @@ cat $0 > "$log_folder/runner.log"
 qsub -t 1-8 \
 -o ${log_folder}/testpipeline_SeqCap_1_Mei_o \
 -e ${log_folder}/testpipeline_SeqCap_1_Mei_e \
--v LIST=${workingdir}/samples.txt,readsdir=${workingdir}/reads,workingdir=$analysis_dir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmedfolder=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
+-v LIST=${workingdir}/${sample_list},readsdir=${workingdir}/reads,workingdir=$analysis_dir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmedfolder=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
 $script_to_qsub
 
     #-wd $pbs_pwd \
