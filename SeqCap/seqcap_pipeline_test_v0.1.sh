@@ -34,6 +34,7 @@ module load java
 module load bedtools
 module load cutadapt/1.8.1
 module load bamtools
+module load fastqc/0.11.5
 
 #cd to working dir
 cd $workingdir
