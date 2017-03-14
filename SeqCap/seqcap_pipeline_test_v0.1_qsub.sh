@@ -14,7 +14,18 @@ exit -1
 else
 echo 'Submitting samples listed in $2 for methylome analysis'
 fi
+
+#number of samples
+number_of_samples=`wc -l $sample_list | awk '{print $1}'`
+if [$number_of_samples -eq 1]
+then
+qsub_t=1
+else
+qsub_t="1-${number_of_samples}"
+
+echo 'number of smaples is $qsub_t'
 ########## Run #################
+
 
 
 #make folder structure
@@ -58,7 +69,7 @@ cat $0 > "$log_folder/runner.log"
 
 #run script and pass args
 #bash $script $workingdir $log_folder $fastqcfolder $trimmed $alignfolder $BSMAPratio_folder $TempOut $OnTargetCoverage
-qsub -t 1-8 \
+qsub -t $qsub_t \
 -o ${log_folder}/testpipeline_SeqCap_1_Mei_o \
 -e ${log_folder}/testpipeline_SeqCap_1_Mei_e \
 -v LIST=${workingdir}/${sample_list},readsdir=${workingdir}/reads,workingdir=$analysis_dir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmedfolder=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
