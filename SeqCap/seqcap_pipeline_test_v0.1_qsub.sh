@@ -12,7 +12,7 @@ then
 echo $usage
 exit -1
 else
-echo "Submitting samples listed in \$2 for methylome analysis"
+echo "Submitting samples listed in '$sample_list' for methylome analysis"
 fi
 
 #number of samples
@@ -24,7 +24,7 @@ else
 qsub_t="1-${number_of_samples}"
 fi
 
-echo "number of samples is \$qsub_t"
+echo "argument to be passed to qsub -t is '$qsub_t'"
 ########## Run #################
 
 
