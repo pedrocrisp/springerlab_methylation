@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=01:00:00,nodes=1:ppn=8,pmem=5gb
+#PBS -l walltime=01:00:00,nodes=1:ppn=8,pmem=8gb
 #PBS -N 20170313_testpipeline_SeqCap_1_Mei
 #PBS -r n
 #PBS -m abe
