@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=01:00:00,nodes=1:ppn=8,mem=32gb
+#PBS -l walltime=01:00:00,nodes=1:ppn=8,mem=64gb
 #PBS -N 20170313_testpipeline_SeqCap_1_Mei
 #PBS -r n
 #PBS -m abe
@@ -57,11 +57,13 @@ cd $workingdir
         #-o "${alignfolder}/${ID}.bam" \
         #-o "./${ID}.bam" \
         
+        which samtools
+        
         bsmap \
         -a "${trimmedfolder}/${ID}_R1_001_val_1.fq" \
         -b "${trimmedfolder}/${ID}_R2_001_val_2.fq" \
         -d "${refdir}/Zea_mays.AGPv4.dna.toplevel.fa" \
-        -o "${trimmedfolder}/${ID}.bam" \
+        -o "${alignfolder}/${ID}.bam" \
         -v 5 \
         -r 0 \
         -p 8 \
