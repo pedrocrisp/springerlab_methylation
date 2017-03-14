@@ -5,9 +5,9 @@ set -e
 #make folder structure
 timestamp=$(date +%Y%m%d-%H%M%S)
 
-#get workingdir
-pbs_pwd=$(pwd)
-echo $pbs_pwd
+#get workingdir - not working try to fix later when I make script generic
+#pbs_pwd=$(pwd)
+#echo $pbs_pwd
 
 workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei
 
@@ -44,13 +44,13 @@ cat $0 > "$log_folder/runner.log"
 #run script and pass args
 #bash $script $workingdir $log_folder $fastqcfolder $trimmed $alignfolder $BSMAPratio_folder $TempOut $OnTargetCoverage
 qsub -t 1-8 \
--wd $pbs_pwd \
 -o ${log_folder}/testpipeline_SeqCap_1_Mei_o \
 -e ${log_folder}/testpipeline_SeqCap_1_Mei_e \
 -v LIST=${workingdir}/samples.txt,readsdir=${workingdir}/reads,workingdir=$analysis_dir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmedfolder=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
 $script_to_qsub
 
-    #-wd Execute the job from the directory specified in working_dir.
+    #-wd $pbs_pwd \
+    #-wd Execute the job from the directory specified in working_dir. - not working...
     #-o and -e pass the file locations for std out/error
     #-v additional variables to pass to the qsub script including the PBS_array list and the dir structures
 
