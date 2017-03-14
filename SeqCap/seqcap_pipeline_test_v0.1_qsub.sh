@@ -23,7 +23,7 @@ qsub_t=1
 else
 qsub_t="1-${number_of_samples}"
 
-echo 'number of smaples is $qsub_t'
+echo 'number of samples is $qsub_t'
 ########## Run #################
 
 
