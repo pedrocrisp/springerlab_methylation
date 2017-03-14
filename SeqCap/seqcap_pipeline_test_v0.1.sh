@@ -29,7 +29,7 @@ echo $ID
 
 #load modules
 module load python2/2.7.8
-#module load samtools #bsmap is not working, maybe this is the issue?
+module load samtools/1.3 #bsmap is not working, maybe this is the issue?
 module load java
 module load bedtools
 module load cutadapt/1.8.1
