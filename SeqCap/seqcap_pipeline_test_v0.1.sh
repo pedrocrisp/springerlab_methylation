@@ -49,6 +49,10 @@ cd $workingdir
         -o $trimmedfolder --paired "${readsdir}/${ID}_R1_001.fastq" "${readsdir}/${ID}_R2_001.fastq"
 
         # align adapter trimmed datasets to B73 genome
+        # -r 0: dont report repeat hits
+        # -v 5: allow 5 mismatches (could also use -v 0.05 = 5% of read length)
+        # -p 8: 8 threads/cores
+        # -q 20: trim to q20
         bsmap \
         -a "${trimmedfolder}/${ID}_R1_001_val_1.fq" \
         -b "${trimmedfolder}/${ID}_R2_001_val_2.fq" \
@@ -60,7 +64,7 @@ cd $workingdir
         -q 20 \
         -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
 
-        # reomve PCR duplicates, must be sorted by coordinate
+        # remove PCR duplicates, must be sorted by coordinate
         java -jar /home/springer/pcrisp/software/picard.jar SortSam \
         "INPUT=${alignedfolder}/${ID}.bam" \
         "OUTPUT=${alignedfolder}/${ID}_sorted.bam" \
