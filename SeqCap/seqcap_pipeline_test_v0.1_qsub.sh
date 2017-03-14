@@ -40,11 +40,15 @@ cat $0 > "$log_folder/runner.log"
 #run script and pass args
 #bash $script $workingdir $log_folder $fastqcfolder $trimmed $alignfolder $BSMAPratio_folder $TempOut $OnTargetCoverage
 qsub -t 1-8 \
--d $pbs_pwd \
+-wd $pbs_pwd \
 -o ${log_folder}/testpipeline_SeqCap_1_Mei_o \
 -e ${log_folder}/testpipeline_SeqCap_1_Mei_e \
 -v LIST=${workingdir}/samples.txt,readsdir=${workingdir}/reads,workingdir=$analysis_dir,log_folder=$log_folder,fastqcfolder=$fastqcfolder,trimmedfolder=$trimmed,alignfolder=$alignfolder,BSMAPratio_folder=$BSMAPratio_folder,TempOut=$TempOut,OnTargetCoverage=$OnTargetCoverage \
 $script_to_qsub
+
+    #-wd Execute the job from the directory specified in working_dir.
+    #-o and -e pass the file locations for std out/error
+    #-v additional variables to pass to the qsub script including the PBS_array list and the dir structures
 
 #to run
 #bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/seqcap_pipeline_test_v0.1_qsub.sh
