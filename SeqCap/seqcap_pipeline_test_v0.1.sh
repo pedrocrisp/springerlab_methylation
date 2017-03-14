@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=01:00:00,nodes=1:ppn=8,mem=16gb
+#PBS -l walltime=01:00:00,nodes=1:ppn=8,mem=32gb
 #PBS -N 20170313_testpipeline_SeqCap_1_Mei
 #PBS -r n
 #PBS -m abe
@@ -29,12 +29,12 @@ echo $ID
 
 #load modules
 module load python2/2.7.8
-module load samtools/1.3 #bsmap is not working, maybe this is the issue?
 module load java
 module load bedtools
 module load cutadapt/1.8.1
 module load bamtools
 module load fastqc/0.11.5
+module load samtools/1.3 #bsmap is not working, maybe this is the issue?
 
 #cd to working dir
 cd $workingdir
