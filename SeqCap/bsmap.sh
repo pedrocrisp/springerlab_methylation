@@ -25,6 +25,8 @@ echo $ID
 #module load fastqc/0.11.5
 module load samtools/1.3 #bsmap is not working, maybe this is the issue?
 
+which samtools
+
 #cd to working dir
 cd $workingdir
 
