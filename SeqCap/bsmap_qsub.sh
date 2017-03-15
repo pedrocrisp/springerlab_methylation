@@ -39,7 +39,7 @@ timestamp=$(date +%Y%m%d-%H%M%S)
 
 workingdir=.
 
-analysis_dir=${workingdir}/analysis
+analysis_dir=analysis
 
 log_folder=${analysis_dir}/logs_bsmap_${timestamp}
 mkdir $log_folder
@@ -60,7 +60,7 @@ cat $0 > "$log_folder/runner.log"
 qsub -t $qsub_t \
 -o ${log_folder}/testpipeline_SeqCap_1_Mei_o \
 -e ${log_folder}/testpipeline_SeqCap_1_Mei_e \
--v LIST=${workingdir}/${sample_list},readsdir=${workingdir}/reads,workingdir=$analysis_dir,log_folder=$log_folder,trimmedfolder=$trimmed,alignfolder=$alignfolder \
+-v LIST=${sample_list},readsdir=reads,analysis_dir=$analysis_dir,log_folder=$log_folder,trimmedfolder=$trimmed,alignfolder=$alignfolder \
 $script_to_qsub
 
     #-wd $pbs_pwd \
