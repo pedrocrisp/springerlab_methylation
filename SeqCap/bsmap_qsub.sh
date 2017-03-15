@@ -13,6 +13,7 @@ echo $usage
 exit -1
 else
 echo "Submitting samples listed in '$sample_list' for methylome analysis"
+cat $sample_list
 fi
 
 #number of samples
