@@ -37,9 +37,9 @@ timestamp=$(date +%Y%m%d-%H%M%S)
 #pbs_pwd=$(pwd)
 #echo $pbs_pwd
 
-workingdir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei
+workingdir=./
 
-analysis_dir=/scratch.global/pcrisp/SeqCap_1_Mei/testpipeline_SeqCap_1_Mei/analysis
+analysis_dir=${analysis_dir}/analysis
 
 log_folder=${analysis_dir}/logs_bsmap_${timestamp}
 mkdir $log_folder
