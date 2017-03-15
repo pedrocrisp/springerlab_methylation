@@ -68,4 +68,4 @@ $script_to_qsub
     #-v additional variables to pass to the qsub script including the PBS_array list and the dir structures
 
 #to run
-#bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/seqcap_pipeline_test_v0.1_qsub.sh
+#bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/bsmap_qsub.sh <sample_list.txt>
