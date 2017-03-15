@@ -48,12 +48,10 @@ cd $workingdir
         #-q 20 \
         #-A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
         
-        echo "${alignfolder}/${ID}/${ID}.bam"
-        
         bsmap \
-        -a "${trimmedfolder}/${ID}_R1_001_val_1.fq" \
-        -b "${trimmedfolder}/${ID}_R2_001_val_2.fq" \
-        -d "${refdir}/Zea_mays.AGPv4.dna.toplevel.fa" \
+        -a $trimmedfolder"/"$ID"_R1_001_val_1.fq" \
+        -b $trimmedfolder"/"$ID"_R2_001_val_2.fq" \
+        -d $refdir"/Zea_mays.AGPv4.dna.toplevel.fa" \
         -o bsmaped/F1-16_Index5_S1/F1-16_Index5_S1.bam \
         -v 5 \
         -r 0 \
