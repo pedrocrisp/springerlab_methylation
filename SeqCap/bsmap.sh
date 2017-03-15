@@ -7,6 +7,7 @@
 
 set -x
 set -e
+cd "$PBS_O_WORKDIR"
 
 #reference file dir
 refdir=/home/springer/pcrisp/ws/refseqs/maize
@@ -28,9 +29,6 @@ module load samtools/1.3 #bsmap is not working, maybe this is the issue?
 which samtools
 
 samtools --version
-
-#cd to working dir
-cd $workingdir
 
 ###################
         
