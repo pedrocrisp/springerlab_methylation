@@ -58,5 +58,3 @@ samtools --version
         -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
         
          #-o "bsmaped/${ID}/${ID}.bam" \
-
-cd $workingdir
