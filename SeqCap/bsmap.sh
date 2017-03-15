@@ -35,7 +35,7 @@ cd $workingdir
 ###################
         
         mkdir "${alignfolder}/${ID}"
-        cd "${alignfolder}/${ID}"
+        #cd "${alignfolder}/${ID}"
         
         bsmap \
         -a trimmed/F1-16_Index5_S1_R1_001_val_1.fq \
