@@ -37,7 +37,7 @@ timestamp=$(date +%Y%m%d-%H%M%S)
 #pbs_pwd=$(pwd)
 #echo $pbs_pwd
 
-workingdir=./
+workingdir=.
 
 analysis_dir=${workingdir}/analysis
 
