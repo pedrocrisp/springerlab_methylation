@@ -39,7 +39,7 @@ timestamp=$(date +%Y%m%d-%H%M%S)
 
 workingdir=./
 
-analysis_dir=${analysis_dir}/analysis
+analysis_dir=${workingdir}/analysis
 
 log_folder=${analysis_dir}/logs_bsmap_${timestamp}
 mkdir $log_folder
