@@ -37,26 +37,28 @@ cd $workingdir
         mkdir "${alignfolder}/${ID}"
         #cd "${alignfolder}/${ID}"
         
-        bsmap \
-        -a trimmed/F1-16_Index5_S1_R1_001_val_1.fq \
-        -b trimmed/F1-16_Index5_S1_R2_001_val_2.fq \
-        -d "${refdir}/Zea_mays.AGPv4.dna.toplevel.fa" \
-        -o bsmaped/F1-16_Index5_S1/F1-16_Index5_S1.bam \
-        -v 5 \
-        -r 0 \
-        -p 1 \
-        -q 20 \
-        -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
-        
         #bsmap \
-        #-a "${trimmedfolder}/${ID}_R1_001_val_1.fq" \
-        #-b "${trimmedfolder}/${ID}_R2_001_val_2.fq" \
+        #-a trimmed/F1-16_Index5_S1_R1_001_val_1.fq \
+        #-b trimmed/F1-16_Index5_S1_R2_001_val_2.fq \
         #-d "${refdir}/Zea_mays.AGPv4.dna.toplevel.fa" \
-        #-o "${alignfolder}/${ID}/${ID}.bam" \
+        #-o bsmaped/F1-16_Index5_S1/F1-16_Index5_S1.bam \
         #-v 5 \
         #-r 0 \
         #-p 1 \
         #-q 20 \
         #-A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
+        
+        echo "${alignfolder}/${ID}/${ID}.bam"
+        
+        bsmap \
+        -a "${trimmedfolder}/${ID}_R1_001_val_1.fq" \
+        -b "${trimmedfolder}/${ID}_R2_001_val_2.fq" \
+        -d "${refdir}/Zea_mays.AGPv4.dna.toplevel.fa" \
+        -o "${alignfolder}/${ID}/${ID}.bam" \
+        -v 5 \
+        -r 0 \
+        -p 1 \
+        -q 20 \
+        -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
 
 cd $workingdir
