@@ -29,6 +29,10 @@ module load fastqc/0.11.5
 module load cutadapt/1.8.1
 
 ########## Set up dirs #################
+
+#get job ID
+ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST} | cut -f 3)"
+
 #cd into work dir
 cd "$PBS_O_WORKDIR"
 
