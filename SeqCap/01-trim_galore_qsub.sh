@@ -39,14 +39,14 @@ analysis_dir=analysis
 mkdir -p $analysis_dir
 
 #make trimmgalore logs folder, timestamped
-log_folder=${analysis_dir}/logs/logs_trim_galore_${timestamp}
+log_folder=logs/logs_trim_galore_${timestamp}
 mkdir $log_folder
 
 #script path and cat a record of what was run
 script_dir=/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap
 script_to_qsub=${script_dir}/01-trim_galore.sh
-cat $script_to_qsub > "$log_folder/script.log"
-cat $0 > "$log_folder/qsub_runner.log"
+cat $script_to_qsub > ${log_folder}/script.log
+cat $0 > ${log_folder}/qsub_runner.log
 
 #submit qsub and pass args
 #-o and -e pass the file locations for std out/error
