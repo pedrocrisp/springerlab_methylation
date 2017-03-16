@@ -59,7 +59,7 @@ trimmed_folder=analysis/trimmed
 bsmap \
 -a analysis/trimmed/F1-16_Index5_S1_R1_001_val_1.fq \
 -b analysis/trimmed/F1-16_Index5_S1_R2_001_val_2.fq \
--d ${genome_reference} \
+-d $genome_reference \
 -o analysis/bsmapped/F1-16_Index5_S1.bam \
 -v 5 \
 -r 0 \
