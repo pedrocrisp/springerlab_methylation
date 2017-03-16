@@ -1,6 +1,6 @@
 #!/bin/bash
-set -x
-set -e
+#set -xe
+set -xeuo pipefail
 
 usage="USAGE:
 seqcap_pipeline_test_v0.1_qsub.sh <sample_list.txt>"
