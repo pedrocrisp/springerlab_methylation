@@ -44,7 +44,7 @@ mkdir $log_folder
 
 #script path and cat a record of what was run
 script_dir=/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap
-script_to_qsub=${script_dir}/01-trimgalore.sh
+script_to_qsub=${script_dir}/01-trim_galore.sh
 cat $script_to_qsub > "$log_folder/script.log"
 cat $0 > "$log_folder/qsub_runner.log"
 
