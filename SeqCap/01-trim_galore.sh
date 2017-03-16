@@ -21,6 +21,8 @@ echo PBS: job name is $PBS_JOBNAME
 echo PBS: node file is $PBS_NODEFILE
 echo PBS: current home directory is $PBS_O_HOME
 echo PBS: PATH = $PBS_O_PATH
+echo PBS: array_ID is ${PBS_ARRAYID}
+echo PBS: array_ID is "${PBS_ARRAYID}p"
 echo ------------------------------------------------------
 
 ########## Modules #################
@@ -31,7 +33,8 @@ module load cutadapt/1.8.1
 ########## Set up dirs #################
 
 #get job ID
-ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST} | cut -f 3)"
+#use sed, -n supression pattern space, then 'p' to print item number {PBS_ARRAYID} eg 2 from {list}
+ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 
 #cd into work dir
 cd "$PBS_O_WORKDIR"
