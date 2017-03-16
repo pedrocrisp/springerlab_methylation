@@ -1,10 +1,11 @@
 #!/bin/bash
-#PBS -l walltime=01:00:00,nodes=1:ppn=1,mem=16gb
-#PBS -N 20170313_testpipeline_SeqCap_1_Mei
+#PBS -l walltime=01:00:00,nodes=1:ppn=8,mem=16gb
+#PBS -N trim_galore
 #PBS -r n
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
 
+########## QC #################
 set -xeuo pipefail
 
 echo ------------------------------------------------------
@@ -22,16 +23,27 @@ echo PBS: current home directory is $PBS_O_HOME
 echo PBS: PATH = $PBS_O_PATH
 echo ------------------------------------------------------
 
+########## Modules #################
+
+module load fastqc/0.11.5
+module load cutadapt/1.8.1
+
+########## Set up dirs #################
+#cd into work dir
 cd "$PBS_O_WORKDIR"
 
- trim_galore \
-        --phred33 \
-        --fastqc \
-        --fastqc_args "--noextract --outdir $fastqcfolder" \
--o $trimmedfolder --paired "${readsdir}/${ID}_R1_001.fastq" "${readsdir}/${ID}_R2_001.fastq"
+#make trimmed folder
+trimmedfolder=analysis/trimmed
+mkdir $trimmedfolder
 
-trimmed=${analysis_dir}/trimmed
+fastqcfolder=analysis/fastqc
+mkdir $fastqcfolder
 
-alignfolder=${analysis_dir}/bsmaped
-mkdir $alignfolder
+########## Run #################
+trim_galore \
+--phred33 \
+--fastqc \
+--fastqc_args "--noextract --outdir $fastqcfolder" \
+-o $trimmedfolder --paired reads/${ID}_R1_001.fastq reads/${ID}_R2_001.fastq"
+
 
