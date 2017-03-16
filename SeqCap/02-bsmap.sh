@@ -33,7 +33,37 @@ echo working dir is now $PWD
 
 ########## Modules #################
 
-module load fastqc/0.11.5
-module load cutadapt/1.8.1
+module load samtools/1.3
 
 ########## Set up dirs #################
+
+#get job ID
+#use sed, -n supression pattern space, then 'p' to print item number {PBS_ARRAYID} eg 2 from {list}
+ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
+
+echo sample being mapped is $ID
+
+#make adaligned folder bsmaped
+mapfolder=analysis/bsmapped
+mkdir -p $mapfolder
+
+########## Run #################
+
+# align adapter trimmed datasets to B73 genome
+        # -r 0: dont report repeat hits
+        # -v 5: allow 5 mismatches (could also use -v 0.05 = 5% of read length)
+        # -p 8: 8 threads/cores
+        # -q 20: trim to q20
+
+bsmap \
+-a trimmed/${ID}_R1_001_val_1.fq \
+-b trimmed/${ID}_R2_001_val_2.fq \
+-d ${genome_reference} \
+-o ${mapfolder}/${ID}.bam \
+-v 5 \
+-r 0 \
+-p 1 \
+-q 20 \
+-A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
+
+
