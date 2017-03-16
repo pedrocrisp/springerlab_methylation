@@ -59,7 +59,7 @@ log_folder=logs/${timestamp}_${step}
 mkdir $log_folder
 
 #script path and cat a record of what was run
-script_to_qsub=${script_dir}/${step}
+script_to_qsub=${scriptdir}/${step}
 cat $script_to_qsub > ${log_folder}/script.log
 cat $0 > ${log_folder}/qsub_runner.log
 
