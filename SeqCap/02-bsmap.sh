@@ -56,8 +56,8 @@ mkdir -p $mapfolder
         # -q 20: trim to q20
 
 bsmap \
--a trimmed/${ID}_R1_001_val_1.fq \
--b trimmed/${ID}_R2_001_val_2.fq \
+-a analysis/trimmed/${ID}_R1_001_val_1.fq \
+-b analysis/trimmed/${ID}_R2_001_val_2.fq \
 -d ${genome_reference} \
 -o ${mapfolder}/${ID}.bam \
 -v 5 \
