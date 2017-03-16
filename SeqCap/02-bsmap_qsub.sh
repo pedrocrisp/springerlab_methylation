@@ -73,4 +73,4 @@ qsub -t $qsub_t \
 $script_to_qsub
 
 #to run
-#bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/01-trim_galore_qsub.sh <sample_list.txt>
+#bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/02-bsmap_qsub.sh <sample_list.txt> <genome_reference.fa>
