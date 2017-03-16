@@ -69,7 +69,7 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list}, genome_reference=$genome_reference \
+-v LIST=${sample_list},genome_reference=$genome_reference \
 $script_to_qsub
 
 #to run
