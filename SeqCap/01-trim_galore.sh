@@ -34,10 +34,10 @@ cd "$PBS_O_WORKDIR"
 
 #make trimmed folder
 trimmedfolder=analysis/trimmed
-mkdir $trimmedfolder
+mkdir -p $trimmedfolder
 
 fastqcfolder=analysis/fastqc
-mkdir $fastqcfolder
+mkdir -p $fastqcfolder
 
 ########## Run #################
 trim_galore \
