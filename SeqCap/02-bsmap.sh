@@ -46,6 +46,7 @@ echo sample being mapped is $ID
 #make adaligned folder bsmaped
 mapfolder=analysis/bsmapped
 mkdir -p $mapfolder
+trimmed_folder=analysis/trimmed
 
 ########## Run #################
 
@@ -56,10 +57,10 @@ mkdir -p $mapfolder
         # -q 20: trim to q20
 
 bsmap \
--a analysis/trimmed/${ID}_R1_001_val_1.fq \
--b analysis/trimmed/${ID}_R2_001_val_2.fq \
+-a ${trimmed_folder}/F1-16_Index5_S1_R1_001_val_1.fq \
+-b ${trimmed_folder}/F1-16_Index5_S1_R2_001_val_2.fq \
 -d ${genome_reference} \
--o ${mapfolder}/${ID}.bam \
+-o ${mapfolder}/F1-16_Index5_S1.bam \
 -v 5 \
 -r 0 \
 -p 1 \
