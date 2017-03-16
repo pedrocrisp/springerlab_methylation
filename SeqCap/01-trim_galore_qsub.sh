@@ -30,7 +30,7 @@ echo "argument to be passed to qsub -t is '$qsub_t'"
 
 #make log and analysis folders
 #make logs folder if it doesnt exist yet
-makdir -p logs
+mkdir -p logs
 
 timestamp=$(date +%Y%m%d-%H%M%S)
 
