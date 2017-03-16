@@ -5,8 +5,9 @@
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
 
-set -x
-set -e
+#set -xe
+set -xeuo pipefail
+
 cd "$PBS_O_WORKDIR"
 
 #reference file dir
@@ -53,7 +54,7 @@ samtools --version
         -o ${alignfolder}/${ID}/${ID}.bam \
         -v 5 \
         -r 0 \
-        -p 4 \
+        -p 1 \
         -q 20 \
         -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
         
