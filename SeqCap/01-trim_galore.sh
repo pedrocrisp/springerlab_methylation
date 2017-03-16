@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=01:00:00,nodes=1:ppn=8,mem=16gb
+#PBS -l walltime=01:00:00,nodes=1:ppn=8,mem=8gb
 #PBS -N trim_galore
 #PBS -r n
 #PBS -m abe
