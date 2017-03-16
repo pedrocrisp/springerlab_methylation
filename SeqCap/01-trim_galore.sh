@@ -24,6 +24,13 @@ echo PBS: PATH = $PBS_O_PATH
 echo PBS: array_ID is ${PBS_ARRAYID}
 echo ------------------------------------------------------
 
+echo $PWD
+
+#cd into work dir
+cd "$PBS_O_WORKDIR"
+
+echo $PWD
+
 ########## Modules #################
 
 module load fastqc/0.11.5
@@ -34,9 +41,6 @@ module load cutadapt/1.8.1
 #get job ID
 #use sed, -n supression pattern space, then 'p' to print item number {PBS_ARRAYID} eg 2 from {list}
 ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
-
-#cd into work dir
-cd "$PBS_O_WORKDIR"
 
 #make trimmed folder
 trimmedfolder=analysis/trimmed
