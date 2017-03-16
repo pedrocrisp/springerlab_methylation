@@ -39,7 +39,7 @@ analysis_dir=analysis
 mkdir -p $analysis_dir
 
 #make trimmgalore logs folder, timestamped
-log_folder=logs/logs_trim_galore_${timestamp}
+log_folder=logs/${timestamp}_trim_galore
 mkdir $log_folder
 
 #script path and cat a record of what was run
