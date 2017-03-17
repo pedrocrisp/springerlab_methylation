@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l walltime=01:00:00,nodes=1:ppn=8,mem=16gb
-#PBS -N trim_galore
+#PBS -N bsmapping
 #PBS -r n
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
