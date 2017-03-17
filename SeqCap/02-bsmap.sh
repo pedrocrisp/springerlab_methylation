@@ -44,9 +44,8 @@ ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 echo sample being mapped is $ID
 
 #make adaligned folder bsmaped
-mapfolder=analysis/bsmapped
-mkdir -p $mapfolder
-trimmed_folder=analysis/trimmed
+cd analysis
+mkdir -p bsmapped
 
 ########## Run #################
 
@@ -57,14 +56,13 @@ trimmed_folder=analysis/trimmed
         # -q 20: trim to q20
 
 bsmap \
--a analysis/trimmed/F1-16_Index5_S1_R1_001_val_1.fq \
--b analysis/trimmed/F1-16_Index5_S1_R2_001_val_2.fq \
--d $genome_reference \
--o analysis/bsmapped/F1-16_Index5_S1.bam \
+-a trimmed/F1-16_Index5_S1_R1_001_val_1.fq \
+-b trimmed/F1-16_Index5_S1_R2_001_val_2.fq \
+-d /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
+-o bsmapped/F1-16_Index5_S1.bam \
 -v 5 \
 -r 0 \
 -p 1 \
 -q 20 \
 -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
-
 
