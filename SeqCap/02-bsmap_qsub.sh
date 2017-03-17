@@ -72,5 +72,7 @@ qsub -t $qsub_t \
 -v LIST=${sample_list},genome_reference=$genome_reference \
 $script_to_qsub
 
-#to run
-#bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/02-bsmap_qsub.sh <sample_list.txt> <genome_reference.fa>
+# to run
+# bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/02-bsmap_qsub.sh <sample_list.txt> <genome_reference.fa>
+# eg
+# bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/02-bsmap_qsub.sh samples.txt /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa
