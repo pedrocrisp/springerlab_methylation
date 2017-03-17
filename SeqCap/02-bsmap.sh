@@ -56,10 +56,10 @@ mkdir -p bsmapped
         # -q 20: trim to q20
 
 bsmap \
--a trimmed/F1-16_Index5_S1_R1_001_val_1.fq \
--b trimmed/F1-16_Index5_S1_R2_001_val_2.fq \
--d /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
--o bsmapped/F1-16_Index5_S1.bam \
+-a trimmed/${ID}_R1_001_val_1.fq \
+-b trimmed/${ID}_R2_001_val_2.fq \
+-d ${genome_reference} \
+-o bsmapped/${ID}.bam \
 -v 5 \
 -r 0 \
 -p 1 \
