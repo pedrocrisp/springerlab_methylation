@@ -6,7 +6,7 @@ usage="USAGE:
 bash 03-bsmap_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed> <intersect_regions.bed>
 for example:
 bash \
-03-bsmap_qsub.sh \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/03-filter_summarise_qsub.sh \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
 /home/springer/pcrisp/ws/refseqs/maize/seqcapv2_onTarget-for-picard.bed \
 /home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
