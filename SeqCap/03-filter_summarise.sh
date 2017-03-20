@@ -66,9 +66,9 @@ mkdir -p OnTargetCoverage
         METRICS_FILE=bsmapped/${ID}_MarkDupMetrics.txt \
         REMOVE_DUPLICATES=true
 
-        ## on-target HsMetrics
-        ## args to be passed from qsub script
-        ## ${CalculateHsMetrics_reference} eg ${refdir}/seqcapv2_onTarget-for-picard.bed
+        # on-target HsMetrics
+        # args to be passed from qsub script
+        # ${CalculateHsMetrics_reference} eg ${refdir}/seqcapv2_onTarget-for-picard.bed
         java -jar /home/springer/pcrisp/software/picard.jar CalculateHsMetrics \
         I=bsmapped/$(ID}_sorted_MarkDup.bam \
         O=bsmapped/$(ID}_HsMetrics_noDuplicate.txt \
