@@ -3,16 +3,24 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 02-bsmap_qsub.sh <sample_list.txt> <genome.fa>"
-#eg /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa
+bash 03-bsmap_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed> <intersect_regions.bed>
+for example:
+bash \
+03-bsmap_qsub.sh \
+/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
+/home/springer/pcrisp/ws/refseqs/maize/seqcapv2_onTarget-for-picard.bed \
+/home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
+"
 
 #define stepo in the pipeline - should be the same name as the script
-step=02-bsmap
+step=03-filter_summarise
 
 ######### Setup ################
 sample_list=$1
 genome_reference=$2
-if [ "$#" -lt "2" ]
+CalculateHsMetrics_reference=$3
+intersect_regions_ref=$4
+if [ "$#" -lt "4" ]
 then
 echo $usage
 exit -1
@@ -20,6 +28,8 @@ else
 echo "Submitting samples listed in '$sample_list' for trimming"
 cat $sample_list
 echo genome reference is $genome_reference
+echo CalculateHsMetrics_reference is $CalculateHsMetrics_reference
+echo intersect regions are $intersect_regions_ref
 fi
 
 #number of samples
@@ -69,10 +79,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},genome_reference=$genome_reference \
+-v LIST=${sample_list},genome_reference=$genome_reference,CalculateHsMetrics_reference=$CalculateHsMetrics_reference,intersect_regions_ref=${intersect_regions_ref} \
 $script_to_qsub
-
-# to run
-# bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/02-bsmap_qsub.sh <sample_list.txt> <genome_reference.fa>
-# eg
-# bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/02-bsmap_qsub.sh samples.txt /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa
