@@ -66,13 +66,22 @@ mkdir -p OnTargetCoverage
         METRICS_FILE=bsmapped/${ID}_MarkDupMetrics.txt \
         REMOVE_DUPLICATES=true
 
+        #DEPRECIATED
         # on-target HsMetrics
         # args to be passed from qsub script
         # ${CalculateHsMetrics_reference} eg ${refdir}/seqcapv2_onTarget-for-picard.bed
-        java -jar /home/springer/pcrisp/software/picard.jar CalculateHsMetrics \
+        #java -jar /home/springer/pcrisp/software/picard.jar CalculateHsMetrics \
+        #I=bsmapped/$(ID}_sorted_MarkDup.bam \
+        #O=bsmapped/$(ID}_HsMetrics_noDuplicate.txt \
+        #BI=${CalculateHsMetrics_reference} \
+        #TARGET_INTERVALS=${CalculateHsMetrics_reference} 
+        
+        # on-target CollectHsMetrics
+        java -jar /home/springer/pcrisp/software/picard.jar CollectHsMetrics \
         I=bsmapped/$(ID}_sorted_MarkDup.bam \
         O=bsmapped/$(ID}_HsMetrics_noDuplicate.txt \
-        BI=${CalculateHsMetrics_reference} \
+        R=${genome_reference} \
+        BAIT_INTERVALS=${CalculateHsMetrics_reference} \
         TARGET_INTERVALS=${CalculateHsMetrics_reference} 
         
         # keep properly paired reads
