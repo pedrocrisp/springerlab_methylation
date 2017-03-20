@@ -80,6 +80,7 @@ mkdir -p OnTargetCoverage
         java -jar /home/springer/pcrisp/software/picard.jar CollectHsMetrics \
         I=bsmapped/${ID}_sorted_MarkDup.bam \
         O=bsmapped/${ID}_HsMetrics_noDuplicate.txt \
+        CLIP_OVERLAPPING_READS=false \
         R=${genome_reference} \
         BAIT_INTERVALS=${CalculateHsMetrics_reference} \
         TARGET_INTERVALS=${CalculateHsMetrics_reference} 
