@@ -37,6 +37,7 @@ module load python2/2.7.8
 module load java
 module load bedtools
 module load bamtools
+module load samtools/1.3
 
 ########## Set up dirs #################
 
