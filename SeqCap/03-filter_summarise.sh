@@ -111,6 +111,8 @@ mkdir -p OnTargetCoverage
         
         #awk funciton for extracting methylation info from methratio.py output. Check with Qing what this is meant to do. Also try to figure out how to split this over multiple lines
         #awk '(NR>1){if(($3=="-" && $4~/^.CG../ ) || ($3=="+" &&  $4~/^..CG./)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CG""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else if(($3=="-" && $4~/^C[AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT]G/)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CHG""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else if(($3=="-" && $4~/^[AGT][AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT][ACT]/)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CHH""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else print $1"\t"$2-1"\t"$2"\t"$3"\t""CNN""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}' BSMAPratio/${ID}.txt > BSMAPratio/${ID}_BSMAP_out.txt
+        
+        cd BSMAPratio
         awk_make_bed='BEGIN {OFS = FS} (NR>1){
                 if(($3=="-" && $4~/^.CG../ ) || ($3=="+" &&  $4~/^..CG./))
                         printf $1, $2-1, $2, $3, "CG", $5, $6, $7, $8, $9, $10, $11, $12;
@@ -122,7 +124,11 @@ mkdir -p OnTargetCoverage
                         print $1, $2-1, $2, $3, "CNN", $5, $6, $7, $8, $9, $10, $11, $12
                 }
                 ' 
-        awk -F $'\t' "$awk_make_bed" BSMAPratio/${ID}_methratio.txt > BSMAPratio/${ID}_BSMAP_out.txt
+        #awk -F $'\t' "$awk_make_bed" F1-16_Index5_S1_methratio.txt > F1-16_Index5_S1.bed
+         
+        awk -F $'\t' "$awk_make_bed" ${ID}_methratio.txt > ${ID}_BSMAP_out.txt
+        
+        cd ..
         
         # conversion rate
         # awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
