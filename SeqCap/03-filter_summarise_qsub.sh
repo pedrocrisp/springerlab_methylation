@@ -19,8 +19,8 @@ step=03-filter_summarise
 sample_list=$1
 genome_reference=$2
 CalculateHsMetrics_reference=$3
-intersect_regions_ref=$4
-if [ "$#" -lt "4" ]
+
+if [ "$#" -lt "3" ]
 then
 echo $usage
 exit -1
@@ -29,7 +29,6 @@ echo "Submitting samples listed in '$sample_list' for trimming"
 cat $sample_list
 echo genome reference is $genome_reference
 echo CalculateHsMetrics_reference is $CalculateHsMetrics_reference
-echo intersect regions are $intersect_regions_ref
 fi
 
 #number of samples
@@ -79,5 +78,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},genome_reference=$genome_reference,CalculateHsMetrics_reference=$CalculateHsMetrics_reference,intersect_regions_ref=${intersect_regions_ref} \
+-v LIST=${sample_list},genome_reference=$genome_reference,CalculateHsMetrics_reference=$CalculateHsMetrics_reference \
 $script_to_qsub
