@@ -55,7 +55,7 @@ mkdir -p OnTargetCoverage
 
 ########## Run #################
 
-# remove PCR duplicates, must be sorted by coordinate
+# remove PCR duplicates, must be sorted by coordinate using pickard
         java -jar /home/springer/pcrisp/software/picard.jar SortSam \
         INPUT=bsmapped/${ID}.bam \
         OUTPUT=bsmapped/${ID}_sorted.bam \
@@ -77,7 +77,7 @@ mkdir -p OnTargetCoverage
         #BI=${CalculateHsMetrics_reference} \
         #TARGET_INTERVALS=${CalculateHsMetrics_reference} 
         
-        # on-target CollectHsMetrics
+        # on-target CollectHsMetrics using pickard
         java -jar /home/springer/pcrisp/software/picard.jar CollectHsMetrics \
         I=bsmapped/${ID}_sorted_MarkDup.bam \
         O=bsmapped/${ID}_HsMetrics_noDuplicate.txt \
@@ -86,7 +86,7 @@ mkdir -p OnTargetCoverage
         BAIT_INTERVALS=${CalculateHsMetrics_reference} \
         TARGET_INTERVALS=${CalculateHsMetrics_reference} 
         
-        # keep properly paired reads
+        # keep properly paired reads using mabtools package
         bamtools filter \
         -isMapped true \
         -isPaired true \
@@ -94,13 +94,13 @@ mkdir -p OnTargetCoverage
         -in bsmapped/${ID}_sorted_MarkDup.bam \
         -out bsmapped/${ID}_sorted_MarkDup_pairs.bam
         
-        # clip overlapping reads
+        # clip overlapping reads using bamUtils package
         bamtools clipOverlap \
         --in  bsmapped/${ID}_sorted_MarkDup_pairs.bam \
         --out bsmapped/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
         --stats
         
-        # extract methylation information
+        # extract methylation information using bsmap tool methratio.py
         python /home/springer/pcrisp/software/bsmap-2.90/methratio.py \
         -o BSMAPratio/${ID} \
         -d ${genome_reference} \
@@ -108,6 +108,7 @@ mkdir -p OnTargetCoverage
         -z \
         -r bsmapped/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
         
+        #awk funciton for extracting methylation info from methratio.py output
          awk_bsmapped_cmd='NR > 1 {
                 if(($3=="-" && $4~/^.CG../ ) || ($3=="+" &&  $4~/^..CG./)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CG""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; 
                 else if(($3=="-" && $4~/^C[AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT]G/)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CHG""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; 
@@ -115,11 +116,11 @@ mkdir -p OnTargetCoverage
                 else print $1"\t"$2-1"\t"$2"\t"$3"\t""CNN""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12
                 }
                 '
-        
+        #run awk function
         awk $awk_bsmapped_cmd BSMAPratio/${ID} > BSMAPratio/${ID}_BSMAP_out.txt
         
         # conversion rate
-        # awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"$i"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
+        # awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
         
         ## summarize read count, only use uniquley mapped and properly paried reads
         ## args to be passed from qsub script ${intersect_regions_ref} eg ${refdir}/BSseqcapv2_specific_regions.bed
@@ -143,4 +144,5 @@ mkdir -p OnTargetCoverage
         -wb > TempOut/${ID}_BSMAP_out_ontarget.txt
         
         awk \
-        -F"\t" '{mC[$14"\t"$15"\t"$16"\t"$5] += $8; CT[$14"\t"$15"\t"$16"\t"$5] += $9; n[$14"\t"$15"\t"$16"\t"$5]++} END { for (j in mC) print j"\t"n[j]"\t"mC[j]"\t"CT[j]}' TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
+        -F"\t" '{mC[$14"\t"$15"\t"$16"\t"$5] += $8; CT[$14"\t"$15"\t"$16"\t"$5] += $9; n[$14"\t"$15"\t"$16"\t"$5]++} END { for (j in mC) print j"\t"n[j]"\t"mC[j]"\t"CT[j]}' \
+        TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
