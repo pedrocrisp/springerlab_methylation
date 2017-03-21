@@ -33,12 +33,12 @@ echo working dir is now $PWD
 
 ########## Modules #################
 
-module load python2/2.7.8
+#module load python2/2.7.8
 module load java
-module load bedtools
+#module load bedtools
 module load bamtools
 #bsmap requires samtools < 1.0.0
-module load samtools/0.1.18
+#module load samtools/0.1.18
 
 ########## Set up dirs #################
 
