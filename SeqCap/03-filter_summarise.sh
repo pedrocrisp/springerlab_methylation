@@ -37,7 +37,8 @@ module load python2/2.7.8
 module load java
 module load bedtools
 module load bamtools
-module load samtools/1.3
+#bsmap requires samtools < 1.0.0
+module load samtools/0.1.18
 
 ########## Set up dirs #################
 
