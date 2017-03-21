@@ -3,17 +3,17 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 03-bsmap_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed> <intersect_regions.bed>
+bash 03-filter_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed> <intersect_regions.bed>
 for example:
 bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/03-filter_summarise_qsub.sh \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/03-filter_qsub.sh \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
 /home/springer/pcrisp/ws/refseqs/maize/seqcapv2_onTarget-for-picard.bed \
 /home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=03-filter_summarise
+step=03-filter
 
 ######### Setup ################
 sample_list=$1
