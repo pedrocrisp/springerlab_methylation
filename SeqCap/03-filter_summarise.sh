@@ -95,7 +95,7 @@ mkdir -p OnTargetCoverage
         -out bsmapped/${ID}_sorted_MarkDup_pairs.bam
         
         # clip overlapping reads using bamUtils package
-        bamtools clipOverlap \
+        bam clipOverlap \
         --in  bsmapped/${ID}_sorted_MarkDup_pairs.bam \
         --out bsmapped/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
         --stats
