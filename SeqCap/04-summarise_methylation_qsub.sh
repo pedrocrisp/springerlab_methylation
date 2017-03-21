@@ -6,6 +6,7 @@ usage="USAGE:
 bash 04-summarise_methylation_qsub.sh <sample_list.txt> <genome.fa> <intersect_regions.bed>
 for example:
 bash \
+single_sample.txt \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/04-summarise_methylation_qsub.sh \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
 /home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
