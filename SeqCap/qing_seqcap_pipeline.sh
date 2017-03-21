@@ -12,7 +12,8 @@
 #SBATCH -A Springer_Vaughn           # <-- Allocation name to charge job against
 
 module load python/2.7.11
-module load samtools
+#bsmap requires samtools < 1.0.0
+module load samtools/0.1.18
 module load java/1.8.77
 module load bedtools
 
