@@ -103,7 +103,7 @@ mkdir -p OnTargetCoverage
         
         # extract methylation information using bsmap tool methratio.py
         python /home/springer/pcrisp/software/bsmap-2.90/methratio.py \
-        -o BSMAPratio/${ID} \
+        -o BSMAPratio/${ID}.txt \
         -d ${genome_reference} \
         -u \
         -z \
@@ -118,7 +118,7 @@ mkdir -p OnTargetCoverage
                 }
                 '
         #run awk function
-        awk $awk_bsmapped_cmd BSMAPratio/${ID} > BSMAPratio/${ID}_BSMAP_out.txt
+        awk $awk_bsmapped_cmd BSMAPratio/${ID}.txt > BSMAPratio/${ID}_BSMAP_out.txt
         
         # conversion rate
         # awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
