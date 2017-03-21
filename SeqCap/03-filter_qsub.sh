@@ -6,8 +6,8 @@ usage="USAGE:
 bash 03-filter_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed> <intersect_regions.bed>
 for example:
 bash \
-single_sample.txt \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/03-filter_qsub.sh \
+single_sample.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
 /home/springer/pcrisp/ws/refseqs/maize/seqcapv2_onTarget-for-picard.bed
 "
