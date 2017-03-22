@@ -80,7 +80,7 @@ mkdir -p OnTargetCoverage
                 '
         #awk -F$"\t" "$awk_make_bed" "F1-16_Index5_S1_methratio.txt" > F1-16_Index5_S1.bed
         
-        awk -F$"\t" "$awk_make_bed" \
+        awk -F$"\\t" "$awk_make_bed" \
         "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out.txt"
         
         # conversion rate
