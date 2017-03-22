@@ -81,7 +81,7 @@ mkdir -p OnTargetCoverage
         #awk -F $'\t' "$awk_make_bed" F1-16_Index5_S1_methratio.txt > F1-16_Index5_S1.bed
         
         awk -F $'\t' "$awk_make_bed" \
-        BSMAPratio/${ID}_methratio.txt > ${ID}_BSMAP_out.txt
+        BSMAPratio/${ID}_methratio.txt > BSMAPratio/${ID}_BSMAP_out.txt
         
         # conversion rate
         # awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
