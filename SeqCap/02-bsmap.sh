@@ -33,7 +33,8 @@ echo working dir is now $PWD
 
 ########## Modules #################
 
-module load samtools/1.3
+#bsmap requires samtools < 1.0.0
+module load samtools/0.1.18
 
 ########## Set up dirs #################
 
