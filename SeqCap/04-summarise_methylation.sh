@@ -53,6 +53,7 @@ cd analysis
 mkdir -p BSMAPratio
 mkdir -p TempOut
 mkdir -p OnTargetCoverage
+mkdir -P ConversionRate
 
 ########## Run #################
 
@@ -79,30 +80,27 @@ mkdir -p OnTargetCoverage
                 }
                 '
         #awk -F$"\t" "$awk_make_bed" "F1-16_Index5_S1_methratio.txt" > F1-16_Index5_S1.bed
+        #BSMAPratio/$F1-16_Index5_S1_BSMAP_out.txt
         
         awk -F$"\\t" "$awk_make_bed" \
         "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out.txt"
         
-         awk_make_bed2='BEGIN {OFS = FS} (NR>1){
-                if((\$3=="-" && \$4~/^.CG../ ) || (\$3=="+" &&  \$4~/^..CG./))
-                        printf \$1, \$2-1, \$2, \$3, "CG", \$5, \$6, \$7, \$8, \$9, \$10, \$11, \$12;
-                else if((\$3=="-" && \$4~/^C[AGT]G../ ) || (\$3=="+" &&  \$4~/^..C[ACT]G/))
-                        print \$1, \$2-1, \$2, \$3, "CHG", \$5, \$6, \$7, \$8, \$9, \$10, \$11, \$12;
-                else if((\$3=="-" && \$4~/^[AGT][AGT]G../ ) || (\$3=="+" &&  \$4~/^..C[ACT][ACT]/))
-                        print \$1, \$2-1, \$2, \$3, "CHH", \$5, \$6, \$7, \$8, \$9, \$10, \$11, \$12;
-                else
-                        print \$1, \$2-1, \$2, \$3, "CNN", \$5, \$6, \$7, \$8, \$9, \$10, \$11, \$12
-                }
-                '
-        #awk -F$"\t" "$awk_make_bed" "F1-16_Index5_S1_methratio.txt" > F1-16_Index5_S1.bed
-        
-        awk -F$"\\t" "$awk_make_bed2" \
-        "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out2.txt"
-        
         # conversion rate
-        # awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
-        
-        ## summarize read count, only use uniquley mapped and properly paried reads
+        #awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
+
+        # conversion rate pete - not sure if this is correct...
+        # using plastid CHH unconverted C rate: 100-(sum(#C_counts)/sum(#eff_CT_counts)*100)
+        awk -F$"\\t" \
+        'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
+        BSMAPratio/${ID}_BSMAP_out.txt | \
+        awk '{sum1 += $7; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}' > ConversionRate/${ID}_conversion_rate.txt
+        #debugging
+        #awk -F$"\\t" \
+        #'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
+        #BSMAPratio/F1-16_Index5_S1_BSMAP_out.txt | \
+        #awk -F$"\\t" 'BEGIN {OFS = FS} {sum1 += $7; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}'
+       
+        ## count read depth over each specific target region, only use uniquley mapped and properly paried reads
         ## args to be passed from qsub script ${intersect_regions_ref} eg ${refdir}/BSseqcapv2_specific_regions.bed
         
         bedtools intersect \
@@ -112,9 +110,14 @@ mkdir -p OnTargetCoverage
         -wa \
         -wb > TempOut/${ID}_specific_region_pairs_clipOverlap.txt
         
-        awk -F"\t" '{sum[$16]++} END {for (i in sum) print i"\t"sum[i]}' \
-        TempOut/${ID}_specific_region_pairs_clipOverlap.txt > \
+        awk -F$"\\t" 'BEGIN {OFS = FS} {sum[$16]++} END {for (i in sum) print i, sum[i]}' \
+        TempOut/${ID}_specific_region_pairs_clipOverlap.txt | \
+        sort -k1 -n -t > \
         OnTargetCoverage/${ID}_specific_region_count_pairs_clipOverlap.txt
+        #debugging
+        #awk -F$"\\t" 'BEGIN {OFS = FS} {sum[$16]++} END {for (i in sum) print i, sum[i]}' \
+        #TempOut/F1-16_Index5_S1_specific_region_pairs_clipOverlap.txt | \
+        #sort -k1 -n -t | head
         
         # count methylated and unmethylated Cytosine per region
         bedtools intersect \
@@ -123,6 +126,24 @@ mkdir -p OnTargetCoverage
         -wa \
         -wb > TempOut/${ID}_BSMAP_out_ontarget.txt
         
+        #awk \
+        #-F"\t" '{mC[$14"\t"$15"\t"$16"\t"$5] += $8; CT[$14"\t"$15"\t"$16"\t"$5] += $9; n[$14"\t"$15"\t"$16"\t"$5]++} END { for (j in mC) print j"\t"n[j]"\t"mC[j]"\t"CT[j]}' \
+        #TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
+
         awk \
-        -F"\t" '{mC[$14"\t"$15"\t"$16"\t"$5] += $8; CT[$14"\t"$15"\t"$16"\t"$5] += $9; n[$14"\t"$15"\t"$16"\t"$5]++} END { for (j in mC) print j"\t"n[j]"\t"mC[j]"\t"CT[j]}' \
-TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
+        -F$"\\t" 'BEGIN {OFS = FS} 
+        {mC[$14"\t"$15"\t"$16"\t"$5] += $8; 
+        CT[$14"\t"$15"\t"$16"\t"$5] += $9; 
+        n[$14"\t"$15"\t"$16"\t"$5]++} END {
+        for (j in mC) print j, n[j], mC[j], CT[j]}' \
+        TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
+        
+        #awk \
+        #-F$"\\t" 'BEGIN {OFS = FS} 
+        #{mC[$14"\t"$15"\t"$16"\t"$5] += $8; 
+        #CT[$14"\t"$15"\t"$16"\t"$5] += $9; 
+        #n[$14"\t"$15"\t"$16"\t"$5]++} END {
+        #for (j in mC) print j, n[j], mC[j], CT[j]}' \
+        #TempOut/F1-16_Index5_S1_BSMAP_out_ontarget.txt |head
+
+echo finished summarising
