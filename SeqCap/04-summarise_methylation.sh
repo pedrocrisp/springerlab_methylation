@@ -53,7 +53,7 @@ cd analysis
 mkdir -p BSMAPratio
 mkdir -p TempOut
 mkdir -p OnTargetCoverage
-mkdir -P ConversionRate
+mkdir -p ConversionRate
 
 ########## Run #################
 
