@@ -57,7 +57,7 @@ mkdir -p OnTargetCoverage
 ########## Run #################
 
 # extract methylation information using bsmap tool methratio.py
-        python /home/springer/pcrisp/software/bsmap-2.90/methratio.py \
+        python /home/springer/pcrisp/software/bsmap-2.74/methratio.py \
         -o BSMAPratio/${ID}_methratio.txt \
         -d ${genome_reference} \
         -u \
