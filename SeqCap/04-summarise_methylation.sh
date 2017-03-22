@@ -83,6 +83,22 @@ mkdir -p OnTargetCoverage
         awk -F$"\\t" "$awk_make_bed" \
         "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out.txt"
         
+         awk_make_bed2='BEGIN {OFS = FS} (NR>1){
+                if((\$3=="-" && \$4~/^.CG../ ) || (\$3=="+" &&  \$4~/^..CG./))
+                        printf \$1, \$2-1, \$2, \$3, "CG", \$5, \$6, \$7, \$8, \$9, \$10, \$11, \$12;
+                else if((\$3=="-" && \$4~/^C[AGT]G../ ) || (\$3=="+" &&  \$4~/^..C[ACT]G/))
+                        print \$1, \$2-1, \$2, \$3, "CHG", \$5, \$6, \$7, \$8, \$9, \$10, \$11, \$12;
+                else if((\$3=="-" && \$4~/^[AGT][AGT]G../ ) || (\$3=="+" &&  \$4~/^..C[ACT][ACT]/))
+                        print \$1, \$2-1, \$2, \$3, "CHH", \$5, \$6, \$7, \$8, \$9, \$10, \$11, \$12;
+                else
+                        print \$1, \$2-1, \$2, \$3, "CNN", \$5, \$6, \$7, \$8, \$9, \$10, \$11, \$12
+                }
+                '
+        #awk -F$"\t" "$awk_make_bed" "F1-16_Index5_S1_methratio.txt" > F1-16_Index5_S1.bed
+        
+        awk -F$"\\t" "$awk_make_bed2" \
+        "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out2.txt"
+        
         # conversion rate
         # awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
         
