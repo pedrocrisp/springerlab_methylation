@@ -67,6 +67,7 @@ mkdir -p $analysis_dir
 
 #script path and cat a record of what was run
 log_folder0=logs/${timestamp}_00-pipeline-master
+mkdir $log_folder0
 cat $0 > ${log_folder0}/qsub_runner.log
 
 ########## scripts #################
