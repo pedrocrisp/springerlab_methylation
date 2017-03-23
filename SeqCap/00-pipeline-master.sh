@@ -74,21 +74,25 @@ cat $0 > ${log_folder0}/qsub_runner.log
 step1=01-trim_galore
 script_to_qsub1=${scriptdir}/${step1}.sh
 log_folder1=logs/${timestamp}_${step1}
+mkdir $log_folder1
 cat $script_to_qsub1 > ${log_folder1}/script.log
 
 step2=02-bsmap
 script_to_qsub2=${scriptdir}/${step2}.sh
 log_folder2=logs/${timestamp}_${step2}
+mkdir $log_folder2
 cat $script_to_qsub2 > ${log_folder2}/script.log
 
 step3=03-filter
 script_to_qsub3=${scriptdir}/${step3}.sh
 log_folder3=logs/${timestamp}_${step3}
+mkdir $log_folder3
 cat $script_to_qsub3 > ${log_folder3}/script.log
 
 step4=04-summarise_methylation
 script_to_qsub4=${scriptdir}/${step4}.sh
 log_folder4=logs/${timestamp}_${step4}
+mkdir $log_folder4
 cat $script_to_qsub4 > ${log_folder4}/script.log
 
 ########## qsub #################
