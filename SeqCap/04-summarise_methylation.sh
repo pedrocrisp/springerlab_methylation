@@ -112,7 +112,7 @@ mkdir -p ConversionRate
         
         awk -F$"\\t" 'BEGIN {OFS = FS} {sum[$16]++} END {for (i in sum) print i, sum[i]}' \
         TempOut/${ID}_specific_region_pairs_clipOverlap.txt | \
-        sort -k1 -n -t > \
+        sort -k1 -n > \
         OnTargetCoverage/${ID}_specific_region_count_pairs_clipOverlap.txt
         #debugging
         #awk -F$"\\t" 'BEGIN {OFS = FS} {sum[$16]++} END {for (i in sum) print i, sum[i]}' \
