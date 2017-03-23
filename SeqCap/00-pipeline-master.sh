@@ -102,31 +102,31 @@ cat $script_to_qsub4 > ${log_folder4}/script.log
 #-v additional variables to pass to the qsub script including the PBS_array list and the dir structures
 FIRST=$(qsub -t $qsub_t \
 -o ${log_folder1}/${step1}_o \
--e ${log_folder}/${step1}_e \
+-e ${log_folder1}/${step1}_e \
 -v LIST=${sample_list} \
 $script_to_qsub1)
 echo $FIRST
 
 SECOND=$(qsub -W depend=afterany:$FIRST $script_to_qsub1 \
 -t $qsub_t \
--o ${log_folder1}/${step2}_o \
--e ${log_folder}/${step2}_e \
+-o ${log_folder2}/${step2}_o \
+-e ${log_folder2}/${step2}_e \
 -v LIST=${sample_list},genome_reference=$genome_reference \
 $script_to_qsub2)
 echo $SECOND
 
 THIRD=$(qsub -W depend=afterany:$SECOND $script_to_qsub2 \
 -t $qsub_t \
--o ${log_folder1}/${step3}_o \
--e ${log_folder}/${step3}_e \
+-o ${log_folder3}/${step3}_o \
+-e ${log_folder3}/${step3}_e \
 -v LIST=${sample_list},genome_reference=$genome_reference,CalculateHsMetrics_reference=$CalculateHsMetrics_reference \
 $script_to_qsub3)
 echo $THIRD
 
 FORTH=$(qsub -W depend=afterany:$THIRD $script_to_qsub3 \
 -t $qsub_t \
--o ${log_folder1}/${step4}_o \
--e ${log_folder}/${step4}_e \
+-o ${log_folder4}/${step4}_o \
+-e ${log_folder4}/${step4}_e \
 -v LIST=${sample_list},genome_reference=$genome_reference,intersect_regions_ref=${intersect_regions_ref \
 $script_to_qsub4)
 echo $FORTH
