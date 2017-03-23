@@ -8,6 +8,9 @@
 ########## QC #################
 set -xeuo pipefail
 
+#add bsmap and associated scripts and samtools v0.1.18 (included in bsmap folder) to my path
+PATH=~/software/bsmap2.74:$PATH
+
 echo ------------------------------------------------------
 echo -n 'Job is running on node '; cat $PBS_NODEFILE
 echo ------------------------------------------------------
