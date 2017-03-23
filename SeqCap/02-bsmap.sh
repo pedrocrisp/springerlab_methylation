@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=08:00:00,nodes=1:ppn=8,mem=32gb
+#PBS -l walltime=08:00:00,nodes=1:ppn=8,mem=42gb
 #PBS -N bsmapping
 #PBS -r n
 #PBS -m abe
