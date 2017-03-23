@@ -3,10 +3,10 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 04-summarise_methylation_qsub.sh <sample_list.txt> <genome.fa> <intersect_regions.bed>
+bash 04-summarise_methylation_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed> <intersect_regions.bed>
 for example:
 bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/04-summarise_methylation_qsub.sh \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/00-pipeline-master.sh \
 single_sample.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
 /home/springer/pcrisp/ws/refseqs/maize/seqcapv2_onTarget-for-picard.bed \
