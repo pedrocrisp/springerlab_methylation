@@ -132,9 +132,9 @@ mkdir -p ConversionRate
 
         awk \
         -F$"\\t" 'BEGIN {OFS = FS} 
-        {mC[$14"\t"$15"\t"$16"\t"$5] += $8; 
-        CT[$14"\t"$15"\t"$16"\t"$5] += $9; 
-        n[$14"\t"$15"\t"$16"\t"$5]++} END {
+        {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8; 
+        CT[$14"\\t"$15"\\t"$16"\\t"$5] += $9; 
+        n[$14"\\t"$15"\\t"$16"\\t"$5]++} END {
         for (j in mC) print j, n[j], mC[j], CT[j]}' \
         TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
         
