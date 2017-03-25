@@ -96,6 +96,11 @@ mkdir -p ConversionRate
         'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
         BSMAPratio/${ID}_BSMAP_out.txt | \
         awk '{sum1 += $9; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}' > ConversionRate/${ID}_conversion_rate.txt
+        # conversion rate pete - using eff_CT
+        awk -F$"\\t" \
+        'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
+        BSMAPratio/${ID}_BSMAP_out.txt | \
+        awk '{sum1 += $7; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}' > ConversionRate/${ID}_conversion_rate_eff_C.txt
         #debugging
         #awk -F$"\\t" \
         #'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
@@ -141,6 +146,15 @@ mkdir -p ConversionRate
         n[$14"\\t"$15"\\t"$16"\\t"$5]++} END {
         for (j in mC) print j, n[j], mC[j], CT[j]}' \
         TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
+        
+        #count Cs again, this time use eff_CT_counts
+        awk \
+        -F$"\\t" 'BEGIN {OFS = FS} 
+        {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8; 
+        CT[$14"\\t"$15"\\t"$16"\\t"$5] += $7; 
+        n[$14"\\t"$15"\\t"$16"\\t"$5]++} END {
+        for (j in mC) print j, n[j], mC[j], CT[j]}' \
+        TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mCeff.txt
         
         #awk \
         #-F$"\\t" 'BEGIN {OFS = FS} 
