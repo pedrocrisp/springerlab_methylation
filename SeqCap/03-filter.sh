@@ -55,9 +55,10 @@ mkdir -p bsmapped_filtered
 
         # fix improperly paird reads - specifically discordant read pairs that are incorrectly mraked as concordant by bsmap
         # picard FixMateInformation
-        java -jar /home/springer/pcrisp/software/picard.jar FixMateInformation \
-        I=bsmapped/${ID}.bam \
-        O=bsmapped_filtered/${ID}_sorted.bam
+        # didnt work...
+        #java -jar /home/springer/pcrisp/software/picard.jar FixMateInformation \
+        #I=bsmapped/${ID}.bam \
+        #O=bsmapped_filtered/${ID}_sorted.bam
        
         #remove PCR duplicates, must be sorted by coordinate using pickard
         
@@ -73,11 +74,12 @@ mkdir -p bsmapped_filtered
         #mark duplicates
         #requires sorted input - using samtools sort in bsmap step (co-ordinate sorted)
         # if co-ordinate sorted then pairs where the mate is unmapped or has secondary alignment are not marked as duplicate
-        # call output *_sorted_* becasue input was actually sorted
+        # ASSUME_SORTED=true because sorting performed with samtools but samtools doesnt seem to add this flag to the headder
         java -jar /home/springer/pcrisp/software/picard.jar MarkDuplicates \
         I=bsmapped_filtered/${ID}_sorted.bam \
         O=bsmapped_filtered/${ID}_sorted_MarkDup.bam \
         METRICS_FILE=bsmapped_filtered/${ID}_MarkDupMetrics.txt \
+        ASSUME_SORTED=true \
         REMOVE_DUPLICATES=true
 
         #DEPRECIATED
