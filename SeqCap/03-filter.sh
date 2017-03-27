@@ -55,7 +55,7 @@ mkdir -p bsmapped_filtered
 
         # fix improperly paird reads - specifically discordant read pairs that are incorrectly mraked as concordant by bsmap
         # picard FixMateInformation
-        java -jar  /home/springer/pcrisp/software/picard.jar FixMateInformation \
+        java -jar /home/springer/pcrisp/software/picard.jar FixMateInformation \
         I=bsmapped/${ID}.bam \
         O=bsmapped_filtered/${ID}_sorted.bam
        
@@ -75,9 +75,9 @@ mkdir -p bsmapped_filtered
         # if co-ordinate sorted then pairs where the mate is unmapped or has secondary alignment are not marked as duplicate
         # call output *_sorted_* becasue input was actually sorted
         java -jar /home/springer/pcrisp/software/picard.jar MarkDuplicates \
-        I=bsmapped/${ID}_sorted.bam \
-        O=bsmapped/${ID}_sorted_MarkDup.bam \
-        METRICS_FILE=bsmapped/${ID}_MarkDupMetrics.txt \
+        I=bsmapped_filtered/${ID}_sorted.bam \
+        O=bsmapped_filtered/${ID}_sorted_MarkDup.bam \
+        METRICS_FILE=bsmapped_filtered/${ID}_MarkDupMetrics.txt \
         REMOVE_DUPLICATES=true
 
         #DEPRECIATED
@@ -93,8 +93,8 @@ mkdir -p bsmapped_filtered
         # on-target CollectHsMetrics using pickard
         #consider incorporating proper TARGET_INTERVALS file
         java -jar /home/springer/pcrisp/software/picard.jar CollectHsMetrics \
-        I=bsmapped/${ID}_sorted_MarkDup.bam \
-        O=bsmapped/${ID}_HsMetrics_noDuplicate.txt \
+        I=bsmapped_filtered/${ID}_sorted_MarkDup.bam \
+        O=bsmapped_filtered/${ID}_HsMetrics_noDuplicate.txt \
         CLIP_OVERLAPPING_READS=false \
         R=${genome_reference} \
         BAIT_INTERVALS=${CalculateHsMetrics_reference} \
@@ -106,12 +106,12 @@ mkdir -p bsmapped_filtered
         -isMapped true \
         -isPaired true \
         -isProperPair true \
-        -in bsmapped/${ID}_sorted_MarkDup.bam \
-        -out bsmapped/${ID}_sorted_MarkDup_pairs.bam
+        -in bsmapped_filtered/${ID}_sorted_MarkDup.bam \
+        -out bsmapped_filtered/${ID}_sorted_MarkDup_pairs.bam
         
         # clip overlapping reads using bamUtils package
         bam clipOverlap \
-        --in  bsmapped/${ID}_sorted_MarkDup_pairs.bam \
-        --out bsmapped/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
+        --in bsmapped_filtered/${ID}_sorted_MarkDup_pairs.bam \
+        --out bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
         --stats
        
