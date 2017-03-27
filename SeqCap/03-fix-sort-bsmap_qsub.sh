@@ -3,32 +3,26 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 03-filter_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed> <intersect_regions.bed>
+bash 03-fix-sort-bsmap_qsub.sh <sample_list.txt>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/03-filter_qsub.sh \
 single_sample.txt \
-/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
-/home/springer/pcrisp/ws/refseqs/maize/seqcapv2_onTarget-for-picard.bed
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=03-filter
+step=03-fix-sort
 
 ######### Setup ################
 sample_list=$1
-genome_reference=$2
-CalculateHsMetrics_reference=$3
 
-if [ "$#" -lt "3" ]
+if [ "$#" -lt "1" ]
 then
 echo $usage
 exit -1
 else
-echo "Submitting samples listed in '$sample_list' for trimming"
+echo "Submitting samples listed in '$sample_list' for fixing and sorting"
 cat $sample_list
-echo genome reference is $genome_reference
-echo CalculateHsMetrics_reference is $CalculateHsMetrics_reference
 fi
 
 #number of samples
@@ -78,5 +72,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},genome_reference=$genome_reference,CalculateHsMetrics_reference=$CalculateHsMetrics_reference \
+-v LIST=${sample_list} \
 $script_to_qsub
