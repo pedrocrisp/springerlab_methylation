@@ -64,8 +64,11 @@ cd analysis
         #SORT_ORDER=coordinate
         
         #mark duplicates
+        #requires sorted input - using samtools sort in bsmap step (co-ordinate sorted)
+        # if co-ordinate sorted then pairs where the mate is unmapped or has secondary alignment are not marked as duplicate
+        # call output *_sorted_* becasue input was actually sorted
         java -jar /home/springer/pcrisp/software/picard.jar MarkDuplicates \
-        I=bsmapped/${ID}_sorted.bam \
+        I=bsmapped/${ID}.bam \
         O=bsmapped/${ID}_sorted_MarkDup.bam \
         METRICS_FILE=bsmapped/${ID}_MarkDupMetrics.txt \
         REMOVE_DUPLICATES=true
