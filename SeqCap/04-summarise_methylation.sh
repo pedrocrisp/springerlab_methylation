@@ -63,7 +63,7 @@ mkdir -p ConversionRate
         -d ${genome_reference} \
         -u \
         -z \
-        -r bsmapped/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
+        -r bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
         
         #awk funciton for extracting methylation info from methratio.py output. Check with Qing what this is meant to do. Also try to figure out how to split this over multiple lines
         #awk '(NR>1){if(($3=="-" && $4~/^.CG../ ) || ($3=="+" &&  $4~/^..CG./)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CG""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else if(($3=="-" && $4~/^C[AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT]G/)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CHG""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else if(($3=="-" && $4~/^[AGT][AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT][ACT]/)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CHH""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else print $1"\t"$2-1"\t"$2"\t"$3"\t""CNN""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}' BSMAPratio/${ID}.txt > BSMAPratio/${ID}_BSMAP_out.txt
@@ -111,7 +111,7 @@ mkdir -p ConversionRate
         ## args to be passed from qsub script ${intersect_regions_ref} eg ${refdir}/BSseqcapv2_specific_regions.bed
         
         bedtools intersect \
-        -abam bsmapped/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
+        -abam bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
         -b ${intersect_regions_ref} \
         -bed \
         -wa \
