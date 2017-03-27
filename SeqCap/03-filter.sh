@@ -53,11 +53,17 @@ cd analysis
 ########## Run #################
 
 # remove PCR duplicates, must be sorted by coordinate using pickard
-        java -jar /home/springer/pcrisp/software/picard.jar SortSam \
-        INPUT=bsmapped/${ID}.bam \
-        OUTPUT=bsmapped/${ID}_sorted.bam \
-        SORT_ORDER=coordinate
         
+        # bams already co-ordinate sorted by samtools, this step seems unnecessary
+        # Also causesing issues: bsmap is reporting PE reads as properly mapped where they hit different chromosomes, solution: skip step 
+        # uncomment to re-instate
+        
+        #java -jar /home/springer/pcrisp/software/picard.jar SortSam \
+        #INPUT=bsmapped/${ID}.bam \
+        #OUTPUT=bsmapped/${ID}_sorted.bam \
+        #SORT_ORDER=coordinate
+        
+        #mark duplicates
         java -jar /home/springer/pcrisp/software/picard.jar MarkDuplicates \
         I=bsmapped/${ID}_sorted.bam \
         O=bsmapped/${ID}_sorted_MarkDup.bam \
@@ -75,6 +81,7 @@ cd analysis
         #TARGET_INTERVALS=${CalculateHsMetrics_reference} 
         
         # on-target CollectHsMetrics using pickard
+        #consider incorporating proper TARGET_INTERVALS file
         java -jar /home/springer/pcrisp/software/picard.jar CollectHsMetrics \
         I=bsmapped/${ID}_sorted_MarkDup.bam \
         O=bsmapped/${ID}_HsMetrics_noDuplicate.txt \
@@ -84,6 +91,7 @@ cd analysis
         TARGET_INTERVALS=${CalculateHsMetrics_reference} 
         
         # keep properly paired reads using mabtools package
+        # note that some reads marked as properly paired by bsmap actually map to different chromosomes
         bamtools filter \
         -isMapped true \
         -isPaired true \
