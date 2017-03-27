@@ -49,10 +49,17 @@ ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 echo sample being mapped is $ID
 
 cd analysis
+mkdir -p bsmapped_filtered
 
 ########## Run #################
 
-# remove PCR duplicates, must be sorted by coordinate using pickard
+        # fix improperly paird reads - specifically discordant read pairs that are incorrectly mraked as concordant by bsmap
+        # picard FixMateInformation
+        java -jar  /home/springer/pcrisp/software/picard.jar FixMateInformation \
+        I=bsmapped/${ID}.bam \
+        O=bsmapped_filtered/${ID}_sorted.bam
+       
+        #remove PCR duplicates, must be sorted by coordinate using pickard
         
         # bams already co-ordinate sorted by samtools, this step seems unnecessary
         # Also causesing issues: bsmap is reporting PE reads as properly mapped where they hit different chromosomes, solution: skip step 
@@ -68,7 +75,7 @@ cd analysis
         # if co-ordinate sorted then pairs where the mate is unmapped or has secondary alignment are not marked as duplicate
         # call output *_sorted_* becasue input was actually sorted
         java -jar /home/springer/pcrisp/software/picard.jar MarkDuplicates \
-        I=bsmapped/${ID}.bam \
+        I=bsmapped/${ID}_sorted.bam \
         O=bsmapped/${ID}_sorted_MarkDup.bam \
         METRICS_FILE=bsmapped/${ID}_MarkDupMetrics.txt \
         REMOVE_DUPLICATES=true
