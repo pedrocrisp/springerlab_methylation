@@ -54,7 +54,7 @@ mkdir -p bsmapped
 ########## Run #################
 
 # align adapter trimmed datasets to B73 genome
-        # -r 0: dont report repeat hits
+        # -r 0: [0,1]   how to report repeat hits, 0=none(unique hit/pair only); 1=random one, default:1
         # -v 5: allow 5 mismatches (could also use -v 0.05 = 5% of read length)
         # -p 8: 8 threads/cores
         # -q 20: trim to q20
