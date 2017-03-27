@@ -36,7 +36,7 @@ echo working dir is now $PWD
 
 ########## Modules #################
 
-#bsmap requires samtools < 1.0.0
+#bsmap requires samtools < 1.0.0 (note: now output is sam and running samtools manually on my own)
 module load samtools/0.1.18
 
 ########## Set up dirs #################
@@ -63,7 +63,7 @@ bsmap \
 -a trimmed/${ID}_R1_001_val_1.fq \
 -b trimmed/${ID}_R2_001_val_2.fq \
 -d ${genome_reference} \
--o bsmapped/${ID}.bam \
+-o bsmapped/${ID}.sam \
 -v 5 \
 -r 0 \
 -p 1 \
