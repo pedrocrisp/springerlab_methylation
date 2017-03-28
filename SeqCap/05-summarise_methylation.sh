@@ -25,7 +25,7 @@ echo PBS: array_ID is ${PBS_ARRAYID}
 echo ------------------------------------------------------
 
 echo working dir is $PWD
-
+ 
 #cd into work dir
 echo changing to PBS_O_WORKDIR
 cd "$PBS_O_WORKDIR"
