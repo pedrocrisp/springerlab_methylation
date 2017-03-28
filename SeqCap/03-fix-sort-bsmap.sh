@@ -55,7 +55,7 @@ samtools view -bS ${ID}.sam > ${ID}.bam
 samtools sort -n ${ID}.bam ${ID}_nameSrt
 
 # fix mate pairs
-samtools fixmate ${ID}_nameSrt.bam ${ID}_nameSrt_fixed
+samtools fixmate ${ID}_nameSrt.bam ${ID}_nameSrt_fixed.bam
 
 # co-ordinate sort
 samtools sort ${ID}_nameSrt_fixed.bam ${ID}_sorted
