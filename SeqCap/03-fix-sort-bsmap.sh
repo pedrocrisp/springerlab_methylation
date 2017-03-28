@@ -64,4 +64,4 @@ samtools sort ${ID}_nameSrt_fixed.bam ${ID}_sorted
 samtools index ${ID}_sorted.bam
 
 # remove intermediate files
-rm ${ID}_nameSrt ${ID}_nameSrt_fixed.bam ${ID}.bam
+rm ${ID}.sam ${ID}_nameSrt.bam ${ID}_nameSrt_fixed.bam ${ID}.bam
