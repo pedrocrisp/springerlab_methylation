@@ -76,7 +76,7 @@ mkdir -p bsmapped_filtered
         # if co-ordinate sorted then pairs where the mate is unmapped or has secondary alignment are not marked as duplicate
         # ASSUME_SORTED=true because sorting performed with samtools but samtools doesnt seem to add this flag to the headder
         java -jar /home/springer/pcrisp/software/picard.jar MarkDuplicates \
-        I=bsmapped_filtered/${ID}_sorted.bam \
+        I=bsmapped/${ID}_sorted.bam \
         O=bsmapped_filtered/${ID}_sorted_MarkDup.bam \
         METRICS_FILE=bsmapped_filtered/${ID}_MarkDupMetrics.txt \
         ASSUME_SORTED=true \
