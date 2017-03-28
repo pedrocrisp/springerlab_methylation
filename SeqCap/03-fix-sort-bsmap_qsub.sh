@@ -11,7 +11,7 @@ single_sample.txt \
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=03-fix-sort
+step=03-fix-sort-bsmap
 
 ######### Setup ################
 sample_list=$1
