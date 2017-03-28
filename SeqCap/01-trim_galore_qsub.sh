@@ -5,6 +5,9 @@ set -xeuo pipefail
 usage="USAGE:
 bash 01-trim_galore_qsub.sh <sample_list.txt>"
 
+#define stepo in the pipeline - should be the same name as the script
+step=01-trim_galore
+
 ######### Setup ################
 sample_list=$1
 if [ "$#" -lt "1" ]
@@ -39,12 +42,12 @@ analysis_dir=analysis
 mkdir -p $analysis_dir
 
 #make trimmgalore logs folder, timestamped
-log_folder=logs/${timestamp}_trim_galore
+log_folder=logs/${timestamp}_${step}
 mkdir $log_folder
 
 #script path and cat a record of what was run
 script_dir=/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap
-script_to_qsub=${script_dir}/01-trim_galore.sh
+script_to_qsub=${script_dir}/${step}.sh
 cat $script_to_qsub > ${log_folder}/script.log
 cat $0 > ${log_folder}/qsub_runner.log
 
@@ -52,8 +55,8 @@ cat $0 > ${log_folder}/qsub_runner.log
 #-o and -e pass the file locations for std out/error
 #-v additional variables to pass to the qsub script including the PBS_array list and the dir structures
 qsub -t $qsub_t \
--o ${log_folder}/trim_galore_o \
--e ${log_folder}/trim_galore_e \
+-o ${log_folder}/${step}_o \
+-e ${log_folder}/${step}_e \
 -v LIST=${sample_list} \
 $script_to_qsub
 
