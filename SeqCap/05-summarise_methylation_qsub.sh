@@ -3,17 +3,17 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 04-summarise_methylation_qsub.sh <sample_list.txt> <genome.fa> <intersect_regions.bed>
+bash 05-summarise_methylation_qsub.sh <sample_list.txt> <genome.fa> <intersect_regions.bed>
 for example:
 bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/04-summarise_methylation_qsub.sh \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/05-summarise_methylation_qsub.sh \
 single_sample.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
 /home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=04-summarise_methylation
+step=05-summarise_methylation
 
 ######### Setup ################
 sample_list=$1
