@@ -25,7 +25,7 @@ echo PBS: array_ID is ${PBS_ARRAYID}
 echo ------------------------------------------------------
 
 echo working dir is $PWD
- 
+
 #cd into work dir
 echo changing to PBS_O_WORKDIR
 cd "$PBS_O_WORKDIR"
@@ -64,13 +64,13 @@ mkdir -p ConversionRate
         -u \
         -z \
         -r bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
-        
+
         #awk funciton for extracting methylation info from methratio.py output. Check with Qing what this is meant to do. Also try to figure out how to split this over multiple lines
         #awk '(NR>1){if(($3=="-" && $4~/^.CG../ ) || ($3=="+" &&  $4~/^..CG./)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CG""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else if(($3=="-" && $4~/^C[AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT]G/)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CHG""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else if(($3=="-" && $4~/^[AGT][AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT][ACT]/)) print $1"\t"$2-1"\t"$2"\t"$3"\t""CHH""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12; else print $1"\t"$2-1"\t"$2"\t"$3"\t""CNN""\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}' BSMAPratio/${ID}.txt > BSMAPratio/${ID}_BSMAP_out.txt
-        
+
         awk_make_bed='BEGIN {OFS = FS} (NR>1){
                 if(($3=="-" && $4~/^.CG../ ) || ($3=="+" &&  $4~/^..CG./))
-                        printf $1, $2-1, $2, $3, "CG", $5, $6, $7, $8, $9, $10, $11, $12;
+                        print $1, $2-1, $2, $3, "CG", $5, $6, $7, $8, $9, $10, $11, $12;
                 else if(($3=="-" && $4~/^C[AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT]G/))
                         print $1, $2-1, $2, $3, "CHG", $5, $6, $7, $8, $9, $10, $11, $12;
                 else if(($3=="-" && $4~/^[AGT][AGT]G../ ) || ($3=="+" &&  $4~/^..C[ACT][ACT]/))
@@ -81,16 +81,16 @@ mkdir -p ConversionRate
                 '
         #awk -F$"\t" "$awk_make_bed" "F1-16_Index5_S1_methratio.txt" > F1-16_Index5_S1.bed
         #BSMAPratio/$F1-16_Index5_S1_BSMAP_out.txt
-        
+
         awk -F$"\\t" "$awk_make_bed" \
         "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out.txt"
-        
+
         # conversion rate
         #awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
 
         # conversion rate pete - not sure if this is correct...
         # using plastid CHH unconverted C rate: 100-(sum(#C_counts)/sum(#CT_counts)*100)
-        # Note that bsmap recomends using the eff_CT_counts (field #$7) which considers if there is a mismatch with the reverse strand. 
+        # Note that bsmap recomends using the eff_CT_counts (field #$7) which considers if there is a mismatch with the reverse strand.
         # However, Qing recommends just using the CT count (field #$9) becasue the reverse strand could equally be a sequencing error. Check this.
         awk -F$"\\t" \
         'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
@@ -106,17 +106,17 @@ mkdir -p ConversionRate
         #'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
         #BSMAPratio/F1-16_Index5_S1_BSMAP_out.txt | \
         #awk -F$"\\t" 'BEGIN {OFS = FS} {sum1 += $7; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}'
-       
+
         ## count read depth over each specific target region, only use uniquley mapped and properly paried reads
         ## args to be passed from qsub script ${intersect_regions_ref} eg ${refdir}/BSseqcapv2_specific_regions.bed
-        
+
         bedtools intersect \
         -abam bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
         -b ${intersect_regions_ref} \
         -bed \
         -wa \
         -wb > TempOut/${ID}_specific_region_pairs_clipOverlap.txt
-        
+
         awk -F$"\\t" 'BEGIN {OFS = FS} {sum[$16]++} END {for (i in sum) print i, sum[i]}' \
         TempOut/${ID}_specific_region_pairs_clipOverlap.txt | \
         sort -k1 -n > \
@@ -125,41 +125,41 @@ mkdir -p ConversionRate
         #awk -F$"\\t" 'BEGIN {OFS = FS} {sum[$16]++} END {for (i in sum) print i, sum[i]}' \
         #TempOut/F1-16_Index5_S1_specific_region_pairs_clipOverlap.txt | \
         #sort -k1 -n -t | head
-        
+
         # count methylated and unmethylated Cytosine per specific target region
-        
+
         # subset the methylations counts file to only those sites that overlap target regions
         bedtools intersect \
         -a BSMAPratio/${ID}_BSMAP_out.txt \
         -b ${intersect_regions_ref} \
         -wa \
         -wb > TempOut/${ID}_BSMAP_out_ontarget.txt
-        
+
         # use awk to total CTs in each region and count mC in each context to calculating ratios
         # *** Think about this method: it will be swayed by high count sites - should we average the ratios at each site?
         # Note that bsmap recomends using the eff_CT_counts (field #$7) which considers if there is a mismatch with the reverse strand. Check this.
         # However, Qing recommends just using the CT count (field #$9) becasue the reverse strand could equally be a sequencing error.
         awk \
-        -F$"\\t" 'BEGIN {OFS = FS} 
-        {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8; 
-        CT[$14"\\t"$15"\\t"$16"\\t"$5] += $9; 
+        -F$"\\t" 'BEGIN {OFS = FS}
+        {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8;
+        CT[$14"\\t"$15"\\t"$16"\\t"$5] += $9;
         n[$14"\\t"$15"\\t"$16"\\t"$5]++} END {
         for (j in mC) print j, n[j], mC[j], CT[j], mC[j]/CT[j]}' \
         TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
-        
+
         #count Cs again, this time use eff_CT_counts
         awk \
-        -F$"\\t" 'BEGIN {OFS = FS} 
-        {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8; 
-        CT[$14"\\t"$15"\\t"$16"\\t"$5] += $7; 
+        -F$"\\t" 'BEGIN {OFS = FS}
+        {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8;
+        CT[$14"\\t"$15"\\t"$16"\\t"$5] += $7;
         n[$14"\\t"$15"\\t"$16"\\t"$5]++} END {
         for (j in mC) print j, n[j], mC[j], CT[j], mC[j]/CT[j]}' \
         TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mCeff.txt
-        
+
         #awk \
-        #-F$"\\t" 'BEGIN {OFS = FS} 
-        #{mC[$14"\t"$15"\t"$16"\t"$5] += $8; 
-        #CT[$14"\t"$15"\t"$16"\t"$5] += $9; 
+        #-F$"\\t" 'BEGIN {OFS = FS}
+        #{mC[$14"\t"$15"\t"$16"\t"$5] += $8;
+        #CT[$14"\t"$15"\t"$16"\t"$5] += $9;
         #n[$14"\t"$15"\t"$16"\t"$5]++} END {
         #for (j in mC) print j, n[j], mC[j], CT[j]}' \
         #TempOut/F1-16_Index5_S1_BSMAP_out_ontarget.txt |head
