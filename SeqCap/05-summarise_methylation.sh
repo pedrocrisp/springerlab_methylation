@@ -147,7 +147,7 @@ mkdir -p ConversionRate
         for (j in mC) print j, n[j], mC[j], CT[j]}' \
         TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mC.txt
 
-        #count Cs again, this time use eff_CT_counts
+        # count Cs again, this time use eff_CT_counts
         awk \
         -F$"\\t" 'BEGIN {OFS = FS}
         {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8;
@@ -156,12 +156,12 @@ mkdir -p ConversionRate
         for (j in mC) print j, n[j], mC[j], CT[j]}' \
         TempOut/${ID}_BSMAP_out_ontarget.txt > OnTargetCoverage/${ID}_BSMAP_out_ontarget_mCeff.txt
 
-        #awk \
-        #-F$"\\t" 'BEGIN {OFS = FS}
-        #{mC[$14"\t"$15"\t"$16"\t"$5] += $8;
-        #CT[$14"\t"$15"\t"$16"\t"$5] += $9;
-        #n[$14"\t"$15"\t"$16"\t"$5]++} END {
-        #for (j in mC) print j, n[j], mC[j], CT[j]}' \
-        #TempOut/F1-16_Index5_S1_BSMAP_out_ontarget.txt |head
+        # awk \
+        # -F$"\\t" 'BEGIN {OFS = FS}
+        # {mC[$14"\t"$15"\t"$16"\t"$5] += $8;
+        # CT[$14"\t"$15"\t"$16"\t"$5] += $9;
+        # n[$14"\t"$15"\t"$16"\t"$5]++} END {
+        # for (j in mC) print j, n[j], mC[j], CT[j]}' \
+        # TempOut/F1-16_Index5_S1_BSMAP_out_ontarget.txt |head
 
 echo finished summarising
