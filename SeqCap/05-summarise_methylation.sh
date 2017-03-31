@@ -135,7 +135,7 @@ mkdir -p ConversionRate
         -wa \
         -wb > TempOut/${ID}_BSMAP_out_ontarget.txt
 
-        # use awk to total CTs in each region and count mC in each context to calculating ratios
+        # use awk to total CTs in each region and count mC in each context to calculate ratios
         # *** Think about this method: it will be swayed by high count sites - should we average the ratios at each site?
         # Note that bsmap recomends using the eff_CT_counts (field #$7) which considers if there is a mismatch with the reverse strand. Check this.
         # However, Qing recommends just using the CT count (field #$9) becasue the reverse strand could equally be a sequencing error.
