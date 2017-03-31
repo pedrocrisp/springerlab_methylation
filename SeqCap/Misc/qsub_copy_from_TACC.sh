@@ -1,3 +1,6 @@
+#THIS DOESNT WORK BECAUSE OF 2-STEP LOGIN ON TACC...
+#USE THE SCREEN-INTERACTIVE METHOD ON LAB SERV
+
 #!/bin/bash -l
 #PBS -l walltime=48:00:00,nodes=1:ppn=1,mem=4gb
 #-o copy_TACC_o
