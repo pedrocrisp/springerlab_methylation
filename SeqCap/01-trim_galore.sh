@@ -53,5 +53,6 @@ mkdir -p $fastqcfolder
 trim_galore \
 --phred33 \
 --fastqc \
+--gzip \
 --fastqc_args "--noextract --outdir $fastqcfolder" \
--o $trimmedfolder --paired reads/${ID}_R1_001.fastq reads/${ID}_R2_001.fastq
+-o $trimmedfolder --paired reads/${ID}_R1_001.fastq.gz reads/${ID}_R2_001.fastq.gz
