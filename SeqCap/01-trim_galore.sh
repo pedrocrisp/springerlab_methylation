@@ -54,5 +54,5 @@ trim_galore \
 --phred33 \
 --fastqc \
 --fastqc_args "--noextract --outdir $fastqcfolder" \
--—dont_gzip \
+--dont_gzip \
 -o $trimmedfolder --paired reads/${ID}_R1_001.fastq.gz reads/${ID}_R2_001.fastq.gz
