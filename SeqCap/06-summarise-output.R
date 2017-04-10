@@ -76,9 +76,9 @@ final_data <- merge(mC_data_processed, read_counts_data, by="v4spec", all = TRUE
 # annotation
 SeqCap_v2_annotation_metadata_v4_final <- read.csv("~/umn/refseqs/maize/SeqCap/Seqcap_ultimate_annotation_files/SeqCapEpi2_regions_annotation_v2_v4.csv")
 
-final_data_annotated <- merge(SeqCap_v2_annotation_metadata_v4_final, final_data, by.x = "v4specfic",by.y ="v4spec", all = TRUE, suffixes = c("filtered_data", "ref_annotation")
+final_data_annotated <- merge(SeqCap_v2_annotation_metadata_v4_final, final_data, by.x = "v4specfic",by.y ="v4spec", all = TRUE, suffixes = c("filtered_data", "ref_annotation"))
 
 ###########################
 #write output
 
-write.csv(final_data_annotated, paste0(outDir, "/", sample, "_ratio_annotated.csv"), row.names = F)
+write.csv(final_data_annotated, paste0(outDir, "/", sample, "_ratio_annotated.csv"), row.names = FALSE)
