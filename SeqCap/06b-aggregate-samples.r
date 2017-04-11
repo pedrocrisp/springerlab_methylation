@@ -6,6 +6,14 @@
 #R script to make aggregate table from the individual summarise methylation output
 
 ####################################
+#Usage
+#Rscript \
+#~/gitrepos/springerlab_methylation/SeqCap/06b-aggregate-samples.R \
+#OnTargetCoverage_annotated \
+#Mei_final \
+#~/umn/refseqs/maize/SeqCap/Seqcap_ultimate_annotation_files/SeqCapEpi2_regions_annotation_v2_v4.csv
+
+####################################
 #libraries
 library(tidyverse)
 
