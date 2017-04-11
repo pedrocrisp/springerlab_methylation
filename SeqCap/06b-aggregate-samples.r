@@ -19,6 +19,8 @@ data_path <- args[1]
 data_path
 outPrefix <- args[2]
 outPrefix
+annotationFile <- args[3]
+annotationFile
 
 ####################################
 # read in dataset
@@ -29,6 +31,7 @@ outPrefix
 
 # list the files
 files <- dir(data_path, pattern = "*_ratio_annotated.csv") # get file names
+files
 
 # inspired by:
 # #http://serialmentor.com/blog/2016/6/13/reading-and-combining-many-tidy-data-files-in-R
@@ -48,16 +51,27 @@ data <- data_frame(filename = files) %>% # create a data frame
 big_data <- unnest(data)
 
 # gather the data so that it can be spread with "sample"_"mC-type" as columns
+#split off all metadata except SampleID and unique region variable - doesnt work otherwise, plus this is quicker
 big_data_spread <-
   big_data %>%
     separate(filename, c("sample", "suffix"), sep="_ratio_annotated") %>%
-      select(-suffix)  %>%
-        gather(variable, value, CG_CT:reads) %>%
+      select(sample, Region, CG_CT:reads)  %>%
+        gather(variable, value, -(sample:Region)) %>%
+        # gather(variable, value, CG_CT:reads) %>%
           unite(temp, sample, variable) %>%
             spread(temp, value)
 
 ####################################
+## re annotate with metadata
+#annotationFile = "~/umn/refseqs/maize/SeqCap/Seqcap_ultimate_annotation_files/SeqCapEpi2_regions_annotation_v2_v4.csv"
+#get annotation
+SeqCap_v2_annotation_metadata_v4_final <- read_csv(annotationFile)
+
+#merge and sort by coordinate
+final_data_annotated <- merge(SeqCap_v2_annotation_metadata_v4_final, big_data_spread, by ="Region", all = TRUE) %>% arrange(v4_Chr,	v4_start,	v4_end)
+
+####################################
 #write the final output table
-write_csv(big_data_spread, paste0(outPrefix, "_mC_all_samples.csv"))
+write_csv(final_data_annotated, paste0(outPrefix, "_mC_all_samples.csv"))
 
 ####################################
