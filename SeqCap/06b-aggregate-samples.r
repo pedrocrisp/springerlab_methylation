@@ -29,6 +29,7 @@ outPrefix <- args[2]
 outPrefix
 annotationFile <- args[3]
 annotationFile
+keyfile <- args[4]
 
 ####################################
 # read in dataset
@@ -58,15 +59,19 @@ data <- data_frame(filename = files) %>% # create a data frame
 #long-ish table, gather properly, then fully cast
 big_data <- unnest(data)
 
+# rename samples
+key <- read_csv(keyfile)
+big_data <- merge(key, big_data, by ="filename", all = TRUE)
+
 # gather the data so that it can be spread with "sample"_"mC-type" as columns
 #split off all metadata except SampleID and unique region variable - doesnt work otherwise, plus this is quicker
 big_data_spread <-
   big_data %>%
-    separate(filename, c("sample", "suffix"), sep="_ratio_annotated") %>%
-      select(sample, Region, CG_CT:reads)  %>%
-        gather(variable, value, -(sample:Region)) %>%
+    #separate(filename, c("sample", "suffix"), sep="_ratio_annotated") %>%
+      select(sample_description, Region, CG_CT:reads)  %>%
+        gather(variable, value, -(sample_description:Region)) %>%
         # gather(variable, value, CG_CT:reads) %>%
-          unite(temp, sample, variable) %>%
+          unite(temp, sample_description, variable) %>%
             spread(temp, value)
 
 ####################################
