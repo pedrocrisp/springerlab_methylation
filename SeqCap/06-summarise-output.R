@@ -36,7 +36,7 @@ colnames(mC_data) <- c("chr", "start", "stop", "context", "sites", "mC", "CT")
 #dplyr oh yeah - melt, cast, sort, add columns
 mC_data_processed <-
   mC_data %>%
-    mutate(specific_target = as.character(paste0(chr, ":", start, ":",stop)), ratio = format(round(mC/CT,2), nsmall = 2)) %>%
+    mutate(specific_target = as.character(paste0(chr, ":", start, ":",stop)), ratio = mC/CT) %>%
       arrange(specific_target) %>%
         select(context:ratio) %>%
           melt(variable.name = "key", value.names = "value", id.vars = c("specific_target", "context")) %>%
