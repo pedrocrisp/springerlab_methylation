@@ -33,10 +33,10 @@ while (my $l = <IN>) {
 	#udated column numbers for my file which has a new col 3
 	# note this is using CT rather than eff_CT
 	my $chr = $f[0];
-	my $pos = $f[1];
+	my $pos = $f[2];
 	my $ccnt = $f[7];
 	my $ctcnt = $f[8];
-	my $context = $f[5];
+	my $context = $f[4];
 
 	my $bin = int(($pos-1 )/ $WINDOW);
 
