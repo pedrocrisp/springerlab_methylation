@@ -105,6 +105,14 @@ mkdir -p ConversionRate
         "BSMAPratio/${ID}_BSMAP_out.txt" | \
         awk -F$"\\t" "$awk_make_bedGraph_context" -
 
+        #Make bigWigs
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        "BSMAPratio/${ID}_BSMAP_out_CG.bigWig"
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        "BSMAPratio/${ID}_BSMAP_out_CHG.bigWig"
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        "BSMAPratio/${ID}_BSMAP_out_CHH.bigWig"
+
         ###############
 
         # conversion rate
