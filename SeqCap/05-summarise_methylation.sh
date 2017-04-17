@@ -96,7 +96,7 @@ mkdir -p ConversionRate
 
         # split by bedGraph by contex
         awk_make_bedGraph_context='BEGIN {OFS = FS} (NR>1){
-          print > "BSMAPratio/"${ID}"_BSMAP_out_"$5".bedGraph"
+          print > "BSMAPratio/${ID}_BSMAP_out_"$5".bedGraph"
         }
         '
 
