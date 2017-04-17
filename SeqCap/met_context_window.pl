@@ -30,7 +30,7 @@ while (my $l = <IN>) {
 	chomp($l);
 	my @f = split(/\t/, $l);
 
-	#udated column numbers for my file which has a new col 3
+	#udated column numbers for my file which has a new col 2
 	# note this is using CT rather than eff_CT
 	my $chr = $f[0];
 	my $pos = $f[2];
