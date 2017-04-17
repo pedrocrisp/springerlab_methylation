@@ -90,18 +90,18 @@ mkdir -p ConversionRate
 
         # begGraph ratio files for tdfs
         awk_make_bedGraph='BEGIN {OFS = FS} (NR>1){
-          print $1, $2, $3, , $8/$9*100
+          print $1, $2, $3, $4, $5, $8/$9*100
         }
         '
 
         # split by bedGraph by contex
         awk_make_bedGraph_context='BEGIN {OFS = FS} (NR>1){
-          print > "BSMAPratio/${ID}_BSMAP_out_${5}.bedGraph"
+          print > "BSMAPratio/"${ID}"_BSMAP_out_"$5".bedGraph"
         }
         '
 
         #pipe bedGraph to split by context (use dash to read from sdtin)
-        awk -F$"\\t" "$awk_make_bed" \
+        awk -F$"\\t" "$awk_make_bedGraph" \
         "BSMAPratio/${ID}_BSMAP_out.txt" | \
         awk -F$"\\t" "$awk_make_bedGraph_context" -
 
