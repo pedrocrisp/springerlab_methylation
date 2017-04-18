@@ -56,7 +56,7 @@ mkdir -p OnTargetCoverage
 mkdir -p ConversionRate
 
 ########## Run #################
-
+        # The required input is all in the folder bsmapped_filtered from the prior step
         ########################
         # extract methylation information using bsmap tool methratio.py
         python /home/springer/pcrisp/software/bsmap-2.74/methratio.py \
