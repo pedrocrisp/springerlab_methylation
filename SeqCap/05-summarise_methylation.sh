@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=04:00:00,nodes=1:ppn=1,mem=60gb
+#PBS -l walltime=05:00:00,nodes=1:ppn=1,mem=60gb
 #PBS -N summarise_methylation
 #PBS -r n
 #PBS -m abe
@@ -110,9 +110,9 @@ mkdir -p ConversionRate
         #Make bigWigs
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out_CG.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CHG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out_CHG.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CHH.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out_CHH.bigWig"
 
         ########################
@@ -201,6 +201,7 @@ mkdir -p ConversionRate
         ########################
 
         # 100 bp tiles using Qing's perl script
-        perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl BSMAPratio/${ID}_BSMAP_out.txt 100
+        cd BSMAPratio
+        perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ${ID}_BSMAP_out.txt 100
 
 echo finished summarising
