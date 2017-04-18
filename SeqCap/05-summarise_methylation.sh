@@ -57,7 +57,8 @@ mkdir -p ConversionRate
 
 ########## Run #################
 
-# extract methylation information using bsmap tool methratio.py
+        ########################
+        # extract methylation information using bsmap tool methratio.py
         python /home/springer/pcrisp/software/bsmap-2.74/methratio.py \
         -o BSMAPratio/${ID}_methratio.txt \
         -d ${genome_reference} \
@@ -86,7 +87,8 @@ mkdir -p ConversionRate
         awk -F$"\\t" "$awk_make_bed" \
         "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out.txt"
 
-        ###############
+        ########################
+        #For genome browser
 
         # begGraph ratio files for tdfs
         awk_make_bedGraph='BEGIN {OFS = FS} (NR>1){
@@ -96,14 +98,14 @@ mkdir -p ConversionRate
 
         # split by bedGraph by contex
         awk_make_bedGraph_context='BEGIN {OFS = FS} (NR>1){
-          print > "BSMAPratio/${ID}_BSMAP_out_"$5".bedGraph"
+          print > "BSMAPratio/"ID"_BSMAP_out_"$5".bedGraph"
         }
         '
 
         #pipe bedGraph to split by context (use dash to read from sdtin)
         awk -F$"\\t" "$awk_make_bedGraph" \
         "BSMAPratio/${ID}_BSMAP_out.txt" | \
-        awk -F$"\\t" "$awk_make_bedGraph_context" -
+        awk -F$"\\t" -v ID=$ID "$awk_make_bedGraph_context" -
 
         #Make bigWigs
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
@@ -113,7 +115,7 @@ mkdir -p ConversionRate
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out_CHH.bigWig"
 
-        ###############
+        ########################
 
         # conversion rate
         #awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
@@ -137,6 +139,10 @@ mkdir -p ConversionRate
         #BSMAPratio/F1-16_Index5_S1_BSMAP_out.txt | \
         #awk -F$"\\t" 'BEGIN {OFS = FS} {sum1 += $7; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}'
 
+        ########################
+        #Target region analysis
+        # count methylated and unmethylated Cytosine per specific target region
+
         ## count read depth over each specific target region, only use uniquley mapped and properly paried reads
         ## args to be passed from qsub script ${intersect_regions_ref} eg ${refdir}/BSseqcapv2_specific_regions.bed
 
@@ -155,8 +161,6 @@ mkdir -p ConversionRate
         #awk -F$"\\t" 'BEGIN {OFS = FS} {sum[$16]++} END {for (i in sum) print i, sum[i]}' \
         #TempOut/F1-16_Index5_S1_specific_region_pairs_clipOverlap.txt | \
         #sort -k1 -n -t | head
-
-        # count methylated and unmethylated Cytosine per specific target region
 
         # subset the methylations counts file to only those sites that overlap target regions
         bedtools intersect \
@@ -193,5 +197,10 @@ mkdir -p ConversionRate
         # n[$14"\t"$15"\t"$16"\t"$5]++} END {
         # for (j in mC) print j, n[j], mC[j], CT[j]}' \
         # TempOut/F1-16_Index5_S1_BSMAP_out_ontarget.txt |head
+
+        ########################
+
+        # 100 bp tiles using Qing's perl script
+        perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl BSMAPratio/${ID}_BSMAP_out.txt 100
 
 echo finished summarising
