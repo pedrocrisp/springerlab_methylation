@@ -49,12 +49,16 @@ cd analysis
 
         cd BSMAPratio
 
+        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CG.bed > ${ID}_BSMAP_out.txt.100.CG.sorted.bed
+        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CHG.bed > ${ID}_BSMAP_out.txt.100.CHG.sorted.bed
+        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CHH.bed > ${ID}_BSMAP_out.txt.100.CHH.sorted.bed
+
         #Make bigWigs
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.sorted.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out.txt.100.CG.bigWig"
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHG.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHG.sorted.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out.txt.100.CHG.bigWig"
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHH.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHH.sorted.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out.txt.100.CHH.bigWig"
 
 echo finished summarising
