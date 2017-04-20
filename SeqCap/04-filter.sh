@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=02:00:00,nodes=1:ppn=8,mem=32gb
+#PBS -l walltime=03:00:00,nodes=1:ppn=8,mem=32gb
 #PBS -N filter
 #PBS -r n
 #PBS -m abe
@@ -59,18 +59,18 @@ mkdir -p bsmapped_filtered
         #java -jar /home/springer/pcrisp/software/picard.jar FixMateInformation \
         #I=bsmapped/${ID}.bam \
         #O=bsmapped_filtered/${ID}_sorted.bam
-       
+
         #remove PCR duplicates, must be sorted by coordinate using pickard
-        
+
         # bams already co-ordinate sorted by samtools, this step seems unnecessary
-        # Also causesing issues: bsmap is reporting PE reads as properly mapped where they hit different chromosomes, solution: skip step 
+        # Also causesing issues: bsmap is reporting PE reads as properly mapped where they hit different chromosomes, solution: skip step
         # uncomment to re-instate
-        
+
         #java -jar /home/springer/pcrisp/software/picard.jar SortSam \
         #INPUT=bsmapped/${ID}.bam \
         #OUTPUT=bsmapped/${ID}_sorted.bam \
         #SORT_ORDER=coordinate
-        
+
         #mark duplicates
         #requires sorted input - using samtools sort in bsmap step (co-ordinate sorted)
         # if co-ordinate sorted then pairs where the mate is unmapped or has secondary alignment are not marked as duplicate
@@ -90,8 +90,8 @@ mkdir -p bsmapped_filtered
         #I=bsmapped/$(ID}_sorted_MarkDup.bam \
         #O=bsmapped/$(ID}_HsMetrics_noDuplicate.txt \
         #BI=${CalculateHsMetrics_reference} \
-        #TARGET_INTERVALS=${CalculateHsMetrics_reference} 
-        
+        #TARGET_INTERVALS=${CalculateHsMetrics_reference}
+
         # on-target CollectHsMetrics using pickard
         #consider incorporating proper TARGET_INTERVALS file
         java -jar /home/springer/pcrisp/software/picard.jar CollectHsMetrics \
@@ -100,8 +100,8 @@ mkdir -p bsmapped_filtered
         CLIP_OVERLAPPING_READS=false \
         R=${genome_reference} \
         BAIT_INTERVALS=${CalculateHsMetrics_reference} \
-        TARGET_INTERVALS=${CalculateHsMetrics_reference} 
-        
+        TARGET_INTERVALS=${CalculateHsMetrics_reference}
+
         # keep properly paired reads using mabtools package
         # note that some reads marked as properly paired by bsmap actually map to different chromosomes
         bamtools filter \
@@ -110,10 +110,9 @@ mkdir -p bsmapped_filtered
         -isProperPair true \
         -in bsmapped_filtered/${ID}_sorted_MarkDup.bam \
         -out bsmapped_filtered/${ID}_sorted_MarkDup_pairs.bam
-        
+
         # clip overlapping reads using bamUtils package
         bam clipOverlap \
         --in bsmapped_filtered/${ID}_sorted_MarkDup_pairs.bam \
         --out bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
         --stats
-       
