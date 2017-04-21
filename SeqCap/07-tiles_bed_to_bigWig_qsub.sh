@@ -16,6 +16,7 @@ step=07-tiles_bed_to_bigWig
 
 ######### Setup ################
 sample_list=$2
+chrom.sizes=$3
 
 if [ "$#" -lt "1" ]
 then
