@@ -51,13 +51,13 @@ cd analysis
 
         #make bedGraph by sorting and removing cols 4 and 5 with awk
 
-        awk -F$"\\t"'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CG.bed | \
+        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CG.bed | \
         sort -k1,1 -k2,2n > ${ID}_BSMAP_out.txt.100.CG.sorted.bg
 
-        awk -F$"\\t"'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CHG.bed | \
+        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CHG.bed | \
         sort -k1,1 -k2,2n > ${ID}_BSMAP_out.txt.100.CHG.sorted.bg
 
-        awk -F$"\\t"'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CHH.bed | \
+        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CHH.bed | \
         sort -k1,1 -k2,2n > ${ID}_BSMAP_out.txt.100.CHH.sorted.bg
 
         #Make bigWigs
