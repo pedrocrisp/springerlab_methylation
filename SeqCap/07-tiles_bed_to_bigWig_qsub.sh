@@ -23,7 +23,7 @@ then
 echo $usage
 exit -1
 else
-echo "Submitting samples listed in '$sample_list' for trimming"
+echo "Submitting samples listed in '$sample_list' for binning"
 cat $sample_list
 fi
 
@@ -74,5 +74,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},${chrom.sizes} \
+-v LIST=${sample_list},chrom.sizes=${chrom.sizes} \
 $script_to_qsub
