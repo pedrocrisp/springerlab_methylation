@@ -6,7 +6,7 @@ usage="USAGE:
 bash 07-summarise_methylation_qsub.sh <sample_list.txt> <chrom.sizes file>
 for example:
 bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/05-summarise_methylation_qsub.sh \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig_qsub.sh \
 single_sample.txt \
 ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes
 "
@@ -15,8 +15,8 @@ single_sample.txt \
 step=07-tiles_bed_to_bigWig
 
 ######### Setup ################
-sample_list=$2
-chrom.sizes=$3
+sample_list=$1
+chrom.sizes=$2
 
 if [ "$#" -lt "1" ]
 then
