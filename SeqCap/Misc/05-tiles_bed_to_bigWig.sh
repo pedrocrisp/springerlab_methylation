@@ -65,6 +65,7 @@ mkdir -p tiles
         sort -k1,1 -k2,2n > ${ID}_BSMAP_out.txt.100.CHH.sorted.bg
 
         #Make bigWigs
+        # At some point soft code the reference, make variable in script call
         bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.sorted.bg" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out.txt.100.CG.bigWig"
         bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHG.sorted.bg" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
