@@ -3,18 +3,19 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 05-summarise_methylation_qsub.sh <sample_list.txt>
+bash 07-summarise_methylation_qsub.sh <sample_list.txt> <chrom.sizes file>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/05-summarise_methylation_qsub.sh \
-single_sample.txt
+single_sample.txt \
+~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=05-tiles_bed_to_bigWig
+step=07-tiles_bed_to_bigWig
 
 ######### Setup ################
-sample_list=$1
+sample_list=$2
 
 if [ "$#" -lt "1" ]
 then
@@ -72,5 +73,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list} \
+-v LIST=${sample_list},${chrom.sizes} \
 $script_to_qsub
