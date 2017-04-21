@@ -8,7 +8,7 @@ for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig_qsub.sh \
 single_sample.txt \
-~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes
+/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes
 "
 
 #define stepo in the pipeline - should be the same name as the script
@@ -16,7 +16,7 @@ step=07-tiles_bed_to_bigWig
 
 ######### Setup ################
 sample_list=$1
-chrom.sizes=$2
+chrom_sizes=$2
 
 if [ "$#" -lt "1" ]
 then
@@ -74,5 +74,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},chrom.sizes=${chrom.sizes} \
+-v LIST=${sample_list},chrom_sizes=${chrom_sizes} \
 $script_to_qsub
