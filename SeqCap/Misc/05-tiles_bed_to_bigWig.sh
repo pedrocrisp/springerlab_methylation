@@ -55,10 +55,10 @@ cd analysis
           print $1, $2, $3, $6}' - > ${ID}_BSMAP_out.txt.100.CG.sorted.bg
 
         sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CHG.bed | awk -F$"\\t"'BEGIN {OFS = FS} (NR>1){
-          print $1, $2, $3, $6}' - > > ${ID}_BSMAP_out.txt.100.CHG.sorted.bg
+          print $1, $2, $3, $6}' - > ${ID}_BSMAP_out.txt.100.CHG.sorted.bg
 
         sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CHH.bed | awk -F$"\\t"'BEGIN {OFS = FS} (NR>1){
-          print $1, $2, $3, $6}' - > > ${ID}_BSMAP_out.txt.100.CHH.sorted.bg
+          print $1, $2, $3, $6}' - > ${ID}_BSMAP_out.txt.100.CHH.sorted.bg
 
         #Make bigWigs
         bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.sorted.bg" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
