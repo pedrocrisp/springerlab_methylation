@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=2:00:00,nodes=1:ppn=1,mem=32gb
+#PBS -l walltime=4:00:00,nodes=1:ppn=1,mem=32gb
 #PBS -N summarise_methylation
 #PBS -r n
 #PBS -m abe
@@ -44,10 +44,14 @@ echo sample being mapped is $ID
 
 #make adaligned folder bsmaped
 cd analysis
+mkdir -p tiles
 
 ########## Run #################
 
-        cd BSMAPratio
+        cd tiles
+
+        # 100 bp tiles using Qing's perl script
+        perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ../BSMAPratio/${ID}_BSMAP_out.txt 100
 
         #make bedGraph by sorting and removing cols 4 and 5 with awk
 
