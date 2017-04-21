@@ -66,11 +66,11 @@ mkdir -p tiles
 
         #Make bigWigs
         # At some point soft code the reference, make variable in script call
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.sorted.bg" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.sorted.bg" ${chrom.sizes} \
         "BSMAPratio/${ID}_BSMAP_out.txt.100.CG.bigWig"
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHG.sorted.bg" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHG.sorted.bg" ${chrom.sizes} \
         "BSMAPratio/${ID}_BSMAP_out.txt.100.CHG.bigWig"
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHH.sorted.bg" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHH.sorted.bg" ${chrom.sizes} \
         "BSMAPratio/${ID}_BSMAP_out.txt.100.CHH.bigWig"
 
 echo finished summarising
