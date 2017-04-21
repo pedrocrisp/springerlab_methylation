@@ -49,9 +49,16 @@ cd analysis
 
         cd BSMAPratio
 
-        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CG.bed > ${ID}_BSMAP_out.txt.100.CG.sorted.bed
-        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CHG.bed > ${ID}_BSMAP_out.txt.100.CHG.sorted.bed
-        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CHH.bed > ${ID}_BSMAP_out.txt.100.CHH.sorted.bed
+        #make bed by sorting and removing cols 4 and 5 with awk
+
+        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CG.bed | awk -F$"\\t"'BEGIN {OFS = FS} (NR>1){
+          print $1, $2, $3, $6}' - > ${ID}_BSMAP_out.txt.100.CG.sorted.bed
+
+        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CHG.bed | awk -F$"\\t"'BEGIN {OFS = FS} (NR>1){
+          print $1, $2, $3, $6}' - > > ${ID}_BSMAP_out.txt.100.CHG.sorted.bed
+
+        sort -k1,1 -k2,2n ${ID}_BSMAP_out.txt.100.CHH.bed | awk -F$"\\t"'BEGIN {OFS = FS} (NR>1){
+          print $1, $2, $3, $6}' - > > ${ID}_BSMAP_out.txt.100.CHH.sorted.bed
 
         #Make bigWigs
         bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.sorted.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
