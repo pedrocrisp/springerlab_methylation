@@ -201,15 +201,15 @@ mkdir -p ConversionRate
         ########################
 
         # 100 bp tiles using Qing's perl script
-        cd BSMAPratio
-        perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ${ID}_BSMAP_out.txt 100
+        #cd BSMAPratio
+        #perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ${ID}_BSMAP_out.txt 100
 
         #Make bigWigs
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
-        "BSMAPratio/${ID}_BSMAP_out.txt.100.CG.bigWig"
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHG.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
-        "BSMAPratio/${ID}_BSMAP_out.txt.100.CHG.bigWig"
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHH.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
-        "BSMAPratio/${ID}_BSMAP_out.txt.100.CHH.bigWig"
+        #bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        #"BSMAPratio/${ID}_BSMAP_out.txt.100.CG.bigWig"
+        #bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHG.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        #"BSMAPratio/${ID}_BSMAP_out.txt.100.CHG.bigWig"
+        #bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHH.bed" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        #"BSMAPratio/${ID}_BSMAP_out.txt.100.CHH.bigWig"
 
 echo finished summarising
