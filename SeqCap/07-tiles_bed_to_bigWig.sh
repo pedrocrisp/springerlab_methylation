@@ -33,7 +33,7 @@ echo working dir is now $PWD
 
 ########## Modules #################
 
-
+module load R/3.3.2
 ########## Set up dirs #################
 
 #get job ID
@@ -56,22 +56,27 @@ mkdir -p tiles
 
         #make bedGraph by sorting and removing cols 4 and 5 with awk
 
-        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ./tiles/${ID}_BSMAP_out.txt.100.CG.bed | \
-        sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CG.sorted.bg
+        # make bedGraph by removing cols 4 and 5 with
+        cut -d$'\t' -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CG.bed > ./tiles/${ID}_BSMAP_out.txt.100.CG.bg
+        cut -d$'\t' -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHG.bed > ./tiles/${ID}_BSMAP_out.txt.100.CHG.bg
+        cut -d$'\t' -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHH.bed > ./tiles/${ID}_BSMAP_out.txt.100.CHH.bg
 
-        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ./tiles/${ID}_BSMAP_out.txt.100.CHG.bed | \
-        sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHG.sorted.bg
+        #fix chr ends in bg
+        R -f ~/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig.R \
+        --args {} tiles ${ID} /home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles.txt
 
-        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ./tiles/${ID}_BSMAP_out.txt.100.CHH.bed | \
-        sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHH.sorted.bg
+        #sort
+        sort -k1,1 -k2,2n ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.bg > ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.sorted.bg
+        sort -k1,1 -k2,2n ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.bg > ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.sorted.bg
+        sort -k1,1 -k2,2n ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.bg > ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.sorted.bg
 
         #Make bigWigs
         # At some point soft code the reference, make variable in script call
-        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CG.sorted.bg" ${chrom_sizes} \
+        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.sorted.bg" ${chrom_sizes} \
         "./tiles/BSMAPratio/${ID}_BSMAP_out.txt.100.CG.bigWig"
-        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CHG.sorted.bg" ${chrom_sizes} \
+        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.sorted.bg" ${chrom_sizes} \
         "./tiles/BSMAPratio/${ID}_BSMAP_out.txt.100.CHG.bigWig"
-        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CHH.sorted.bg" ${chrom_sizes} \
+        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.sorted.bg" ${chrom_sizes} \
         "./tiles/BSMAPratio/${ID}_BSMAP_out.txt.100.CHH.bigWig"
 
 echo finished summarising
