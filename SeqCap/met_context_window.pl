@@ -38,8 +38,12 @@ while (my $l = <IN>) {
 	my $ctcnt = $f[8];
 	my $context = $f[4];
 
-	#This means that if there is data at position 1 then the window breaks = 0/window = Z?
+	#Set bins, dealing with corner case where data at position 1 then the window breaks = 0/window = null?
+if($pos-1)!=0){
 	my $bin = int(($pos-1 )/ $WINDOW);
+}else{
+	my $bin = 0
+}
 
 	#$dat{$chr}->{$bin}->{'total'}++;
 	$dat{$chr}->{$bin}->{$context}->{'C'}+=$ccnt;
