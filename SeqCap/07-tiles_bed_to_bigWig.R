@@ -28,32 +28,32 @@ reference_tiles <- read_delim(reference_tile_file, delim ="\t")
 #########
 #fix bed CG
 
-broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.sorted.bg"), delim ="\t")
+broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.bg"), delim ="\t")
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
 
 fixed_bedGraph <-
 merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
 
-write_delim(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.sorted.fixed.bg"), delim ="\t")
+write_delim(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.bg"), delim ="\t")
 
 #########
 #fix bed CHG
 
-broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.sorted.bg"), delim ="\t")
+broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.bg"), delim ="\t")
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
 
 fixed_bedGraph <-
 merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
 
-write_delim(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.sorted.fixed.bg"), delim ="\t")
+write_delim(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.bg"), delim ="\t")
 
 #########
 #fix bed CHH
 
-broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.sorted.bg"), delim ="\t")
+broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.bg"), delim ="\t")
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
 
 fixed_bedGraph <-
 merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
 
-write_delim(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.sorted.fixed.bg"), delim ="\t")
+write_delim(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.bg"), delim ="\t")
