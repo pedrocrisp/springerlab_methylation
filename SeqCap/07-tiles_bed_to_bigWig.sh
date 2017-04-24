@@ -48,29 +48,30 @@ mkdir -p tiles
 
 ########## Run #################
 
-        cd tiles
-
         # 100 bp tiles using Qing's perl script
-        perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ../BSMAPratio/${ID}_BSMAP_out.txt 100
+        perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ./BSMAPratio/${ID}_BSMAP_out.txt 100
+
+        #move output into tiles folder
+        mv -rv ./BSMAPratio/${ID}_BSMAP_out.txt 100 ./tiles/${ID}_BSMAP_out.txt 100
 
         #make bedGraph by sorting and removing cols 4 and 5 with awk
 
-        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CG.bed | \
-        sort -k1,1 -k2,2n > ${ID}_BSMAP_out.txt.100.CG.sorted.bg
+        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ./tiles/${ID}_BSMAP_out.txt.100.CG.bed | \
+        sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CG.sorted.bg
 
-        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CHG.bed | \
-        sort -k1,1 -k2,2n > ${ID}_BSMAP_out.txt.100.CHG.sorted.bg
+        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ./tiles/${ID}_BSMAP_out.txt.100.CHG.bed | \
+        sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHG.sorted.bg
 
-        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ${ID}_BSMAP_out.txt.100.CHH.bed | \
-        sort -k1,1 -k2,2n > ${ID}_BSMAP_out.txt.100.CHH.sorted.bg
+        awk -F$"\\t" 'BEGIN {OFS = FS} (NR>1){print $1, $2, $3, $6}' ./tiles/${ID}_BSMAP_out.txt.100.CHH.bed | \
+        sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHH.sorted.bg
 
         #Make bigWigs
         # At some point soft code the reference, make variable in script call
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CG.sorted.bg" ${chrom_sizes} \
-        "BSMAPratio/${ID}_BSMAP_out.txt.100.CG.bigWig"
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHG.sorted.bg" ${chrom_sizes} \
-        "BSMAPratio/${ID}_BSMAP_out.txt.100.CHG.bigWig"
-        bedGraphToBigWig "${ID}_BSMAP_out.txt.100.CHH.sorted.bg" ${chrom_sizes} \
-        "BSMAPratio/${ID}_BSMAP_out.txt.100.CHH.bigWig"
+        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CG.sorted.bg" ${chrom_sizes} \
+        "./tiles/BSMAPratio/${ID}_BSMAP_out.txt.100.CG.bigWig"
+        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CHG.sorted.bg" ${chrom_sizes} \
+        "./tiles/BSMAPratio/${ID}_BSMAP_out.txt.100.CHG.bigWig"
+        bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CHH.sorted.bg" ${chrom_sizes} \
+        "./tiles/BSMAPratio/${ID}_BSMAP_out.txt.100.CHH.bigWig"
 
 echo finished summarising
