@@ -63,7 +63,7 @@ mkdir -p tiles
 
         #fix chr ends in bg
         R -f ~/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig.R \
-        --args {} tiles ${ID} /home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles.txt
+        --args ${ID} tiles /home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles.txt
 
         #sort
         sort -k1,1 -k2,2n ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.bg > ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.sorted.bg
