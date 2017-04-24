@@ -52,7 +52,7 @@ mkdir -p tiles
         perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ./BSMAPratio/${ID}_BSMAP_out.txt 100
 
         #move output into tiles folder
-        mv -rv ./BSMAPratio/${ID}_BSMAP_out.txt.100.*.bed ./tiles/
+        mv -v ./BSMAPratio/${ID}_BSMAP_out.txt.100.*.bed ./tiles/
 
         #make bedGraph by sorting and removing cols 4 and 5 with awk
 
