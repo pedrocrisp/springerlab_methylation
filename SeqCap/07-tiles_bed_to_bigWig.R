@@ -35,6 +35,7 @@ reference_tiles <- read_delim(reference_tile_file, delim ="\t")
 
 broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.bg"), delim ="\t", col_names = F)
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
+broken_bedGraph <- na.omit(broken_bedGraph)
 
 fixed_bedGraph <-
 merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
@@ -46,6 +47,7 @@ write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
 
 broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.bg"), delim ="\t", col_names = F)
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
+broken_bedGraph <- na.omit(broken_bedGraph)
 
 fixed_bedGraph <-
 merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
@@ -57,6 +59,7 @@ write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
 
 broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.bg"), delim ="\t", col_names = F)
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
+broken_bedGraph <- na.omit(broken_bedGraph)
 
 fixed_bedGraph <-
 merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
