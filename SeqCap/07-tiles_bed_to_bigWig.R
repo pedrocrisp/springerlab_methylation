@@ -33,35 +33,35 @@ reference_tiles <- read_delim(reference_tile_file, delim ="\t")
 # note: using write.table, write_delim converts to scientific notation
 # and cannot seem to disable that
 
-broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.bg"), delim ="\t", col_names = F)
-colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
+broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.bed"), delim ="\t", col_names = F)
+colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "C", "CT", "ratio")
 broken_bedGraph <- na.omit(broken_bedGraph)
 
 fixed_bedGraph <-
-merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, C, CT, ratio)
 
-write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.bg"), sep = "\t", quote = F, row.names = F, col.names = F)
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
 
 #########
 #fix bed CHG
 
 broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.bg"), delim ="\t", col_names = F)
-colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "C", "CT", "ratio")
 broken_bedGraph <- na.omit(broken_bedGraph)
 
 fixed_bedGraph <-
-merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, C, CT, ratio)
 
-write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.bg"), sep = "\t", quote = F, row.names = F, col.names = F)
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
 
 #########
 #fix bed CHH
 
 broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.bg"), delim ="\t", col_names = F)
-colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "C", "CT", "ratio")
 broken_bedGraph <- na.omit(broken_bedGraph)
 
 fixed_bedGraph <-
-merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, ratio)
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, C, CT, ratio)
 
-write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.bg"), sep = "\t", quote = F, row.names = F, col.names = F)
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
