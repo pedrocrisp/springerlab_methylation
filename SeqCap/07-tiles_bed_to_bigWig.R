@@ -45,7 +45,7 @@ write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
 #########
 #fix bed CHG
 
-broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.bg"), delim ="\t", col_names = F)
+broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.bed"), delim ="\t", col_names = F)
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "C", "CT", "ratio")
 broken_bedGraph <- na.omit(broken_bedGraph)
 
@@ -57,7 +57,7 @@ write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
 #########
 #fix bed CHH
 
-broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.bg"), delim ="\t", col_names = F)
+broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.bed"), delim ="\t", col_names = F)
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "C", "CT", "ratio")
 broken_bedGraph <- na.omit(broken_bedGraph)
 
