@@ -28,7 +28,7 @@ reference_tiles <- read_delim(reference_tile_file, delim ="\t")
 #########
 #fix bed CG
 
-broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.bg"), delim ="\t")
+broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.bg"), delim ="\t", col_names = F)
 colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "ratio")
 
 fixed_bedGraph <-
