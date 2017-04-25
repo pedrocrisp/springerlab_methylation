@@ -39,7 +39,7 @@ while (my $l = <IN>) {
 	my $context = $f[4];
 
 	#Set bins, dealing with corner case where data at position 1 then the window breaks = 0/window = null?
-if($pos >= 2){
+if($pos < 100000){
 	my $bin = int(($pos-1 )/ $WINDOW);
 }else{
 	my $bin = 0
