@@ -20,13 +20,16 @@ reference_tile_file
 ###########################
 #setup
 library(tidyverse)
+# disable scientific notation
+old.scipen <- getOption("scipen")
+options(scipen=999)
 ###########################
 
 #reference used to make amendments
 reference_tiles <- read_delim(reference_tile_file, delim ="\t")
 
 #########
-#fix bed CG
+# fix bed CG
 # note: using write.table, write_delim converts to scientific notation
 # and cannot seem to disable that
 
