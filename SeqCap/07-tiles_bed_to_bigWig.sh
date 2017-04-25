@@ -54,21 +54,16 @@ mkdir -p tiles
         #move output into tiles folder
         mv -v ./BSMAPratio/${ID}_BSMAP_out.txt.100.*.bed ./tiles/
 
-        #make bedGraph by sorting and removing cols 4 and 5 with awk
-
-        # make bedGraph by removing cols 4 and 5 with
-        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CG.bed > ./tiles/${ID}_BSMAP_out.txt.100.CG.bg
-        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHG.bed > ./tiles/${ID}_BSMAP_out.txt.100.CHG.bg
-        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHH.bed > ./tiles/${ID}_BSMAP_out.txt.100.CHH.bg
-
         #fix chr ends in bg
         R -f ~/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig.R \
         --args ${ID} tiles /home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles.txt
 
-        #sort
-        sort -k1,1 -k2,2n ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.bg > ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.sorted.bg
-        sort -k1,1 -k2,2n ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.bg > ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.sorted.bg
-        sort -k1,1 -k2,2n ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.bg > ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.sorted.bg
+        #make bedGraph by sorting and removing cols 4 and 5 with awk
+
+        # make bedGraph by removing cols 4 and 5 with and sorting
+        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.sorted.bg
+        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.sorted.bg
+        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.sorted.bg
 
         #Make bigWigs
         # At some point soft code the reference, make variable in script call
