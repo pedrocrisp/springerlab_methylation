@@ -49,10 +49,10 @@ mkdir -p tiles
 ########## Run #################
 
         # 100 bp tiles using Qing's perl script
-        perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ./BSMAPratio/${ID}_BSMAP_out.txt 100
+        # perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ./BSMAPratio/${ID}_BSMAP_out.txt 100
 
         #move output into tiles folder
-        mv -v ./BSMAPratio/${ID}_BSMAP_out.txt.100.*.bed ./tiles/
+        # mv -v ./BSMAPratio/${ID}_BSMAP_out.txt.100.*.bed ./tiles/
 
         #make bedGraph by sorting and removing cols 4 and 5 with awk
 
