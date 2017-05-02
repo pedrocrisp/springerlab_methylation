@@ -4,6 +4,11 @@ Pipeline for processing SeqCap data.
 
 --------
 
+## Installation Notes
+This pipeline requires the following software:
+
+
+
 ## Example pipeline execution - Server Steps
 
 ### Step 1 Trim reads
