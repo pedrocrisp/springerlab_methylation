@@ -1,0 +1,24 @@
+#2017-05-02
+#Note for running bsmap with Michael Maher
+
+# add bsmap to PATH
+PATH=~/programs/bsmap-2.74:$PATH
+
+#load samtools
+module load samtools/0.1.18
+
+#run bsmap
+...
+
+# extract methylation info per C
+
+#load python2
+module load python2/2.7.8
+
+#
+python ~/programs/bsmap-2.74/methratio.py \
+-o out_methratio.txt \
+-d  \
+-u \
+-z \
+-r bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
