@@ -5,9 +5,9 @@ Pipeline for processing SeqCap data.
 --------
 
 ## Installation Notes
-This pipeline requires the following software:
+This pipeline requires a number of pieces of software, some are loaded as modules, some are expected to be in your path, depending on the step.
 
-
+Bsmap is a special case. It looks for bsmap in ~/software/bsmap-2.74 and puts this dir in your path. I also edited the script sam2bam.sh to use the system version of samtools; however, ultimately I dont use this file becasue I resorted to output in sam format becasue I fix the sam/bam due to a discordant pairs issues, then manually run samtools to sort and index bams.
 
 ## Example pipeline execution - Server Steps
 
