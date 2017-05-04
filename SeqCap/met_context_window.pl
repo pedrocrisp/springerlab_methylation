@@ -68,24 +68,24 @@ for my $C (sort {$a <=> $b} keys %dat) {
 		# CG output
 		if($dat{$C}->{$W}->{'CG'}->{'CT'}!=0){
 			my $cgfrac = ($dat{$C}->{$W}->{'CG'}->{'C'} / $dat{$C}->{$W}->{'CG'}->{'CT'});
-			print CGOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\t", $cgfrac, "\n";
+			print CGOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\t", $cgfrac, "\n";
 		}else{
-			print CGOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\tNA\n";
+			print CGOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\tNA\n";
 		}
 		# CHG output
 		if($dat{$C}->{$W}->{'CHG'}->{'CT'}!=0){
 			my $chgfrac = ($dat{$C}->{$W}->{'CHG'}->{'C'} / $dat{$C}->{$W}->{'CHG'}->{'CT'});
-			print CHGOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'CT'}, "\t", $chgfrac, "\n";
+			print CHGOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'CT'}, "\t", $chgfrac, "\n";
 		}else{
-			print CHGOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'CT'}, "\tNA\n";
+			print CHGOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'CT'}, "\tNA\n";
 		}
 
 		# CHH output
 		if($dat{$C}->{$W}->{'CHH'}->{'CT'}!=0){
 			my $chhfrac = ($dat{$C}->{$W}->{'CHH'}->{'C'} / $dat{$C}->{$W}->{'CHH'}->{'CT'});
-			print CHHOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHH'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'CT'}, "\t", $chhfrac, "\n";
+			print CHHOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHH'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'CT'}, "\t", $chhfrac, "\n";
 		}else{
-			print CHHOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHH'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'CT'}, "\tNA\n";
+			print CHHOUT $C, "\t", (($W * $WINDOW) + 1), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHH'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'CT'}, "\tNA\n";
 		}
 
 	}
