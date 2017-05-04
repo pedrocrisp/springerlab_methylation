@@ -163,6 +163,7 @@ mkdir -p ConversionRate
         #sort -k1 -n -t | head
 
         # subset the methylations counts file to only those sites that overlap target regions
+        # we will use the added region column to summarise counts and mC sites per region
         bedtools intersect \
         -a BSMAPratio/${ID}_BSMAP_out.txt \
         -b ${intersect_regions_ref} \
