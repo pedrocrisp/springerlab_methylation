@@ -1,3 +1,5 @@
+#DOSENT SEEM TO WORK IN THE QSUB ENVIRONMENT - CANT FIND S3 CONFIG FILE...
+
 #pcrisp
 #2017-04-04
 #script to sync the contents of the current working dir to the specific location on s3
