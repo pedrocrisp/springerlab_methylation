@@ -3,7 +3,7 @@
 #script to sync the contents of the current working dir to the specific location on s3
 
 #!/bin/bash -l
-#PBS -l walltime=00:10:00,nodes=1:ppn=1,mem=4gb
+#PBS -l walltime=00:3:00,nodes=1:ppn=1,mem=4gb
 #-o copy_logs_o
 #-e copy_logs_e
 #PBS -N copy_s3
