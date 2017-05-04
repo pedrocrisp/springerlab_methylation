@@ -1,5 +1,5 @@
 #2017-05-02
-#Note for running bsmap with Michael Maher
+#Note for running bsmap with Michael Maher (Voytas Lab )
 
 # add bsmap to PATH
 PATH=~/programs/bsmap-2.74:$PATH
