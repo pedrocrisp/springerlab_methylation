@@ -50,6 +50,8 @@ while (my $l = <IN>) {
 	#$dat{$chr}->{$bin}->{'total'}++;
 	$dat{$chr}->{$bin}->{$context}->{'C'}+=$ccnt;
 	$dat{$chr}->{$bin}->{$context}->{'CT'}+=$ctcnt;
+	#count sites
+	$dat{$chr}->{$bin}->{$context}->{'sites'}++;
 	#print STDERR "$chr\t$bin\t$met\n";
 
 }
