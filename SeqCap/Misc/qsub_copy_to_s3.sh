@@ -12,10 +12,7 @@
 #PBS -M pcrisp@umn.edu
 
 #to run
-#qsub <~/gitrepos/springerlab_methylation/SeqCap/Misc/qsub_copy_to_s3.sh> <-v target_to_copy="./",destination_s3_location="target_s3_location">
-
-target_to_copy=$1
-destination_s3_location=$2
+#qsub ~/gitrepos/springerlab_methylation/SeqCap/Misc/qsub_copy_to_s3.sh -v target_to_copy="./",destination_s3_location="target_s3_location"
 
 # start copy
 s3cmd \
