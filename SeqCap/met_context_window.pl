@@ -54,6 +54,7 @@ $ts = localtime();
 print STDERR $ts, "\n";
 
 # Emit window BED file (base zero coordinates)
+# to get one based changed ($W * $WINDOW) to (($W * $WINDOW) + 1)
 print STDERR "Printout time\n";
 for my $C (sort {$a <=> $b} keys %dat) {
 
