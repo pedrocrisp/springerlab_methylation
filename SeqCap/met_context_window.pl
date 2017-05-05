@@ -62,7 +62,7 @@ for my $C (sort {$a <=> $b} keys %dat) {
 		# CG output
 		if($dat{$C}->{$W}->{'CG'}->{'CT'}!=0){
 			my $cgfrac = ($dat{$C}->{$W}->{'CG'}->{'C'} / $dat{$C}->{$W}->{'CG'}->{'CT'});
-			print CGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'} ->{'CT'}, "\t", $cgfrac, "\n";
+			print CGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\t", $cgfrac, "\n";
 		}else{
 			print CGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\tNA\n";
 		}
