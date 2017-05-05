@@ -49,21 +49,25 @@ mkdir -p tiles
 ########## Run #################
 
         # 100 bp tiles using Qing's perl script
+        # the output file format is actually a bed it is a zero-based coordinate
         perl ~/gitrepos/springerlab_methylation/SeqCap/met_context_window.pl ./BSMAPratio/${ID}_BSMAP_out.txt 100
 
         #move output into tiles folder
         mv -v ./BSMAPratio/${ID}_BSMAP_out.txt.100.*.bed ./tiles/
 
-        #fix chr ends in bg
+        #Run R moudle to:
+        # 1. fix chr ends in BED file
+        # 2. output one-based coordinate .txt file for analysis in R
+        # 3. output zero-based coordinate bedGrraph file (omit excess columns and sort)
         R -f ~/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig.R \
-        --args ${ID} tiles /home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles.txt
+        --args ${ID} tiles /home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles_zBased.txt
 
         #make bedGraph by sorting and removing cols 4 and 5 with awk
 
-        # make bedGraph by removing cols 4 and 5 with and sorting
-        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.sorted.bg
-        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.sorted.bg
-        cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.sorted.bg
+        # make bedGraph by removing cols 4 and 5 and sorting
+        #cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CG.fixed.sorted.bg
+        #cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHG.fixed.sorted.bg
+        #cut -f1-3,6-6 ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.bed | sort -k1,1 -k2,2n > ./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.sorted.bg
 
         #Make bigWigs
         # At some point soft code the reference, make variable in script call
