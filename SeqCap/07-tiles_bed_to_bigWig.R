@@ -34,34 +34,55 @@ reference_tiles <- read_delim(reference_tile_file, delim ="\t")
 # and cannot seem to disable that
 
 broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.bed"), delim ="\t", col_names = F)
-colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "C", "CT", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "C", "CT", "ratio")
 broken_bedGraph <- na.omit(broken_bedGraph)
 
+#keep as BED format (zero-based coordinates)
+# only retain chr, start, end, ratio; then sort to make it a bedGraph file
 fixed_bedGraph <-
-merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, C, CT, ratio)
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start_zBased"))  %>% select(chr, start, end, ratio) %>% arrange(chr, start)
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.sorted.bg"), sep = "\t", quote = F, row.names = F, col.names = F)
 
-write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
+#convert to one-based coordinate .txt file and sort
+fixed_bedGraph <-
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start_zBased"))  %>% select(chr, start_zBased, end, C, CT, ratio) %>% arrange(chr, start_zBased)
+colnames(fixed_bedGraph) <- c("chr", "start", "end", "C", "CT", "ratio")
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.txt"), sep = "\t", quote = F, row.names = F, col.names = F)
 
 #########
 #fix bed CHG
 
 broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.bed"), delim ="\t", col_names = F)
-colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "C", "CT", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "C", "CT", "ratio")
 broken_bedGraph <- na.omit(broken_bedGraph)
 
+#keep as BED format (zero-based coordinates)
+# only retain chr, start, end, ratio; then sort to make it a bedGraph file
 fixed_bedGraph <-
-merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, C, CT, ratio)
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start_zBased"))  %>% select(chr, start, end, ratio) %>% arrange(chr, start)
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.sorted.bg"), sep = "\t", quote = F, row.names = F, col.names = F)
 
-write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
+#convert to one-based coordinate .txt file and sort
+fixed_bedGraph <-
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start_zBased"))  %>% select(chr, start_zBased, end, C, CT, ratio) %>% arrange(chr, start_zBased)
+colnames(fixed_bedGraph) <- c("chr", "start", "end", "C", "CT", "ratio")
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.txt"), sep = "\t", quote = F, row.names = F, col.names = F)
 
 #########
 #fix bed CHH
 
 broken_bedGraph <- read_delim(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.bed"), delim ="\t", col_names = F)
-colnames(broken_bedGraph) <- c("chr", "start", "broken_end", "C", "CT", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "C", "CT", "ratio")
 broken_bedGraph <- na.omit(broken_bedGraph)
 
+#keep as BED format (zero-based coordinates)
+# only retain chr, start, end, ratio; then sort to make it a bedGraph file
 fixed_bedGraph <-
-merge(broken_bedGraph, reference_tiles, by = c("chr", "start"))  %>% select(chr, start, end, C, CT, ratio)
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start_zBased"))  %>% select(chr, start, end, ratio) %>% arrange(chr, start)
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.sorted.bg"), sep = "\t", quote = F, row.names = F, col.names = F)
 
-write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
+#convert to one-based coordinate .txt file and sort
+fixed_bedGraph <-
+merge(broken_bedGraph, reference_tiles, by = c("chr", "start_zBased"))  %>% select(chr, start_zBased, end, C, CT, ratio) %>% arrange(chr, start_zBased)
+colnames(fixed_bedGraph) <- c("chr", "start", "end", "C", "CT", "ratio")
+write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.txt"), sep = "\t", quote = F, row.names = F, col.names = F)
