@@ -92,13 +92,13 @@ merge(broken_bedGraph, reference_tiles, by = c("chr", "start_zBased"))
 #keep as BED format (zero-based coordinates)
 # only retain chr, start, end, ratio; then sort to make it a bedGraph file
 fixed_bedGraph2 <-
-fixed_bedGraph %>% select(chr, start_zBased, end, ratio, sites_with_data) %>% arrange(chr, start_zBased)
+fixed_bedGraph %>% select(chr, start_zBased, end, ratio) %>% arrange(chr, start_zBased)
 write.table(fixed_bedGraph2, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.sorted.bg"), sep = "\t", quote = F, row.names = F, col.names = F)
 rm(fixed_bedGraph2)
 
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
-fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, chg_sites) %>% arrange(chr, start)
+fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, sites_with_data, chg_sites) %>% arrange(chr, start)
 write.table(fixed_bedGraph3, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
 
