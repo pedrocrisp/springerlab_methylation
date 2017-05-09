@@ -26,7 +26,7 @@ options(scipen=999)
 ###########################
 
 #reference used to make amendments
-reference_tiles <- read_tsv(reference_tile_file, , col_names = TRUE,
+reference_tiles <- read_tsv(reference_tile_file, col_names = TRUE,
                             cols(
                               chr = col_character(),
                               start = col_integer(),
