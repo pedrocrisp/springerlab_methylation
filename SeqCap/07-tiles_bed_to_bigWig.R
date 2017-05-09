@@ -50,7 +50,8 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                             ))
 
 colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
-#broken_bedGraph <- na.omit(broken_bedGraph)
+#remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
+broken_bedGraph <- na.omit(broken_bedGraph)
 
 #fix
 fixed_bedGraph <-
@@ -81,7 +82,8 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X4 = col_number()
                             ))
 colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
-#broken_bedGraph <- na.omit(broken_bedGraph)
+#remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
+broken_bedGraph <- na.omit(broken_bedGraph)
 
 #fix
 fixed_bedGraph <-
@@ -112,7 +114,8 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X4 = col_number()
                             ))
 colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
-#broken_bedGraph <- na.omit(broken_bedGraph)
+#remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
+broken_bedGraph <- na.omit(broken_bedGraph)
 
 #fix
 fixed_bedGraph <-
