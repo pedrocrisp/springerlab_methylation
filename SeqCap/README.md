@@ -7,6 +7,8 @@ Pipeline for processing SeqCap data.
 ## Installation Notes
 This pipeline requires a number of pieces of software, some are loaded as modules, some are expected to be in your path, depending on the step.
 
+It is designed to run on UMN MSI computer clusters.
+
 Bsmap is a special case. It looks for bsmap in ~/software/bsmap-2.74 and puts this dir in your path. I also edited the script sam2bam.sh to use the system version of samtools; however, ultimately I dont use this file because I resorted to output in sam format because I fix the sam/bam due to a discordant pairs issues, then manually run samtools to sort and index bams.
 
 To do things:
@@ -79,7 +81,7 @@ samples.txt \
 
 ### Step 5 Extract methylation data
 
-Use methylratio.py script from bsmap to extract methylation data. Then use awk to convert output to mC context and add a column for chromosome end column to bedtools. Then use awk to convert to bedgraph format and split into a separate file per context. Use bedGraphToBigWig to make a bigWig file for IGV. Use awk to get conversion rates using the chloroplast reads. Use bedtools to intersect bam with target regions then use awk to sum reads per region. Then use bedtools to intersect C and CT counts file with target regions and use awk to sum counts. Also count methylaiton per region using eff_CT incase we want this metric later.
+Use methylratio.py script from bsmap to extract methylation data. Then use awk to convert output to mC context (CG, CHG, CHH) and parse coordinate to zero-based format "BED" type for bedtools. Then use awk to convert to bedgraph format (chr, start, stop, ratio) and split into a separate file per context. Use bedGraphToBigWig to make a bigWig file for IGV. Use awk to get conversion rates using the chloroplast reads. Use bedtools to intersect bam with target regions then use awk to sum reads per region. Then use bedtools to intersect C and CT counts file with target regions and use awk to sum counts. Also count methylaiton per region using eff_CT incase we want this metric later.
 
 usage="USAGE:
 bash 05-summarise_methylation_qsub.sh <sample_list.txt> <genome.fa> <intersect_regions.bed>
@@ -93,6 +95,26 @@ bash \
 samples.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
 /home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
+```
+
+### Step 7 100 bp tiles
+
+Summarise methylation to 100 bp tiles across the genome. This is a 4-parter. First it runs the perl script `met_context_window.pl` to get C, CT, ratios and C_site_counts per 100bp window per context. Per sample any window with data is reported for all contexts even if some windows do not have data for a particular context. Next the R script `07-tiles_bed_to_bigWig.R` is called to fix the ends of the chromosomes which have windows the extend beyond the chromosome ends, this is necessary if we want to make begWigs etc. This script also pulls in the C_sites per window information from the file `maize_v4_100pb_tiles_zBased_sites.txt`. This files was created by me tiles windows across the genome then merging with the file ` AGPv4_cg_sites_012017.bed` from Jawon c/o Qing c/o Jackie which gives C sites per 100 bp window. Note this files does not include the contigs - might consider remaking this file to include the contigs (although they only account for 1.31% of the genome). Output is a bedgraph (fixed.sorted.bg; "chr", "start_zBased", "end", "ratio") and a text file with one-based coordinates (fixed.sorted.txt; "chr", "start", "end", "C", "CT", "ratio", "sites_with_data", "c_sites"). Then `bedGraphToBigWig` is used to make bigWigs from the tiles.
+
+ usage="USAGE:
+ bash 07-summarise_methylation_qsub.sh <sample_list.txt> <chrom.sizes file>
+ for example:
+ "
+
+ Requires:
+  - /home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles_zBased_sites.txt
+
+```
+#07-tiles_bed_to_bigWig
+bash \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig_qsub.sh \
+single_sample.txt \
+/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes
 ```
 
 --------
