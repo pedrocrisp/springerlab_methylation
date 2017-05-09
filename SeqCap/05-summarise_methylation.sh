@@ -51,7 +51,6 @@ echo sample being mapped is $ID
 #make adaligned folder bsmaped
 cd analysis
 mkdir -p BSMAPratio
-mkdir -p BSMAPratio_bigWigs
 mkdir -p TempOut
 mkdir -p OnTargetCoverage
 mkdir -p ConversionRate
@@ -110,11 +109,11 @@ mkdir -p ConversionRate
 
         #Make bigWigs
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
-        "BSMAPratio_bigWigs/${ID}_BSMAP_out_CG.bigWig"
+        "BSMAPratio/${ID}_BSMAP_out_CG.bigWig"
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CHG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
-        "BSMAPratio_bigWigs/${ID}_BSMAP_out_CHG.bigWig"
+        "BSMAPratio/${ID}_BSMAP_out_CHG.bigWig"
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CHH.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
-        "BSMAPratio_bigWigs/${ID}_BSMAP_out_CHH.bigWig"
+        "BSMAPratio/${ID}_BSMAP_out_CHH.bigWig"
 
         ########################
 
