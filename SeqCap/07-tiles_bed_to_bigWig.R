@@ -48,7 +48,8 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X3 = col_integer(),
                               X4 = col_number()
                             ))
-colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "C", "CT", "ratio")
+
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
 #broken_bedGraph <- na.omit(broken_bedGraph)
 
 #fix
@@ -65,7 +66,7 @@ rm(fixed_bedGraph2)
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
 fixed_bedGraph %>% select(chr, start, end, C, CT, ratio) %>% arrange(chr, start)
-colnames(fixed_bedGraph3) <- c("chr", "start", "end", "C", "CT", "ratio")
+colnames(fixed_bedGraph3) <- c("chr", "start", "end", "C", "CT", "ratio", "sites_with_data")
 write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
 
@@ -80,7 +81,7 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X3 = col_integer(),
                               X4 = col_number()
                             ))
-colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "C", "CT", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
 #broken_bedGraph <- na.omit(broken_bedGraph)
 
 #fix
@@ -97,7 +98,7 @@ rm(fixed_bedGraph2)
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
 fixed_bedGraph %>% select(chr, start, end, C, CT, ratio) %>% arrange(chr, start)
-colnames(fixed_bedGraph3) <- c("chr", "start", "end", "C", "CT", "ratio")
+colnames(fixed_bedGraph3) <- c("chr", "start", "end", "C", "CT", "ratio", "sites_with_data")
 write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
 
@@ -112,7 +113,7 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X3 = col_integer(),
                               X4 = col_number()
                             ))
-colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "C", "CT", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
 #broken_bedGraph <- na.omit(broken_bedGraph)
 
 #fix
@@ -129,6 +130,6 @@ rm(fixed_bedGraph2)
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
 fixed_bedGraph %>% select(chr, start, end, C, CT, ratio) %>% arrange(chr, start)
-colnames(fixed_bedGraph3) <- c("chr", "start", "end", "C", "CT", "ratio")
+colnames(fixed_bedGraph3) <- c("chr", "start", "end", "C", "CT", "ratio", "sites_with_data")
 write.table(fixed_bedGraph, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
