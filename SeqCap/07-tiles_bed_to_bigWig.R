@@ -66,7 +66,7 @@ rm(fixed_bedGraph2)
 
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
-fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, sites_with_data) %>% arrange(chr, start)
+fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, sites_with_data, cg_sites) %>% arrange(chr, start)
 write.table(fixed_bedGraph3, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
 
@@ -98,7 +98,7 @@ rm(fixed_bedGraph2)
 
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
-fixed_bedGraph %>% select(chr, start, end, C, CT, ratio) %>% arrange(chr, start)
+fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, chg_sites) %>% arrange(chr, start)
 write.table(fixed_bedGraph3, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
 
@@ -130,6 +130,6 @@ rm(fixed_bedGraph2)
 
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
-fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, sites_with_data) %>% arrange(chr, start)
+fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, sites_with_data, chh_sites) %>% arrange(chr, start)
 write.table(fixed_bedGraph3, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
