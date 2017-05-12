@@ -1,6 +1,6 @@
 #!/bin/bash -l
-#PBS -l walltime=4:00:00,nodes=1:ppn=1,mem=40gb
-#PBS -N summarise_methylation
+#PBS -l walltime=1:00:00,nodes=1:ppn=1,mem=20gb
+#PBS -N tiles_analysis
 #PBS -r n
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
