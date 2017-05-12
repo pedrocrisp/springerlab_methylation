@@ -54,6 +54,6 @@ mC_tile_table %>%
 mC_tile_table_CHHcov
 
 paste0("Total tiles in genome 21,350,963")
-paste0("For sample ", sample_file, " there are ", length(mC_tile_table_CHHcov$tile), " tiles with >= 2x CHH coverage")
+paste0("For sample ", sample, " there are ", length(mC_tile_table_CHHcov$tile), " tiles with >= 2x CHH coverage")
 
 write.table(mC_tile_table_CHHcov, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH_cov.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
