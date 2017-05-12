@@ -41,12 +41,14 @@ module load R/3.3.2
 ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 
 echo sample being mapped is $ID
+echo data folder is $data_folder
+echo coverage filter is $coverage_filter
 
 ########## Run #################
 
         #Run R moudle to:
         # 1. make CHH coverage files for summary stats analysis
         R -f ~/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis.R \
-        --args ${ID} data_folder coverage_filter
+        --args ${ID} $data_folder $coverage_filter
 
 echo finished summarising
