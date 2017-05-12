@@ -17,6 +17,8 @@ step=08-tiles_analysis
 
 ######### Setup ################
 sample_list=$1
+data_folder=$2
+coverage_filter=$3
 
 if [ "$#" -lt "3" ]
 then
@@ -74,5 +76,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list} \
+-v LIST=${sample_list},data_folder=$data_folder,coverage_filter=$coverage_filter \
 $script_to_qsub
