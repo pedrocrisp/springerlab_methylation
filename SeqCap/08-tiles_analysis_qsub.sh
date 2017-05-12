@@ -3,15 +3,17 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 07-summarise_methylation_qsub.sh <sample_list.txt> <data_folder> <coverage_filter>
+bash 08-tiles_analysis_qsub.sh <sample_list.txt> <data_folder> <coverage_filter>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis_qsub.sh \
-single_sample.txt \
+samples.txt \
+tiles \
+2
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=07-tiles_analysis
+step=08-tiles_analysis
 
 ######### Setup ################
 sample_list=$1
