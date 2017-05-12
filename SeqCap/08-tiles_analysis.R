@@ -14,7 +14,7 @@ sample <- args[1]
 sample
 data_folder <- args[2]
 data_folder
-coverage_filter <- args[2]
+coverage_filter <- args[3]
 coverage_filter
 
 ###########################
