@@ -31,7 +31,7 @@ options(scipen=999)
 #coverage_filter = 2
 
 #load a file
-mC_tile_table <- read_tsv(paste0(data_folder"/", sample, "_BSMAP_out.txt.100.CHH.fixed.sorted.txt"), col_names = TRUE,
+mC_tile_table <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.sorted.txt"), col_names = TRUE,
                          cols(
   chr = col_character(),
   start = col_integer(),
