@@ -66,7 +66,7 @@ samples.txt
 Use picard tools to filter reads, removing duplicates, removing improperly paired reads and trimming overlapping reads so as to only count 'Cs' once per sequenced molecule. Also collect On target metrics.
 
 usage="USAGE:
-bash 04-filter_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed> <intersect_regions.bed>
+bash 04-filter_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed>
 for example:
 "
 
