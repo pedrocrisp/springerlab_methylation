@@ -30,6 +30,8 @@ bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/01-trim_galore_qsub.sh \
 samples.txt
 ```
+**Methods summary**
+Reads were trimmed and QC'ed with trim_galore version 0.4.3, powered by cutadapt v1.8.1 and fastqc v0.11.5.
 
 ### Step 2 Mapping using bsmap
 
