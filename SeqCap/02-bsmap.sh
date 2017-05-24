@@ -66,7 +66,6 @@ bsmap \
 -o bsmapped/${ID}.sam \
 -v 5 \
 -r 0 \
--p 1 \
+-p 8 \
 -q 20 \
 -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
-
