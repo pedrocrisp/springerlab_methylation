@@ -2,14 +2,21 @@
 #clean-up script
 #Peter Crisp
 #2017-05-24
+# script to purge non-essential files to save space post running the pipeline
+# copy files that should be backed up to desired dir
 
-#script to purge non-essential files to save space post running the pipeline
-
-# to run (USE CARE UNTESTED)
+#############
+# It could take some time so best to run in an interactive session in a screen eg
+# screen -S copy_data
+# qsub -I -l walltime=2:00:00,nodes=1:ppn=1,mem=4gb
+# then to run: (USE CARE UNTESTED)
 # cd <project folder>
 # bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/09-clean-up.sh
+#############
 
 # NOTE THIS FILES NEEDS TO BE UPDATED TO THE CURRENT PIPELINE
+
+home_dir_destination=$1
 
 #removed trimmed fastq files
 rm -rv analysis/trimmed/*.fq
@@ -27,10 +34,29 @@ rm -rv analysis/bsmapped_filtered/*_sorted_MarkDup_pairs.bam
 
 ##################
 
-# THINGS THAT REMAIN:
+# THINGS THAT SHOULD BE KEPT AT LEAST ON S3 that will not be copied to home below:
 
-# small files/folders
-# The BSMAPratio folder will be large but that is a key output, save on s3 or on home
-# The reads folder should be redundant, but why not push a copy to s3 for backup...
+# The "BSMAPratio" folder will be large but that is a key output, save on s3 or on home
+# The "reads" folder should be redundant, but why not push a copy to s3 for backup...
 ## reads could be deleted if space is an issue
+# THE "bsmapped_filtered" folder has bams - useful for IGV, it also has
+
+# it is recommended that everything left after the purge above should be copied to s3
+# eg
+# s3cmd sync --verbose SeqCap_2_McGinnis/ s3://springer-pcrisp-seqcap/SeqCap_2_McGinnis/
+# 76 GB took just under 2 hr to sync ultimately
+
+##################
+# copy the important stuff to backed up file system
+# NOTE DECIDE WHAT IS IMPORTANT AND HOW TO SEPERATE?
+
+#sync log files
+rsync -rhivPt logs $home_dir_destination/
+
 #
+rsync -rhivPt analysis/ConversionRate $home_dir_destination/
+rsync -rhivPt analysis/logs $home_dir_destination/
+rsync -rhivPt analysis/mC_bigWigs $home_dir_destination/
+rsync -rhivPt analysis/OnTargetCoverage $home_dir_destination/
+rsync -rhivPt analysis/tiles $home_dir_destination/
+rsync -rhivPt analysis/tiles_bigWigs $home_dir_destination/
