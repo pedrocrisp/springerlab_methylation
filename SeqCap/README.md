@@ -48,6 +48,9 @@ samples.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa
 ```
 
+**Methods summary**
+Reads were aligned with bsmap v2.74 with the following parameters -v 5 to allow allow 5 mismatches, -r 0 to report only unique mapping pairs, -p 1, -q 20 to alloq quality trimming to q20, -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG adapter sequence. Output file is in SAM format to allow custom QC and sorting (because some reads are not properly paired).
+
 ### Step 3 fix sam files
 
 The output sam files produced by bsmap contain incorrect sam flags. Where PE reads map to different choromsomes the reads are still marked as correctly paird. This breaks picard tools, therefore, fix using samtools fixsam. Also make bams, sort and index (incase we want to vies these in IGV).
@@ -98,6 +101,11 @@ samples.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
 /home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
 ```
+
+output
+chr     start end     strand  context ratio   eff_CT_count    C_count CT_count        rev_G_count     rev_GA_count    CI_lower        CI_upper
+1       489     490     +       CHG     0.250   8.00    2       8       0       0       0.071   0.591
+1       490     491     +       CG      0.875   8.00    7       8       0       0       0.529   0.978
 
 ### Step 7 100 bp tiles
 
