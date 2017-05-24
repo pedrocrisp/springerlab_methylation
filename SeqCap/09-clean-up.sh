@@ -11,7 +11,9 @@
 # qsub -I -l walltime=2:00:00,nodes=1:ppn=1,mem=4gb
 # then to run: (USE CARE UNTESTED)
 # cd <project folder>
-# bash /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/09-clean-up.sh
+# bash \
+# /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/09-clean-up.sh
+# <destination on home>
 #############
 
 # NOTE THIS FILES NEEDS TO BE UPDATED TO THE CURRENT PIPELINE
