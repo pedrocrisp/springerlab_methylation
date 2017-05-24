@@ -38,7 +38,7 @@ module load java
 #module load bedtools
 module load bamtools
 #bsmap requires samtools < 1.0.0
-#module load samtools/0.1.18
+module load samtools/0.1.18
 
 ########## Set up dirs #################
 
@@ -116,3 +116,7 @@ mkdir -p bsmapped_filtered
         --in bsmapped_filtered/${ID}_sorted_MarkDup_pairs.bam \
         --out bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam \
         --stats
+
+        #index bam
+        # index
+        samtools index bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
