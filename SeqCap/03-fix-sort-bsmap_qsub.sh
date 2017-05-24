@@ -6,8 +6,8 @@ usage="USAGE:
 bash 03-fix-sort-bsmap_qsub.sh <sample_list.txt>
 for example:
 bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/03-filter_qsub.sh \
-single_sample.txt \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/03-fix-sort-bsmap_qsub.sh \
+single_sample.txt
 "
 
 #define stepo in the pipeline - should be the same name as the script
