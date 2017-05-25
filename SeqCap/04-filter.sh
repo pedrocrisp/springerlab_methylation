@@ -102,7 +102,7 @@ mkdir -p bsmapped_filtered
         BAIT_INTERVALS=${CalculateHsMetrics_reference} \
         TARGET_INTERVALS=${CalculateHsMetrics_reference}
 
-        # keep properly paired reads using mabtools package
+        # keep properly paired reads using bamtools package
         # note that some reads marked as properly paired by bsmap actually map to different chromosomes
         bamtools filter \
         -isMapped true \
