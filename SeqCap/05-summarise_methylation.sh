@@ -121,7 +121,9 @@ mkdir -p ConversionRate
         #awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
 
         # check if there is PT CHH data
-        PT_data=$(cat SeqCapEpi2_Cap1_A2_S2_BSMAP_out.txt |wc -l)
+        PT_data=$(awk -F$"\\t" \
+        'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
+        BSMAPratio/${ID}_BSMAP_out.txt |wc -l)
         echo $PT_data
 
         # conversion rate pete - not sure if this is correct...
