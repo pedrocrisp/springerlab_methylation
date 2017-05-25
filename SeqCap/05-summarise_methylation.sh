@@ -120,19 +120,29 @@ mkdir -p ConversionRate
         # conversion rate
         #awk -F"\t" '{if($1=="Pt") print}' "./BSMAPratio/"${ID}"_BSMAP_out.txt" | awk '{sum1 += $8; sum2 +=$9} END {print sum1"\t"sum2"\t"100-sum1/sum2*100}' > "./ConversionRate/"$i"_conversion_rate.txt"
 
+        # check if there is PT CHH data
+        PT_data=$(cat SeqCapEpi2_Cap1_A2_S2_BSMAP_out.txt |wc -l)
+        echo $PT_data
+
         # conversion rate pete - not sure if this is correct...
         # using plastid CHH unconverted C rate: 100-(sum(#C_counts)/sum(#CT_counts)*100)
         # Note that bsmap recomends using the eff_CT_counts (field #$7) which considers if there is a mismatch with the reverse strand.
         # However, Qing recommends just using the CT count (field #$9) becasue the reverse strand could equally be a sequencing error. Check this.
-        awk -F$"\\t" \
-        'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
-        BSMAPratio/${ID}_BSMAP_out.txt | \
-        awk '{sum1 += $9; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}' > ConversionRate/${ID}_conversion_rate.txt
-        # conversion rate pete - using eff_CT
-        awk -F$"\\t" \
-        'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
-        BSMAPratio/${ID}_BSMAP_out.txt | \
-        awk '{sum1 += $7; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}' > ConversionRate/${ID}_conversion_rate_eff_C.txt
+        if [ $PT_data -gt 0 ]
+        then
+          echo 'Calculating conversion rate'
+          awk -F$"\\t" \
+          'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
+          BSMAPratio/${ID}_BSMAP_out.txt | \
+          awk '{sum1 += $9; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}' > ConversionRate/${ID}_conversion_rate.txt
+          # conversion rate pete - using eff_CT
+          awk -F$"\\t" \
+          'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
+          BSMAPratio/${ID}_BSMAP_out.txt | \
+          awk '{sum1 += $7; sum2 +=$8} END {print sum1, sum2 , 100-((sum2/sum1)*100)}' > ConversionRate/${ID}_conversion_rate_eff_C.txt
+        else
+          echo 'No data for conversion rate calculation'
+        fi
         #debugging
         #awk -F$"\\t" \
         #'BEGIN {OFS = FS} {if($1=="Pt" && $5=="CHH") print}' \
