@@ -8,7 +8,7 @@
 #############
 # It could take some time so best to run in an interactive session in a screen eg
 # screen -S copy_data
-# qsub -I -l walltime=2:00:00,nodes=1:ppn=1,mem=4gb
+# qsub -I -l walltime=4:00:00,nodes=1:ppn=1,mem=4gb
 # then to run: (USE CARE UNTESTED)
 # cd <project folder>
 # bash \
@@ -16,7 +16,7 @@
 # <destination on home>
 #############
 
-# NOTE THIS FILES NEEDS TO BE UPDATED TO THE CURRENT PIPELINE
+# NOTE THIS FILE NEEDS TO BE UPDATED TO THE CURRENT PIPELINE
 
 home_dir_destination=$1
 
@@ -33,6 +33,10 @@ rm -rv analysis/bsmapped
 # remove intermediate mapping files
 rm -rv analysis/bsmapped_filtered/*_sorted_MarkDup.bam
 rm -rv analysis/bsmapped_filtered/*_sorted_MarkDup_pairs.bam
+
+#move HsMetrics and MarkDuplicates output log files
+mkdir -p analysis/HsMetrics_deDups_logs
+mv analysis/bsmapped_filtered/*.txt analysis/HsMetrics_deDups_logs/
 
 ##################
 
@@ -54,11 +58,19 @@ rm -rv analysis/bsmapped_filtered/*_sorted_MarkDup_pairs.bam
 
 #sync log files
 rsync -rhivPt logs $home_dir_destination/
-
+#extra logs...
+rsync -rhivPt analysis/logs $home_dir_destination/
 #
 rsync -rhivPt analysis/ConversionRate $home_dir_destination/
-rsync -rhivPt analysis/logs $home_dir_destination/
+rsync -rhivPt analysis/fastqc $home_dir_destination/
 rsync -rhivPt analysis/mC_bigWigs $home_dir_destination/
 rsync -rhivPt analysis/OnTargetCoverage $home_dir_destination/
 rsync -rhivPt analysis/tiles $home_dir_destination/
 rsync -rhivPt analysis/tiles_bigWigs $home_dir_destination/
+rsync -rhivPt analysis/analysis/HsMetrics_deDups_logs $home_dir_destination/
+
+#catch any auxillary text files such as sample list
+rsync -rhivPt *.txt $home_dir_destination/
+
+# BSMAPratio?
+rsync -rhivPt analysis/BSMAPratio $home_dir_destination/
