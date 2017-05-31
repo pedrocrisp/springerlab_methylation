@@ -24,7 +24,8 @@ home_dir_destination=$1
 rm -rv analysis/trimmed/*.fq
 
 #remove methratio.txt files because we have parsed these files to make BSMAP_out.txt
-rm -rv analysis/BSMAPratio/*methratio.txt
+# CONSIDER KEEPING THIS - I JUST WENT BACK TO IT FOR SUB-CONTEXT ANALYSIS
+# rm -rv analysis/BSMAPratio/*methratio.txt
 
 # remove initial mapping files
 # note these could be useful for looking at capture efficiency and distribution before filtering reads
