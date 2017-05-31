@@ -81,11 +81,56 @@ mkdir -p ConversionRate
                         print $1, $2-1, $2, $3, "CNN", $5, $6, $7, $8, $9, $10, $11, $12
                 }
                 '
+
+        # make subcontext bed
+        # CG
+        # CHG sub context and minus strand sequence (reverse complement):
+        # CAG, CCG, CTG
+        # CTG, CGG, GAC
+        # CHH subcontext and reverse complement
+        # CAA, CAC, CAT, CCA, CCC, CCT, CTA, CTC, CTT
+        # TTG, GTG. ATG, TGG, GGG, AGG, TAG, GAG, AAG
+
+        awk_make_subcontext_bed='BEGIN {OFS = FS} (NR>1){
+                if(($3=="-" && $4~/^.CG../ ) || ($3=="+" &&  $4~/^..CG./))
+                        print $1, $2-1, $2, $3, "CG", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^CTG../ ) || ($3=="+" &&  $4~/^..CAG/))
+                        print $1, $2-1, $2, $3, "CAG", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^CGG../ ) || ($3=="+" &&  $4~/^..CCG/))
+                        print $1, $2-1, $2, $3, "CCG", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^GAC../ ) || ($3=="+" &&  $4~/^..CTG/))
+                        print $1, $2-1, $2, $3, "CTG", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^TTG../ ) || ($3=="+" &&  $4~/^..CAA/))
+                        print $1, $2-1, $2, $3, "CAA", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^GTG../ ) || ($3=="+" &&  $4~/^..CAC/))
+                        print $1, $2-1, $2, $3, "CAC", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^ATG../ ) || ($3=="+" &&  $4~/^..CAT/))
+                        print $1, $2-1, $2, $3, "CAT", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^TGG../ ) || ($3=="+" &&  $4~/^..CCA/))
+                        print $1, $2-1, $2, $3, "CCA", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^GGG../ ) || ($3=="+" &&  $4~/^..CCC/))
+                        print $1, $2-1, $2, $3, "CCC", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^AGG../ ) || ($3=="+" &&  $4~/^..CCT/))
+                        print $1, $2-1, $2, $3, "CCT", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^TAG../ ) || ($3=="+" &&  $4~/^..CTA/))
+                        print $1, $2-1, $2, $3, "CTA", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^GAG../ ) || ($3=="+" &&  $4~/^..CTC/))
+                        print $1, $2-1, $2, $3, "CTC", $5, $6, $7, $8, $9, $10, $11, $12;
+                      else if(($3=="-" && $4~/^AAG../ ) || ($3=="+" &&  $4~/^..CTT/))
+                        print $1, $2-1, $2, $3, "CTT", $5, $6, $7, $8, $9, $10, $11, $12;
+                else
+                        print $1, $2-1, $2, $3, "CNN", $5, $6, $7, $8, $9, $10, $11, $12
+                }
+                '
+
         #awk -F$"\t" "$awk_make_bed" "F1-16_Index5_S1_methratio.txt" > F1-16_Index5_S1.bed
         #BSMAPratio/$F1-16_Index5_S1_BSMAP_out.txt
 
         awk -F$"\\t" "$awk_make_bed" \
         "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out.txt"
+
+        awk -F$"\\t" "$awk_make_subcontext_bed" \
+        "BSMAPratio/${ID}_methratio.txt" > "BSMAPratio/${ID}_BSMAP_out_subcontext.txt"
 
         ########################
         #For genome browser
@@ -96,16 +141,28 @@ mkdir -p ConversionRate
         }
         '
 
-        # split by bedGraph by contex
+        # split bedGraph by contex
         awk_make_bedGraph_context='BEGIN {OFS = FS} (NR>1){
           print $1, $2, $3, $4 > "BSMAPratio/"ID"_BSMAP_out_"$5".bedGraph"
         }
         '
 
+        # split bedGraph by sub-contex
+        # only difference in the output file suffix (so that we make CG files for context and sub-contex: sainty check - they should be the same)
+        awk_make_bedGraph_subcontext='BEGIN {OFS = FS} (NR>1){
+          print $1, $2, $3, $4 > "BSMAPratio/"ID"_BSMAP_out_subcontext_"$5".bedGraph"
+        }
+        '
         #pipe bedGraph to split by context (use dash to read from sdtin)
+        # per context
         awk -F$"\\t" "$awk_make_bedGraph" \
         "BSMAPratio/${ID}_BSMAP_out.txt" | \
         awk -F$"\\t" -v ID=$ID "$awk_make_bedGraph_context" -
+
+        # per sub-context
+        awk -F$"\\t" "$awk_make_bedGraph" \
+        "BSMAPratio/${ID}_BSMAP_out_subcontext.txt" | \
+        awk -F$"\\t" -v ID=$ID "$awk_make_bedGraph_subcontext" -
 
         #Make bigWigs
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
