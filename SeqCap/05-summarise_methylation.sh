@@ -205,6 +205,9 @@ mkdir -p ConversionRate
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bigWig"
 
+        #remove bedGraph it is large and not really required
+        # keep bigWigs
+        rm -rv BSMAPratio/${ID}*.bedGraph
 
         ########################
 
