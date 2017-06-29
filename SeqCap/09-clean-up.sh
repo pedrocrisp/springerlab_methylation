@@ -60,6 +60,10 @@ rm -rv analysis/bsmapped_filtered/*_sorted_MarkDup_pairs.bam
 mkdir -p analysis/HsMetrics_deDups_logs
 mv analysis/bsmapped_filtered/*.txt analysis/HsMetrics_deDups_logs/
 
+# it is also suggested that bigWigs are moved so they can be copied separately
+mkdir analysis/BSMAPratio_bigWigs
+mv analysis/BSMAPratio/*.bigWig BSMAPratio_bigWigs/
+
 else
 
   echo "Skiping purge"
@@ -80,6 +84,8 @@ rsync -rhivPt analysis/logs $home_dir_destination/
 rsync -rhivPt analysis/ConversionRate $home_dir_destination/
 rsync -rhivPt analysis/fastqc $home_dir_destination/
 rsync -rhivPt analysis/mC_bigWigs $home_dir_destination/
+# BSMAPratio_bigWigs folder has to be created in the purge step above
+rsync -rhivPt analysis/BSMAPratio_bigWigs $home_dir_destination/
 rsync -rhivPt analysis/OnTargetCoverage $home_dir_destination/
 rsync -rhivPt analysis/tiles $home_dir_destination/
 rsync -rhivPt analysis/tiles_bigWigs $home_dir_destination/
