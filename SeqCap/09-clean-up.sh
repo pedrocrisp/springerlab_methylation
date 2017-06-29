@@ -37,7 +37,6 @@ echo "s3 destination $s3_bucket"
 echo "folder for copy to s3 $folder_for_s3_copy"
 
 
-
 # purge
 if [ "$purge" == "purge" ]
 then
@@ -89,8 +88,8 @@ rsync -rhivPt analysis/analysis/HsMetrics_deDups_logs $home_dir_destination/
 #catch any auxillary text files such as sample list
 rsync -rhivPt *.txt $home_dir_destination/
 
-# BSMAPratio?
-rsync -rhivPt analysis/BSMAPratio $home_dir_destination/
+# BSMAPratio? this is the biggest folder! keep on s3...
+# rsync -rhivPt analysis/BSMAPratio $home_dir_destination/
 
 else
 
@@ -107,14 +106,16 @@ fi
     # The "BSMAPratio" folder will be large but that is a key output, save on s3 or on home
     # The "reads" folder should be redundant, but why not push a copy to s3 for backup...
     ## reads could be deleted if space is an issue
-    # THE "bsmapped_filtered" folder has bams - useful for IGV, it also has
+    # THE "bsmapped_filtered" folder has filtered bams that are used for all downstream analysis,
+    ## "bsmapped_filtered" useful for IGV, it also has
+    ## "bsmapped_filtered" also could be used to re-extract the methylation counts if required
 
     # it is recommended that everything left after the purge above should be copied to s3
     # eg
     # s3cmd sync --verbose SeqCap_2_McGinnis/ s3://springer-pcrisp-seqcap/SeqCap_2_McGinnis/
     # 76 GB took just under 2 hr to sync ultimately
 
-    s3cmd sync --verbose ../$folder_for_s3_copy $s3_bucket
+    s3cmd sync --verbose $folder_for_s3_copy $s3_bucket
 
 else
 
