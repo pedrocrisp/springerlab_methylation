@@ -128,9 +128,28 @@ single_sample.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes
 ```
 
-### Step 7 100 bp tiles
+### 08-tiles_CHH_cov
 
+This step takes the CHH output file from the 100 bp tiles script `*_BSMAP_out.txt.100.CHH.fixed.sorted.txt` and
 
+1. Calculates CHH_cov (CHH_cov= CT/chh_sites).
+2. Then using this field it filters on the arg $coverage_filter ($3); for example 2 or 5; which corrosponds to and average read coverage of 2 (or 5) accross all CHH sites in each 100 bp window, the output is significantly smaller file `*_BSMAP_out.txt.100.CHH_cov.txt`.
+
+The idea (still being developed) is that:
+1. These files can be used to explore the read coverage over the whle experiment; and
+1. The tile index in this file could be combined with other samples to make a master list of tiles of interest (this is less memory intensive than combining the whole files).
+
+usage="USAGE:
+bash 08-tiles_analysis_qsub.sh <sample_list.txt> <data_folder> <coverage_filter>
+
+For example:
+```
+bash \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis_qsub.sh \
+samples.txt \
+tiles \
+2
+```
 
 --------
 
