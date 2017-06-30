@@ -128,9 +128,15 @@ single_sample.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes
 ```
 
+### Step 7 100 bp tiles
+
+
+
 --------
 
 ## Example pipeline execution - Laptop Steps
+
+*It is possible these steps will be too intensive for the laptop with 100s of samples*
 
 ### Step 6 summarise-output
 
