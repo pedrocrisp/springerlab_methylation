@@ -145,7 +145,7 @@ bash 08-tiles_analysis_qsub.sh <sample_list.txt> <data_folder> <coverage_filter>
 For example:
 ```
 bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis_qsub.sh \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis_CHH_cov_qsub.sh \
 samples.txt \
 tiles \
 2
