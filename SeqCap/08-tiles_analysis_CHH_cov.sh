@@ -48,7 +48,7 @@ echo coverage filter is $coverage_filter
 
         #Run R moudle to:
         # 1. make CHH coverage files for summary stats analysis
-        R -f ~/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis.R \
+        R -f ~/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis_CHH_cov.R \
         --args ${ID} $data_folder $coverage_filter
 
 echo finished summarising
