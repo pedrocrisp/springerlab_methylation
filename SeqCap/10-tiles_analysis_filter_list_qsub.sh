@@ -13,7 +13,7 @@ analysis_02_tiles_SeqCap_meta_140_samples/chh_2x_cov_62_sample_tile_list.tsv
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=10-tiles_filter_list
+step=10-tiles_analysis_filter_list
 
 ######### Setup ################
 sample_list=$1
