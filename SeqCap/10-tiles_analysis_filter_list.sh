@@ -44,7 +44,7 @@ ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 
 echo sample being mapped is $ID
 echo data folder is $data_folder
-echo coverage filter is $coverage_filter
+echo tile list is $tile_list
 
 ########## Run #################
 
