@@ -133,10 +133,10 @@ single_sample.txt \
 This step takes the CHH output file from the 100 bp tiles script `*_BSMAP_out.txt.100.CHH.fixed.sorted.txt` and
 
 1. Calculates CHH_cov (CHH_cov= CT/chh_sites).
-2. Then using this field it filters on the arg $coverage_filter ($3); for example 2 or 5; which corrosponds to and average read coverage of 2 (or 5) accross all CHH sites in each 100 bp window, the output is significantly smaller file `*_BSMAP_out.txt.100.CHH_cov.txt`.
+2. Then using this field it filters on the arg $coverage_filter ($3); for example 2 or 5; which corrosponds to an average read coverage of 2 (or 5) accross all CHH sites in each 100 bp window, the output is significantly smaller file `*_BSMAP_out.txt.100.CHH_cov.txt`.
 
 The idea (still being developed) is that:
-1. These files can be used to explore the read coverage over the whle experiment; and
+1. These files can be used to explore the read coverage over the whole experiment; and
 1. The tile index in this file could be combined with other samples to make a master list of tiles of interest (this is less memory intensive than combining the whole files).
 
 usage="USAGE:
@@ -149,6 +149,26 @@ bash \
 samples.txt \
 tiles \
 2
+```
+### 09-clean-up
+
+Purges unnecesay files with the option to copy important files to home files space from scratch and also option to copy files to s3. Each of these three options (purge, copy to home and copy to s3) can be run independently.
+
+See the script for more info and or the notebook.
+
+### 10-tiles_filter_list
+
+***Untested***
+
+This step filters the `*_BSMAP_out.txt.100.CG.fixed.sorted.txt`, `*_BSMAP_out.txt.100.CHG.fixed.sorted.txt` and `*_BSMAP_out.txt.100.CHH.fixed.sorted.txt` files based on a list of tiles of interest. The idea is that once these smaller files are generated, they can be read into R in a stack for analysis all together.
+
+For example:
+```
+bash \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/10-tiles_analysis_filter_list_qsub.sh \
+samples.txt \
+tiles \
+../analysis_02_tiles_SeqCap_meta_140_samples/chh_2x_cov_62_sample_tile_list.tsv
 ```
 
 --------
