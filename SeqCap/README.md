@@ -166,7 +166,7 @@ For example:
 ```
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/10-tiles_analysis_filter_list_qsub.sh \
-samples.txt \
+../samples.txt \
 tiles \
 ../analysis_02_tiles_SeqCap_meta_140_samples/chh_2x_cov_62_sample_tile_list.tsv
 ```
