@@ -205,6 +205,56 @@ mkdir -p ConversionRate
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bigWig"
 
+        ########################
+                ## Now make stranded bigWigs for IGV
+                # make both sets, decided later which is prefered 
+
+                ## make begGraph ratio files for bigWigs
+                # function
+                awk_make_bedGraph='BEGIN {OFS = FS} (NR>1){
+                  print $1, $2, $3, $8/$9*100, $5, $4
+                }
+                '
+                # run function
+                awk -F$"\\t" "$awk_make_bedGraph" \
+                "BSMAPratio/${ID}_BSMAP_out.txt" > "BSMAPratio/${ID}_BSMAP_out.bg"
+
+                ## split into + and - strand based on column 6
+                awk -F$"\\t" -v ID=$ID 'BEGIN {OFS = FS} (NR>1){
+                  print > "BSMAPratio/"ID"_BSMAP_out_"$6".bedGraph"
+                }' "BSMAPratio/${ID}_BSMAP_out.bg"
+
+                ## split plus and minnus bedGraphs by contex
+                # plus funciton
+                awk_make_bedGraph_context_plus='BEGIN {OFS = FS} (NR>1){
+                  print $1, $2, $3, $4 > "BSMAPratio/"ID"_BSMAP_out_+_"$5".bedGraph"
+                }
+                '
+                # minus funciton (multiply ratio by -1)
+                awk_make_bedGraph_context_minus='BEGIN {OFS = FS} (NR>1){
+                  print $1, $2, $3, $4*-1 > "BSMAPratio/"ID"_BSMAP_out_-_"$5".bedGraph"
+                }
+                '
+                # run functions
+                awk -F$"\\t" -v ID=$ID "$awk_make_bedGraph_context_plus" "BSMAPratio/"${ID}"_BSMAP_out_+.bedGraph"
+                awk -F$"\\t" -v ID=$ID "$awk_make_bedGraph_context_minus" "BSMAPratio/"${ID}"_BSMAP_out_-.bedGraph"
+
+                ## Make bigWigs per context
+                # bigWigs for each individual induction with its own genome reference and plasmid
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                "BSMAPratio/${ID}_BSMAP_out_+_CG.bigWig"
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CHG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                "BSMAPratio/${ID}_BSMAP_out_+_CHG.bigWig"
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CHH.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                "BSMAPratio/${ID}_BSMAP_out_+_CHH.bigWig"
+
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                "BSMAPratio/${ID}_BSMAP_out_-_CG.bigWig"
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CHG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                "BSMAPratio/${ID}_BSMAP_out_-_CHG.bigWig"
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CHH.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                "BSMAPratio/${ID}_BSMAP_out_-_CHH.bigWig"
+
         #remove bedGraph it is large and not really required
         # keep bigWigs
         rm -rv BSMAPratio/${ID}*.bedGraph
