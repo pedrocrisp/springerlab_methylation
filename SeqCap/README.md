@@ -49,7 +49,7 @@ samples.txt \
 ```
 
 **Methods summary**
-Reads were aligned with bsmap v2.74 with the following parameters -v 5 to allow allow 5 mismatches, -r 0 to report only unique mapping pairs, -p 1, -q 20 to alloq quality trimming to q20, -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG adapter sequence. Output file is in SAM format to allow custom QC and sorting (because some reads are not properly paired).
+Reads were aligned with bsmap v2.74 with the following parameters -v 5 to allow allow 5 mismatches, -r 0 to report only unique mapping pairs, -p 1, -q 20 to allow quality trimming to q20, -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG adapter sequence. Output file is in SAM format to allow custom QC and sorting (because some reads are not properly paired).
 
 ### Step 3 fix sam files
 

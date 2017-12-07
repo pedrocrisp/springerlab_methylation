@@ -68,4 +68,4 @@ bsmap \
 -r 0 \
 -p 8 \
 -q 20 \
--A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG
+-A $adapter_seq

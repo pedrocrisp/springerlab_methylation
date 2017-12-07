@@ -3,7 +3,7 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 02-bsmap_qsub.sh <sample_list.txt> <genome.fa>"
+bash 02-bsmap_qsub.sh <sample_list.txt> <genome.fa> <adapter_seq>"
 #eg /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa
 
 #define stepo in the pipeline - should be the same name as the script
@@ -12,7 +12,8 @@ step=02-bsmap
 ######### Setup ################
 sample_list=$1
 genome_reference=$2
-if [ "$#" -lt "2" ]
+adapter_seq=$3
+if [ "$#" -lt "3" ]
 then
 echo $usage
 exit -1
@@ -69,7 +70,7 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},genome_reference=$genome_reference \
+-v LIST=${sample_list},genome_reference=$genome_reference,adapter_seq=$adapter_seq \
 $script_to_qsub
 
 # to run
