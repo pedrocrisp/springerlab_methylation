@@ -17,6 +17,8 @@ scriptdir="$(dirname $(readlink -f $0))"
 fi
 #
 
+module load cutadapt/1.8.1
+
 #cutadapt
 #note the program has changed since it publication
 #https://cutadapt.readthedocs.org/en/stable/guide.html#cutadapt-s-output
