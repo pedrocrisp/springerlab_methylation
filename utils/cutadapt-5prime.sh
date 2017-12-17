@@ -31,10 +31,10 @@ fq=$1
 fqname="$(basename $fq)"
 
 #new suffix for output file
-outputFile="${fqname%%.*}.trim.fastq.gz"
+outputFile="${fqname%%.*}.fastq.gz"
 
 # cutadapt remove 20 bp 5' end
-cutadapt -u -20 -o outputFile fq
+cutadapt -u -20 -o trimmed/$outputFile fq
 
 # to run
 # find . -name "*R2_001.fastq.gz" | parallel -j 12 bash ~/gitrepos/springerlab_methylation/cutadapt-5ptime.sh {}
