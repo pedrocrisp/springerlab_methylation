@@ -6,7 +6,8 @@ set -e
 set -x
 
 ###
-#code to make script work on both osx and linux. Essentially, it creates a file path to the script directory and saves this path as $0. In detail: 'if the operating system type is darwin (a mac), then use the greadlink function when the readlink function is called. Then use the greadlink function to find the script file named. In doing so, find the path of the script files directory and save as 'scriptdir'. This change is made for Macs because readlink doesn't run properly, but greadlink does. If the OS is not mac (eg. Linux), find the script file using the readlink function and save the path to the script file directory as 'scriptdir.' By using readlink to find where the scripts are, it means if this pipeline is copied onto another computer, the files can still be found.
+#code to make script work on both osx and linux.
+
 if
 [[ $OSTYPE == darwin* ]]
 then
@@ -30,11 +31,15 @@ fq=$1
 #basename
 fqname="$(basename $fq)"
 
+echo $fqname
+
 #new suffix for output file (using the same, but modify if desired)
-outputFile="${fqname%%.*}.fastq.gz"
+outputFile="${fqname%%.*}.fastq"
 
 # cutadapt remove 20 bp 5' end
 cutadapt -u -20 -o trimmed/$outputFile $fq
 
+gzip trimmed/$outputFile
+
 # to run
-# find . -name "*R2_001.fastq.gz" | parallel -j 12 bash ~/gitrepos/springerlab_methylation/cutadapt-5ptime.sh {}
+# find . -name "*R2_001.fastq.gz" | parallel -j 12 bash ~/gitrepos/springerlab_methylation/utils/cutadapt-5ptime.sh {}
