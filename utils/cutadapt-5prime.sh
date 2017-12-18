@@ -37,7 +37,7 @@ echo $fqname
 outputFile="${fqname%%.*}.fastq"
 
 # cutadapt remove 20 bp 5' end
-cutadapt -u -20 -o trimmed/$outputFile $fq
+cutadapt -u 20 -o trimmed/$outputFile $fq
 
 gzip trimmed/$outputFile
 
