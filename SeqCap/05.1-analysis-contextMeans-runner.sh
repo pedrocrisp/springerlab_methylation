@@ -40,7 +40,7 @@ else
   echo Summarising methylation data Iniating $2 parallel jobs
 fi
 ########## Run #################
-
+module load parallel
 
 #user defined variables that could be changed:
 workingdir=./
