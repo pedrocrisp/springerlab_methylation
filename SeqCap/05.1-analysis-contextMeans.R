@@ -13,7 +13,7 @@ sample <- args[1]
 sample
 data_path <- "analysis/BSMAPratio/"
 data_path
-out_folder <- args[3]
+out_folder <- "analysis_context"
 out_folder
 
 ###########################
