@@ -52,7 +52,7 @@ script=$scriptdir/05.1-analysis-contextMeans.R
 # }
 
 outdir="analysis_context"
-mkdir ${outdir}
+mkdir -p ${outdir}
 timestamp=$(date +%Y%m%d-%H%M%S)
 
 logdir="${outdir}/.logs_${timestamp}"
