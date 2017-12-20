@@ -74,7 +74,7 @@ context_file_summary_CT20 <- context_file %>%
 
 context_file_summary_CT20
 
-write.table(context_file_summary, paste0(out_folder, "/", sample, "_context_summary_CT20.tsv"), sep = "\t", quote = F, row.names = F)
+write.table(context_file_summary_CT20, paste0(out_folder, "/", sample, "_context_summary_CT20.tsv"), sep = "\t", quote = F, row.names = F)
 
 ########## subcontext
 
@@ -122,4 +122,4 @@ context_file_summary_CT20 <- context_file %>%
 
 context_file_summary_CT20
 
-write.table(context_file_summary, paste0(out_folder, "/", sample, "_subcontext_summary_CT20.tsv"), sep = "\t", quote = F, row.names = F)
+write.table(context_file_summary_CT20, paste0(out_folder, "/", sample, "_subcontext_summary_CT20.tsv"), sep = "\t", quote = F, row.names = F)
