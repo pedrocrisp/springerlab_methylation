@@ -7,13 +7,16 @@ set -xeuo pipefail
 #Bash qsub script for 05.2-analysis-contextMeans.R
 
 usage="USAGE:
-05.2-analysis-contextMeans-qsub.sh <sample_list> <data_folder> <coverage_filter>
+05.2-analysis-contextMeans-qsub.sh <sample_list> <data_folder> <coverage_filter> \
+<path_to_loci_of_interest_file> <loci_of_interest_name>
 for example:
 bash \
 ~/gitrepos/springerlab_methylation/SeqCap/05.2-analysis-contextMeans-qsub.sh \
 samples.txt \
 analysis/BSMAPratio \
-20
+20 \
+analysis/B73_RdDM/RdDM_loci_CT10.tsv \
+RdDM_loci
 "
 
 #define stepo in the pipeline - should be the same name as the script
@@ -23,8 +26,10 @@ step=05.2-analysis-contextMeans
 sample_list=$1
 data_folder=$2
 coverage_filter=$3
+loci_of_interst_file=$4
+loci_of_interest_name=$5
 
-if [ "$#" -lt "3" ]
+if [ "$#" -lt "5" ]
 then
 echo $usage
 exit -1
@@ -80,5 +85,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},data_folder=$data_folder,coverage_filter=$coverage_filter \
+-v LIST=${sample_list},data_folder=$data_folder,coverage_filter=$coverage_filter,loci_of_interst_file=$loci_of_interst_file,loci_of_interest_name=$loci_of_interest_name \
 $script_to_qsub
