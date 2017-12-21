@@ -27,6 +27,12 @@ options(scipen=999)
 library(ggplot2)
 ###########################
 
+# mode funciton
+getMode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
 # a sample
 # sample = "US_1_Index1_S11"
 
@@ -38,12 +44,26 @@ context_file <- read_tsv(paste0(data_path, "/", sample, "_BSMAP_out.txt"), col_n
                               C_count = col_double(),
                               CT_count = col_double()
                             ))
+# coverageFilter
+coverage_summary <- context_file %>%
+  summarise(mean = mean(CT_count),
+            median = median(CT_count),
+            mode = getMode(CT_count),
+            sd=sd(CT_count),
+            n=n(),
+            q5= quantile(ratio, .05),
+            q95= quantile(ratio, .95)
+            )
+
+write.table(coverage_summary, paste0(out_folder, "/", sample, "_coverage_summary.tsv"), sep = "\t", quote = F, row.names = F)
+
 # summarise
 context_file_summary <- context_file %>%
   mutate(ratio = C_count/CT_count*100) %>%
   group_by(context) %>%
   summarise(mean = mean(ratio),
             median = median(ratio),
+            mode = getMode(ratio),
             sd=sd(ratio),
             n=n(),
             q5= quantile(ratio, .05),
@@ -61,6 +81,7 @@ context_file_summary_CT20 <- context_file %>%
   group_by(context) %>%
   summarise(mean = mean(ratio),
             median = median(ratio),
+            mode = getMode(ratio),
             sd=sd(ratio),
             n=n(),
             q5= quantile(ratio, .05),
@@ -85,6 +106,7 @@ context_file_summary <- context_file %>%
   group_by(context) %>%
   summarise(mean = mean(ratio),
             median = median(ratio),
+            mode = getMode(ratio),
             sd=sd(ratio),
             n=n(),
             q5= quantile(ratio, .05),
@@ -102,6 +124,7 @@ context_file_summary_CT20 <- context_file %>%
   group_by(context) %>%
   summarise(mean = mean(ratio),
             median = median(ratio),
+            mode = getMode(ratio),
             sd=sd(ratio),
             n=n(),
             q5= quantile(ratio, .05),
