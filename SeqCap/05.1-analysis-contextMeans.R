@@ -28,7 +28,7 @@ library(ggplot2)
 # a sample
 # sample = "US_1_Index1_S11"
 
-# read file
+# read file, but only required columns
 # specify that chromosome is a character column
 context_file <- read_tsv(paste0(data_path, "/", sample, "_BSMAP_out.txt"), col_names = c("chr", "start", "end", "strand", "context", "ratio", "eff_CT_count", "C_count", "CT_count", "rev_G_count", "rev_GA_count", "CI_lower", "CI_upper"),
                             cols_only(
@@ -36,14 +36,7 @@ context_file <- read_tsv(paste0(data_path, "/", sample, "_BSMAP_out.txt"), col_n
                               C_count = col_double(),
                               CT_count = col_double()
                             ))
-
-# context_order <- unique(context_file$context)
-
-context_file_original <- context_file
-
-# subsample for testing
-context_file <- sample_n(context_file, size = 100000)
-
+# summarise
 context_file_summary <- context_file %>%
   mutate(ratio = C_count/CT_count*100) %>%
   group_by(context) %>%
@@ -84,13 +77,6 @@ context_file <- read_tsv(paste0(data_path, "/", sample, "_BSMAP_out_subcontext.t
                               C_count = col_double(),
                               CT_count = col_double()
                             ))
-
-# context_order <- unique(context_file$context)
-
-context_file_original <- context_file
-
-# subsample for testing
-context_file <- sample_n(context_file, size = 100000)
 
 context_file_summary <- context_file %>%
   mutate(ratio = C_count/CT_count*100) %>%
