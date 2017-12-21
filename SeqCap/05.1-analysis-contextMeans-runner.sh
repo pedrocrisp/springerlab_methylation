@@ -22,7 +22,7 @@ fi
 
 usage="USAGE:
 05.1-analysis-contextMeans-runner.sh <sample_list> <threads>
-eg bash ~/gitrepos/springerlab_methylation/SeqCap/05.1-analysis-contextMeans-runner.sh samples.txt 8"
+eg bash ~/gitrepos/springerlab_methylation/SeqCap/05.1-analysis-contextMeans-runner.sh samples.txt 2"
 
 ######### Setup ################
 sample_list=$1
