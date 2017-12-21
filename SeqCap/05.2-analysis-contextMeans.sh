@@ -51,6 +51,6 @@ mkdir -p analysis/contextMeans
         #Run R moudle to:
         # 1. make CHH coverage files for summary stats analysis
         R -f ~/gitrepos/springerlab_methylation/SeqCap/05.2-analysis-contextMeans.R \
-        --args ${ID} $data_folder $coverage_filter
+        --args ${ID} $data_folder $coverage_filter $loci_of_interst_file $loci_of_interest_name
 
 echo finished summarising
