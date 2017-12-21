@@ -44,16 +44,16 @@ context_file <- read_tsv(paste0(data_path, "/", sample, "_BSMAP_out.txt"), col_n
                               C_count = col_double(),
                               CT_count = col_double()
                             ))
-# coverageFilter
-coverage_summary <- context_file %>%
-  summarise(mean = mean(CT_count),
-            median = median(CT_count),
-            mode = getMode(CT_count),
-            sd=sd(CT_count),
-            n=n(),
-            q5= quantile(ratio, .05),
-            q95= quantile(ratio, .95)
-            )
+# # coverageFilter
+# coverage_summary <- context_file %>%
+#   summarise(mean = mean(CT_count),
+#             median = median(CT_count),
+#             mode = getMode(CT_count),
+#             sd=sd(CT_count),
+#             n=n(),
+#             q5= quantile(CT_count, .05),
+#             q95= quantile(CT_count, .95)
+#             )
 
 write.table(coverage_summary, paste0(out_folder, "/", sample, "_coverage_summary.tsv"), sep = "\t", quote = F, row.names = F)
 
