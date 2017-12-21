@@ -49,6 +49,8 @@ loi_file <- read_tsv(loci_of_interst_file)
 # specify that chromosome is a character column
 context_file <- read_tsv(paste0(data_path, "/", sample, "_BSMAP_out.txt"), col_names = c("chr", "start", "end", "strand", "context", "ratio", "eff_CT_count", "C_count", "CT_count", "rev_G_count", "rev_GA_count", "CI_lower", "CI_upper"),
                             cols_only(
+                              chr = col_double(),
+                              start = col_double(),
                               context = col_character(),
                               C_count = col_double(),
                               CT_count = col_double()
