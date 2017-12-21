@@ -11,9 +11,11 @@ print(args)
 # trailingOnly=TRUE means that only your arguments are returned
 sample <- args[1]
 sample
-data_path <- "analysis/BSMAPratio/"
+data_path <- args[2]
 data_path
-out_folder <- "analysis_context"
+coverageFilter <- args[3]
+coverageFilter
+out_folder <- "analysis/contextMeans"
 out_folder
 
 ###########################
@@ -54,7 +56,7 @@ write.table(context_file_summary, paste0(out_folder, "/", sample, "_context_summ
 
 # Do a second iteration with a coverage filter to compare
 context_file_summary_CT20 <- context_file %>%
-  filter(CT_count >= 20) %>%
+  filter(CT_count >= coverageFilter) %>%
   mutate(ratio = C_count/CT_count*100) %>%
   group_by(context) %>%
   summarise(mean = mean(ratio),
@@ -95,7 +97,7 @@ write.table(context_file_summary, paste0(out_folder, "/", sample, "_subcontext_s
 
 # Do a second iteration with a coverage filter to compare
 context_file_summary_CT20 <- context_file %>%
-  filter(CT_count >= 20) %>%
+  filter(CT_count >= coverageFilter) %>%
   mutate(ratio = C_count/CT_count*100) %>%
   group_by(context) %>%
   summarise(mean = mean(ratio),
