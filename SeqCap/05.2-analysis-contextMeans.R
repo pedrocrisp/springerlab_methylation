@@ -17,6 +17,11 @@ coverageFilter <- args[3]
 coverageFilter
 out_folder <- "analysis/contextMeans"
 out_folder
+loci_of_interst_file <- args[4]
+loci_of_interst_file
+loci_of_interest_name <- args[5]
+loci_of_interest_name
+
 
 ###########################
 #setup
@@ -32,6 +37,10 @@ getMode <- function(x) {
   ux <- unique(x)
   ux[which.max(tabulate(match(x, ux)))]
 }
+
+# loci_of_interst_file
+loi_file <- read_tsv(loci_of_interst_file)
+
 
 # a sample
 # sample = "US_1_Index1_S11"
@@ -91,6 +100,28 @@ context_file_summary_CT20 <- context_file %>%
 context_file_summary_CT20
 
 write.table(context_file_summary_CT20, paste0(out_folder, "/", sample, "_context_summary_CT20.tsv"), sep = "\t", quote = F, row.names = F)
+
+# Do a third iteration filtering based on a list of loci of interest
+# Filters based on chr and start position
+
+context_file_summary_CT20_loci_of_interest <- context_file %>%
+  filter(CT_count >= coverageFilter) %>%
+  innerjoin(loi_file, by = c("chr", "start")) %>%
+  mutate(ratio = C_count/CT_count*100) %>%
+  group_by(context) %>%
+  summarise(mean = mean(ratio),
+            median = median(ratio),
+            mode = getMode(ratio),
+            sd=sd(ratio),
+            n=n(),
+            q5= quantile(ratio, .05),
+            q95= quantile(ratio, .95)
+            )
+
+context_file_summary_CT20
+
+write.table(context_file_summary_CT20_loci_of_interest, paste0(out_folder, "/", sample, "_context_summary_CT20_", loci_of_interest_name,".tsv"), sep = "\t", quote = F, row.names = F)
+
 
 ########## subcontext
 
