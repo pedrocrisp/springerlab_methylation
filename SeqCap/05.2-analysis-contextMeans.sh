@@ -1,6 +1,6 @@
 #!/bin/bash -l
-#PBS -l walltime=1:00:00,nodes=1:ppn=1,mem=20gb
-#PBS -N tiles_analysis_CHH_cov
+#PBS -l walltime=1:00:00,nodes=1:ppn=1,mem=40gb
+#PBS -N 05.2-analysis-contextMeans
 #PBS -r n
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
@@ -44,11 +44,13 @@ echo sample being mapped is $ID
 echo data folder is $data_folder
 echo coverage filter is $coverage_filter
 
+mkdir -p analysis/contextMeans
+
 ########## Run #################
 
         #Run R moudle to:
         # 1. make CHH coverage files for summary stats analysis
-        R -f ~/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis_CHH_cov.R \
+        R -f ~/gitrepos/springerlab_methylation/SeqCap/05.2-analysis-contextMeans.R \
         --args ${ID} $data_folder $coverage_filter
 
 echo finished summarising
