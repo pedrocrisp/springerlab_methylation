@@ -3,11 +3,12 @@
 set -xeuo pipefail
 
 usage="USAGE:
-05.2-analysis-contextMeans-qsub.sh <sample_list> <coverage_filter>
+05.2-analysis-contextMeans-qsub.sh <sample_list> <data_folder> <coverage_filter>
 for example:
 bash \
-~/gitrepos/springerlab_methylation/SeqCap/05.1-analysis-contextMeans-runner.sh \
+~/gitrepos/springerlab_methylation/SeqCap/05.2-analysis-contextMeans-qsub.sh \
 samples.txt \
+analysis/BSMAPratio \
 20
 "
 
