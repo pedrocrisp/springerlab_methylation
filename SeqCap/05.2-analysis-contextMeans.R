@@ -106,7 +106,7 @@ write.table(context_file_summary_CT20, paste0(out_folder, "/", sample, "_context
 
 context_file_summary_CT20_loci_of_interest <- context_file %>%
   filter(CT_count >= coverageFilter) %>%
-  innerjoin(loi_file, by = c("chr", "start")) %>%
+  inner_join(loi_file, by = c("chr", "start")) %>%
   mutate(ratio = C_count/CT_count*100) %>%
   group_by(context) %>%
   summarise(mean = mean(ratio),
@@ -118,7 +118,7 @@ context_file_summary_CT20_loci_of_interest <- context_file %>%
             q95= quantile(ratio, .95)
             )
 
-context_file_summary_CT20
+context_file_summary_CT20_loci_of_interest
 
 write.table(context_file_summary_CT20_loci_of_interest, paste0(out_folder, "/", sample, "_context_summary_CT20_", loci_of_interest_name,".tsv"), sep = "\t", quote = F, row.names = F)
 
