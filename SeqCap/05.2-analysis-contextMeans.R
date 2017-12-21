@@ -54,8 +54,8 @@ context_file <- read_tsv(paste0(data_path, "/", sample, "_BSMAP_out.txt"), col_n
 #             q5= quantile(CT_count, .05),
 #             q95= quantile(CT_count, .95)
 #             )
-
-write.table(coverage_summary, paste0(out_folder, "/", sample, "_coverage_summary.tsv"), sep = "\t", quote = F, row.names = F)
+#
+# write.table(coverage_summary, paste0(out_folder, "/", sample, "_coverage_summary.tsv"), sep = "\t", quote = F, row.names = F)
 
 # summarise
 context_file_summary <- context_file %>%
