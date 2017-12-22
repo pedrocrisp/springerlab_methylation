@@ -7,13 +7,13 @@ bash 08-tiles_analysis_qsub.sh <sample_list.txt> <data_folder> <coverage_filter>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/08-tiles_analysis_CHH_cov_qsub.sh \
-../samples.txt \
-tiles \
+samples.txt \
+analysis/tiles \
 2
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=08-tiles_CHH_cov
+step=08-tiles_analysis_CHH_cov
 
 ######### Setup ################
 sample_list=$1
