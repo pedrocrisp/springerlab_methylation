@@ -126,6 +126,8 @@ write.table(context_file_summary_CT20_loci_of_interest, paste0(out_folder, "/", 
 
 
 ########## subcontext
+# remove prior context file to save space?
+rm(context_file)
 
 context_file <- read_tsv(paste0(data_path, "/", sample, "_BSMAP_out_subcontext.txt"), col_names = c("chr", "start", "end", "strand", "context", "ratio", "eff_CT_count", "C_count", "CT_count", "rev_G_count", "rev_GA_count", "CI_lower", "CI_upper"),
                             cols_only(
