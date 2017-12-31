@@ -93,7 +93,8 @@ mkdir -p bsmapped_filtered
         #TARGET_INTERVALS=${CalculateHsMetrics_reference}
 
         # on-target CollectHsMetrics using pickard
-        #consider incorporating proper TARGET_INTERVALS file
+        # consider incorporating proper TARGET_INTERVALS file eg v4specific
+        # the reference provided by Qing is the "bait" file ("target" in Qing vocab)
         java -jar /home/springer/pcrisp/software/picard.jar CollectHsMetrics \
         I=bsmapped_filtered/${ID}_sorted_MarkDup.bam \
         O=bsmapped_filtered/${ID}_HsMetrics_noDuplicate.txt \
