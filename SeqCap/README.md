@@ -208,3 +208,101 @@ OnTargetCoverage_annotated \
 Mei_final \
 ~/umn/refseqs/maize/SeqCap/Seqcap_ultimate_annotation_files/SeqCapEpi2_regions_annotation_v2_v4.csv
 ```
+
+--------
+
+# Scraping the log files
+
+*Scrapers written so far*
+
+1. Bsmap - to get initial the mapping rates
+2. MarkDuplicates - to get duplication rates
+3. Methratio - get final valid mapping used to extract methylation data
+
+## Bsmap Scraper
+
+```
+cd logs/..._02-bsmap
+
+for i in $(ls 02-bsmap_e*); do
+SAMPLE=$(grep 'echo sample being mapped is' $i | cut -d " " -f 7)
+MAPPED_PAIRS=$(grep 'pairs:' $i | cut -d " " -f 8)
+MAPPED_PAIRS_PERCENTAGE=$(grep 'pairs:' $i | cut -d " " -f 9 | cut -d "(" -f2 | cut -d ")" -f1)
+MAPPED_A=$(grep 'single a:' $i | cut -d " " -f 6)
+MAPPED_A_PERCENTAGE=$(grep 'single a:' $i | cut -d " " -f 7 | cut -d "(" -f2 | cut -d ")" -f1)
+MAPPED_B=$(grep 'single b:' $i | cut -d " " -f 6)
+MAPPED_B_PERCENTAGE=$(grep 'single b:' $i | cut -d " " -f 7 | cut -d "(" -f2 | cut -d ")" -f1)
+echo -e "$SAMPLE\t$MAPPED_PAIRS\t$MAPPED_PAIRS_PERCENTAGE\t$MAPPED_A\t$MAPPED_A_PERCENTAGE\t$MAPPED_B\t$MAPPED_B_PERCENTAGE"
+done > bsmap_summary.tsv
+
+```
+
+
+## MarkDuplicates
+
+```
+cd /.../analysis/bsmapped_filtered
+
+for i in $(cat ../../samples.txt); do
+SAMPLE=$i
+UNPAIRED_READS_EXAMINED=$(grep 'Unknown Library' ${i}_MarkDupMetrics.txt | cut -f 2)
+STATS=$(grep 'Unknown Library' ${i}_MarkDupMetrics.txt)
+UNPAIRED_READS_EXAMINED=$(grep 'Unknown Library' ${i}_MarkDupMetrics.txt | cut -f 2)
+echo -e "$SAMPLE\t$STATS"
+done > MarkDuplicates_scraped.tsv
+```
+
+## OnTargetMetrics
+
+```
+cd ../analysis/bsmapped_filtered
+
+#Get header from a random sample
+HEADER=$(grep 'BAIT_SET' US_1_Index9_S14_HsMetrics_noDuplicate.txt | head -1)
+echo -e "Sample\t$HEADER" > OnTargetMetrics_scraped.tsv
+
+#grep 'BAIT_SET' *_HsMetrics_noDuplicate.txt | head -1 > OnTargetMetrics_scraped.tsv
+
+#scrape
+for i in $(cat ../../samples.txt); do
+SAMPLE=$i
+STATS=$(grep '^seqcapv2_onTarget-for-picard' ${i}_HsMetrics_noDuplicate.txt)
+echo -e "$SAMPLE\t$STATS"
+done >> OnTargetMetrics_scraped.tsv
+
+```
+
+## ConversionRate
+
+```
+cd ../analysis/ConversionRate
+
+echo -e "Sample\tC_counts\tCT_counts\tConversionRate" > ConversionRate_scraped.tsv
+
+for i in $(cat ../../samples.txt); do
+SAMPLE=$i
+File_data=${i}_conversion_rate.txt
+#STATS=$(cat ${i}_conversion_rate.txt)
+C_counts=$(cat $File_data | cut -d " " -f 1)
+CT_counts=$(cat $File_data | cut -d " " -f 2)
+ConversionRate=$(cat $File_data | cut -d " " -f 3)
+echo -e "$SAMPLE\t$C_counts\t$CT_counts\t$ConversionRate"
+done >> ConversionRate_scraped.tsv
+```
+
+
+
+
+## Methratio
+
+```
+cd logs/..._05-summarise_methylation
+
+for i in $(ls 05-summarise_methylation_o*); do
+SAMPLE=$(grep 'sample being mapped is' $i | cut -d " " -f 5)
+VALID_MAPPINGS=$(grep 'total' $i | cut -d " " -f 2)
+COVERED_CYTOSINES=$(grep 'total' $i | cut -d " " -f 5)
+AVERAGE_COVERAGE=$(grep 'total' $i | cut -d " " -f 10)
+echo -e "$SAMPLE\t$VALID_MAPPINGS\t$COVERED_CYTOSINES\t$AVERAGE_COVERAGE"
+done > methratio_summary.tsv
+```
