@@ -266,7 +266,7 @@ echo -e "Sample\t$HEADER" > OnTargetMetrics_scraped.tsv
 #scrape
 for i in $(cat ../../samples.txt); do
 SAMPLE=$i
-STATS=$(grep '^seqcapv2_onTarget-for-picard' ${i}_HsMetrics_noDuplicate.txt)
+STATS=$(grep '^SeqCapEpi2_v4_capture_space_sorted' ${i}_HsMetrics_noDuplicate.txt)
 echo -e "$SAMPLE\t$STATS"
 done >> OnTargetMetrics_scraped.tsv
 
