@@ -3,13 +3,14 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 04-filter_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_reference.bed>
+bash 04-filter_qsub.sh <sample_list.txt> <genome.fa> <CalculateHsMetrics_bait_reference.bed> <CalculateHsMetrics_specific_target_reference.bed>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/04-filter_qsub.sh \
 single_sample.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
-/home/springer/pcrisp/ws/refseqs/maize/seqcapv2_onTarget-for-picard.bed
+/home/springer/pcrisp/ws/refseqs/maize/Seqcap_ultimate_annotation_files/SeqCapEpi2_v4_capture_space_sorted.interval_list \
+/home/springer/pcrisp/ws/refseqs/maize/Seqcap_ultimate_annotation_files/SeqCapEpi2_v4_specific_targets_no_NA_sorted.interval_list
 "
 
 #define stepo in the pipeline - should be the same name as the script
@@ -18,9 +19,10 @@ step=04-filter
 ######### Setup ################
 sample_list=$1
 genome_reference=$2
-CalculateHsMetrics_reference=$3
+CalculateHsMetrics_bait_reference=$3
+CalculateHsMetrics_specific_target_reference=$4
 
-if [ "$#" -lt "3" ]
+if [ "$#" -lt "4" ]
 then
 echo $usage
 exit -1
@@ -28,7 +30,7 @@ else
 echo "Submitting samples listed in '$sample_list' for trimming"
 cat $sample_list
 echo genome reference is $genome_reference
-echo CalculateHsMetrics_reference is $CalculateHsMetrics_reference
+echo CalculateHsMetrics_reference is $CalculateHsMetrics_bait_reference $CalculateHsMetrics_specific_target_reference
 fi
 
 #number of samples
@@ -78,5 +80,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},genome_reference=$genome_reference,CalculateHsMetrics_reference=$CalculateHsMetrics_reference \
+-v LIST=${sample_list},genome_reference=$genome_reference,CalculateHsMetrics_bait_reference=$CalculateHsMetrics_bait_reference,CalculateHsMetrics_specific_target_reference=$CalculateHsMetrics_specific_target_reference \
 $script_to_qsub
