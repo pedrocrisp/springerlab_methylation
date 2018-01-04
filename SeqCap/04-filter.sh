@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=03:00:00,nodes=1:ppn=8,mem=32gb
+#PBS -l walltime=06:00:00,nodes=1:ppn=8,mem=32gb
 #PBS -N filter
 #PBS -r n
 #PBS -m abe
