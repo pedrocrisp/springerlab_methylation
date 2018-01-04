@@ -100,8 +100,8 @@ mkdir -p bsmapped_filtered
         O=bsmapped_filtered/${ID}_HsMetrics_noDuplicate.txt \
         CLIP_OVERLAPPING_READS=false \
         R=${genome_reference} \
-        BAIT_INTERVALS=${CalculateHsMetrics_reference} \
-        TARGET_INTERVALS=${CalculateHsMetrics_reference}
+        BAIT_INTERVALS=${CalculateHsMetrics_bait_reference} \
+        TARGET_INTERVALS=${CalculateHsMetrics_specific_target_reference}
 
         # keep properly paired reads using bamtools package
         # note that some reads marked as properly paired by bsmap actually map to different chromosomes
