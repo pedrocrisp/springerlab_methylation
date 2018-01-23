@@ -38,9 +38,10 @@ getMode <- function(x) {
   ux[which.max(tabulate(match(x, ux)))]
 }
 
+if (!loci_of_interst_file == "none") {
 # loci_of_interst_file
 loi_file <- read_tsv(loci_of_interst_file)
-
+}
 
 # a sample
 # sample = "US_1_Index1_S11"
