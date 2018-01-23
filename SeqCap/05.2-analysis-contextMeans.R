@@ -106,6 +106,8 @@ write.table(context_file_summary_CT20, paste0(out_folder, "/", sample, "_context
 # Do a third iteration filtering based on a list of loci of interest
 # Filters based on chr and start position
 
+if (!loci_of_interst_file == "none") {
+
 context_file_summary_CT20_loci_of_interest <- context_file %>%
   filter(CT_count >= coverageFilter) %>%
   inner_join(loi_file, by = c("chr", "start")) %>%
@@ -124,6 +126,7 @@ context_file_summary_CT20_loci_of_interest
 
 write.table(context_file_summary_CT20_loci_of_interest, paste0(out_folder, "/", sample, "_context_summary_CT20_", loci_of_interest_name,".tsv"), sep = "\t", quote = F, row.names = F)
 
+}
 
 ########## subcontext
 # remove prior context file to save space?
