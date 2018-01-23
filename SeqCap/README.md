@@ -49,7 +49,7 @@ samples.txt \
 ```
 
 **Methods summary**
-Reads were aligned with bsmap v2.74 with the following parameters -v 5 to allow allow 5 mismatches, -r 0 to report only unique mapping pairs, -p 1, -q 20 to allow quality trimming to q20, -A AGATCGGAAGAGCGGTTCAGCAGGAATGCCG adapter sequence. Output file is in SAM format to allow custom QC and sorting (because some reads are not properly paired).
+Reads were aligned with bsmap v2.74 with the following parameters -v 5 to allow allow 5 mismatches, -r 0 to report only unique mapping pairs, -p 1, -q 20 to allow quality trimming to q20, -A AGATCGGAAGAGC adapter sequence. Output file is in SAM format to allow custom QC and sorting (because some reads are not properly paired).
 
 ### Step 3 fix sam files
 
@@ -84,6 +84,18 @@ samples.txt \
 /home/springer/pcrisp/ws/refseqs/maize/seqcapv2_onTarget-for-picard.bed
 ```
 
+In the WGBS version the collect HS-metrics step is omited
+
+```
+#04-filter
+bash \
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/04-filter-WGBS_qsub.sh \
+samples.txt
+
+```
+
+
+
 ### Step 5 Extract methylation data
 
 Use methylratio.py script from bsmap to extract methylation data. Then use awk to convert output to mC context (CG, CHG, CHH) and parse coordinate to zero-based format "BED" type for bedtools. Then use awk to convert to bedgraph format (chr, start, stop, ratio) and split into a separate file per context. Use bedGraphToBigWig to make a bigWig file for IGV. Use awk to get conversion rates using the chloroplast reads. Use bedtools to intersect bam with target regions then use awk to sum reads per region. Then use bedtools to intersect C and CT counts file with target regions and use awk to sum counts. Also count methylaiton per region using eff_CT incase we want this metric later.
@@ -107,6 +119,20 @@ output - *BSMAP_out.txt
 chr     start end     strand  context ratio   eff_CT_count    C_count CT_count        rev_G_count     rev_GA_count    CI_lower        CI_upper
 1       489     490     +       CHG     0.250   8.00    2       8       0       0       0.071   0.591
 1       490     491     +       CG      0.875   8.00    7       8       0       0       0.529   0.978
+
+### Step 5.2 Context means
+
+This step calculates means per context and sub-context. If a lcoi of interest file is provided it will additionally output a summary for these loci only. If there are no loci of interest then specify ``"none"``.
+
+```
+bash \
+~/gitrepos/springerlab_methylation/SeqCap/05.2-analysis-contextMeans-qsub.sh \
+samples.txt \
+analysis/BSMAPratio \
+20 \
+none \
+none
+```
 
 ### Step 7 100 bp tiles
 
