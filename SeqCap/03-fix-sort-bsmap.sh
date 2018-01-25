@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=07:00:00,nodes=1:ppn=1,mem=24gb
+#PBS -l walltime=12:00:00,nodes=1:ppn=1,mem=24gb
 #PBS -N fix-sort
 #PBS -r n
 #PBS -m abe
