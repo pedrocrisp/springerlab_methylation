@@ -13,7 +13,7 @@ single_sample.txt \
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=05-summarise_methylation
+step=05-summarise_methylation-WGBS
 
 ######### Setup ################
 sample_list=$1
