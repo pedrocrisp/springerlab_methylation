@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=1:00:00,nodes=1:ppn=2,mem=40gb
+#PBS -l walltime=1:00:00,nodes=1:ppn=1,mem=50gb
 #PBS -N 05.2-analysis-contextMeans
 #PBS -r n
 #PBS -m abe
@@ -84,7 +84,7 @@ awk -F$"\\t" -v ID=$ID "$awk_make_bedGraph_subcontext" -
 #########################
         #Run R moudle to:
         # 1. make CHH coverage files for summary stats analysis
-        R -f ~/gitrepos/springerlab_methylation/SeqCap/05.2-analysis-contextMeans.R \
+        R -f ~/gitrepos/springerlab_methylation/SeqCap/05.2-analysis-contextMeans-WGBS.R \
         --args ${ID} $data_folder $coverage_filter $loci_of_interst_file $loci_of_interest_name
 
 echo finished summarising
