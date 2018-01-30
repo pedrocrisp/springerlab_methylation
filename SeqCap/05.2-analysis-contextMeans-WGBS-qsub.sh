@@ -4,7 +4,7 @@ set -xeuo pipefail
 
 #Peter Crisp
 #2017-12-20
-#Bash qsub script for 05.2-analysis-contextMeans.R
+#Bash qsub script for 05.2-analysis-contextMeans-WGBS.R
 
 usage="USAGE:
 05.2-analysis-contextMeans-qsub.sh <sample_list> <data_folder> <coverage_filter> \
