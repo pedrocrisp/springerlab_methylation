@@ -3,12 +3,13 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 07-summarise_methylation_qsub.sh <sample_list.txt> <chrom.sizes file>
+bash 07-summarise_methylation_qsub.sh <sample_list.txt> <chrom.sizes file> <reference_tile_file>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig_qsub.sh \
 single_sample.txt \
-/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes
+/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+/home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles_zBased_sites.txt
 "
 
 #define stepo in the pipeline - should be the same name as the script
@@ -17,8 +18,9 @@ step=07-tiles_bed_to_bigWig
 ######### Setup ################
 sample_list=$1
 chrom_sizes=$2
+reference_tile_file=$3
 
-if [ "$#" -lt "1" ]
+if [ "$#" -lt "3" ]
 then
 echo $usage
 exit -1
@@ -74,5 +76,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},chrom_sizes=${chrom_sizes} \
+-v LIST=${sample_list},chrom_sizes=${chrom_sizes},reference_tile_file=${reference_tile_file} \
 $script_to_qsub
