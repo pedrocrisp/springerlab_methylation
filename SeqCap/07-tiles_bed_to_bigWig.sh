@@ -60,7 +60,7 @@ mkdir -p tiles
         # 2. output one-based coordinate .txt file for analysis in R
         # 3. output zero-based coordinate bedGraph file (omit excess columns and sort)
         R -f ~/gitrepos/springerlab_methylation/SeqCap/07-tiles_bed_to_bigWig.R \
-        --args ${ID} tiles /home/springer/pcrisp/ws/refseqs/maize/maize_v4_100pb_tiles_zBased_sites.txt
+        --args ${ID} tiles ${reference_tile_file}
 
         #make bedGraph by sorting and removing cols 4 and 5 with awk
 
