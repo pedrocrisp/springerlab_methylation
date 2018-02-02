@@ -20,31 +20,30 @@
 # <"s3" or "no_s3"> \
 # <destination on s3>
 
-# eg purge first:
-bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/09-clean-up.sh \
-/scratch.global/pcrisp/m162_seqcap \
-purge \
-no_copy_to_home \
-NA \
-no_s3 \
-NA
+# # eg purge first:
+# bash \
+# /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/09-clean-up.sh \
+# /scratch.global/pcrisp/m162_seqcap \
+# purge \
+# no_copy_to_home \
+# NA \
+# no_s3 \
+# NA
 
-# inspect then copy to home and s3
-bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/09-clean-up.sh \
-/scratch.global/pcrisp/m162_seqcap \
-no_purge \
-copy_to_home \
-~/ws/analysis \
-s3 \
-s3://springer-pcrisp-WGBS/
+# # inspect then copy to home and s3
+# bash \
+# /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/09-clean-up.sh \
+# /scratch.global/pcrisp/m162_seqcap \
+# no_purge \
+# copy_to_home \
+# ~/ws/analysis \
+# s3 \
+# s3://springer-pcrisp-WGBS/
 
 #############
 
 # The script can be run after step(s) 05 summarise methylation.
 # NOTE step 05.2 context means needds to be run before this step
-#
 
 projectFolder=$1
 purge=$2
