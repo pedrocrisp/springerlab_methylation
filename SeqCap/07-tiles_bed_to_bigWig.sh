@@ -82,6 +82,7 @@ mkdir -p tiles
         "./tiles/${ID}_BSMAP_out.txt.100.CHH.bigWig"
 
         # remove .bg - not required
-        rm -rv tiles/${ID}*.bg
+        # meh purge it in step 09 instead
+        # rm -rv tiles/${ID}*.bg
 
 echo finished summarising
