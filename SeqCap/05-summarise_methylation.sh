@@ -207,7 +207,7 @@ mkdir -p ConversionRate
 
         ########################
                 ## Now make stranded bigWigs for IGV
-                # make both sets, decided later which is prefered 
+                # make both sets, decided later which is prefered
 
                 ## make begGraph ratio files for bigWigs
                 # function
@@ -258,6 +258,7 @@ mkdir -p ConversionRate
         #remove bedGraph it is large and not really required
         # keep bigWigs
         rm -rv BSMAPratio/${ID}*.bedGraph
+        rm -rv BSMAPratio/${ID}*.bg
 
         ########################
 
