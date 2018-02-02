@@ -42,6 +42,8 @@ mC_tile_table <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.C
   chh_sites = col_integer()
 ))
 
+mC_tile_table
+
 # coverage filter
 mC_tile_table_CHHcov <-
 mC_tile_table %>%
