@@ -87,4 +87,9 @@ awk -F$"\\t" -v ID=$ID "$awk_make_bedGraph_subcontext" -
         R -f ~/gitrepos/springerlab_methylation/SeqCap/05.2-analysis-contextMeans-WGBS.R \
         --args ${ID} $data_folder $coverage_filter $loci_of_interst_file $loci_of_interest_name
 
+#########################
+# remove unnecesay bedGraphs
+
+rm -rv analysis/BSMAPratio/${ID}*.bedGraph
+
 echo finished summarising
