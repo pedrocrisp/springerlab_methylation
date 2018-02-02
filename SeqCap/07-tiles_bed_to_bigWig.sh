@@ -81,4 +81,7 @@ mkdir -p tiles
         bedGraphToBigWig "./tiles/${ID}_BSMAP_out.txt.100.CHH.fixed.sorted.bg" ${chrom_sizes} \
         "./tiles/${ID}_BSMAP_out.txt.100.CHH.bigWig"
 
+        # remove .bg - not required
+        rm -rv tiles/${ID}*.bg
+
 echo finished summarising
