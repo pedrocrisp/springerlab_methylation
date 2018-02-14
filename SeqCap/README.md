@@ -241,9 +241,28 @@ Mei_final \
 
 *Scrapers written so far*
 
-1. Bsmap - to get initial the mapping rates
+1. Trim_galore - Parse the trimming logs to get the total reads.
+2. Bsmap - to get initial the mapping rates
 2. MarkDuplicates - to get duplication rates
+3. OnTargetMetrics - to get a heap of OnTargetMetrics but mainly, % On target, % Target 2X, mean target coverage, fold enrichment
+4. ConversionRate - parse the output to get conversion rate
 3. Methratio - get final valid mapping used to extract methylation data
+4. CHH_cov - tiles passing 2x CHH
+
+## Trimming (Total reads)
+
+Parse the trimming logs to get the total reads.
+
+```
+cd logs/..._01-trim_galore
+
+for i in $(ls 01-trim_galore_e*); do
+SAMPLE=$(grep '+ ID=' $i | cut -d "=" -f 2)
+TOTAL_READS=$(grep 'Total number of sequences analysed:' $i | cut -d " " -f 6)
+echo -e "$SAMPLE\t$TOTAL_READS"
+done > total_reads_summary.tsv
+
+```
 
 ## Bsmap Scraper
 
@@ -263,11 +282,19 @@ done > bsmap_summary.tsv
 
 ```
 
+Total number of sequences analysed:
 
 ## MarkDuplicates
 
+MarkDuplicates - to get duplication rates
+
+This step requires a samples.txt in the parent folder
+
 ```
+# if before cleanup
 cd /.../analysis/bsmapped_filtered
+# if after cleanup
+cd /.../analysis/HsMetrics_deDups_logs
 
 for i in $(cat ../../samples.txt); do
 SAMPLE=$i
@@ -276,6 +303,10 @@ STATS=$(grep 'Unknown Library' ${i}_MarkDupMetrics.txt)
 UNPAIRED_READS_EXAMINED=$(grep 'Unknown Library' ${i}_MarkDupMetrics.txt | cut -f 2)
 echo -e "$SAMPLE\t$STATS"
 done > MarkDuplicates_scraped.tsv
+# add headder
+echo -e 'sample\tLIBRARY\tUNPAIRED_READS_EXAMINED\tREAD_PAIRS_EXAMINED\tSECONDARY_OR_SUPPLEMENTARY_RDS\tUNMAPPED_READS\tUNPAIRED_READ_DUPLICATES\tREAD_PAIR_DUPLICATES"\tREAD_PAIR_OPTICAL_DUPLICATES\tPERCENT_DUPLICATION\tESTIMATED_LIBRARY_SIZE' \
+| cat - MarkDuplicates_scraped.tsv > temp && mv temp MarkDuplicates_scraped.tsv
+
 ```
 
 ## OnTargetMetrics
@@ -322,11 +353,42 @@ done >> ConversionRate_scraped.tsv
 ```
 cd logs/..._05-summarise_methylation
 
+echo -e "sample\tVALID_MAPPINGS\tCOVERED_CYTOSINES\tAVERAGE_COVERAGE" > methratio_summary.tsv
+
 for i in $(ls 05-summarise_methylation_o*); do
 SAMPLE=$(grep 'sample being mapped is' $i | cut -d " " -f 5)
 VALID_MAPPINGS=$(grep 'total' $i | cut -d " " -f 2)
 COVERED_CYTOSINES=$(grep 'total' $i | cut -d " " -f 5)
 AVERAGE_COVERAGE=$(grep 'total' $i | cut -d " " -f 10)
 echo -e "$SAMPLE\t$VALID_MAPPINGS\t$COVERED_CYTOSINES\t$AVERAGE_COVERAGE"
-done > methratio_summary.tsv
+done >> methratio_summary.tsv
+
+# or WGBS
+
+cd logs/..._05-summarise_methylation-WGBS
+
+echo -e "sample\tVALID_MAPPINGS\tCOVERED_CYTOSINES\tAVERAGE_COVERAGE" > methratio_summary.tsv
+
+for i in $(ls 05-summarise_methylation-WGBS_o*); do
+SAMPLE=$(grep 'sample being mapped is' $i | cut -d " " -f 5)
+VALID_MAPPINGS=$(grep 'total' $i | cut -d " " -f 2)
+COVERED_CYTOSINES=$(grep 'total' $i | cut -d " " -f 5)
+AVERAGE_COVERAGE=$(grep 'total' $i | cut -d " " -f 10)
+echo -e "$SAMPLE\t$VALID_MAPPINGS\t$COVERED_CYTOSINES\t$AVERAGE_COVERAGE"
+done >> methratio_summary.tsv
+```
+
+## CHH_cov
+
+```
+cd logs/..._08-tiles_analysis_CHH_cov
+
+echo -e "sample\tTILES_CHH_COV" > CHH_cov_summary.tsv
+
+for i in $(ls 08-tiles_analysis_CHH_cov_o*); do
+SAMPLE=$(grep 'sample being mapped is' $i | cut -d " " -f 5)
+TILES_CHH_COV=$(grep '\[1\] "For sample*' $i | cut -d " " -f 7)
+echo -e "$SAMPLE\t$TILES_CHH_COV"
+done >> CHH_cov_summary.tsv
+
 ```
