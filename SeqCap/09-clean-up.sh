@@ -88,7 +88,9 @@ mv analysis/bsmapped_filtered/*.txt analysis/HsMetrics_deDups_logs/
 # move bigWigs out of the BSMAPratio folder so they can be copied separately
 mkdir -p analysis/BSMAPratio_bigWigs
 rsync -rhivPt analysis/BSMAPratio/*.bigWig analysis/BSMAPratio_bigWigs/
-# remaining files are quite large,
+# it is recommended that the bigwigs are coppied to s3 and deleted from home... too big otherwise, they can be regenerated if required
+
+# remaining files in BSMAPratio are quite large,
 # it seems to make more sense to delete this folder now and leep the bams (haf the size of *BSMAP_out.txt)
 # ie these files could be easily recreated from bams
 # *BSMAP_out.bg
