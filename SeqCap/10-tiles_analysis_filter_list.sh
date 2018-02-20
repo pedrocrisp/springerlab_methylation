@@ -35,7 +35,7 @@ echo working dir is now $PWD
 
 module load R/3.3.2
 ########## Set up dirs #################
-output_folder=${data_folder}_filtered
+output_folder=${data_folder}_filtered_$filter_suffix
 mkdir -p $output_folder
 
 #get job ID
