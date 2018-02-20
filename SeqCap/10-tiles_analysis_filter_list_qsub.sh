@@ -3,13 +3,14 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 10-tiles_analysis_filter_list_qsub.sh <sample_list.txt> <data_folder> <tile_list>
+bash 10-tiles_analysis_filter_list_qsub.sh <sample_list.txt> <data_folder> <tile_list> <filter_suffix>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/10-tiles_analysis_filter_list_qsub.sh \
 samples.txt \
 tiles \
-analysis_02_tiles_SeqCap_meta_140_samples/chh_2x_cov_62_sample_tile_list.tsv
+analysis_02_tiles_SeqCap_meta_140_samples/chh_2x_cov_62_sample_tile_list.tsv \
+2_samp_MN
 "
 
 #define stepo in the pipeline - should be the same name as the script
@@ -19,8 +20,9 @@ step=10-tiles_analysis_filter_list
 sample_list=$1
 data_folder=$2
 tile_list=$3
+filter_suffix=$4
 
-if [ "$#" -lt "3" ]
+if [ "$#" -lt "4" ]
 then
 echo $usage
 exit -1
@@ -76,5 +78,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},data_folder=$data_folder,tile_list=$tile_list \
+-v LIST=${sample_list},data_folder=$data_folder,tile_list=$tile_list,filter_suffix=$filter_suffix \
 $script_to_qsub
