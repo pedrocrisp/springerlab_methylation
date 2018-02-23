@@ -251,7 +251,9 @@ Mei_final \
 
 ## Trimming (Total reads)
 
-Parse the trimming logs to get the total reads.
+Parse the trimming logs to get the total reads. This is the total reads and should match PF clusters.
+
+NOTE this will not match total reads passed to bsmap, because trimming will reomve some reads entirely.
 
 ```
 cd logs/..._01-trim_galore
@@ -349,6 +351,10 @@ done >> ConversionRate_scraped.tsv
 
 
 ## Methratio
+
+VALID_MAPPINGS, COVERED_CYTOSINES and AVERAGE_COVERAGE determined by methratio.py
+
+Note sure how coverage is calculated...
 
 ```
 cd logs/..._05-summarise_methylation
