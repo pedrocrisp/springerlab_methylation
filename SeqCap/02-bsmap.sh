@@ -69,3 +69,7 @@ bsmap \
 -p 8 \
 -q 20 \
 -A $adapter_seq
+
+echo total reads in sam
+
+samtools view -c bsmapped/${ID}.sam
