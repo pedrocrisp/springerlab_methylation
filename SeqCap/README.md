@@ -242,7 +242,7 @@ Mei_final \
 *Scrapers written so far*
 
 1. Trim_galore - Parse the trimming logs to get the total reads.
-2. Bsmap - to get initial the mapping rates
+2. Bsmap - to get initial mapping rates
 2. MarkDuplicates - to get duplication rates
 3. OnTargetMetrics - to get a heap of OnTargetMetrics but mainly, % On target, % Target 2X, mean target coverage, fold enrichment
 4. ConversionRate - parse the output to get conversion rate
