@@ -72,4 +72,5 @@ bsmap \
 
 echo total reads in sam
 
-samtools view -c bsmapped/${ID}.sam
+# consider calculating how many reads were used for mapping...
+# samtools view -c bsmapped/${ID}.sam
