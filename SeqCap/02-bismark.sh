@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=12:00:00,nodes=1:ppn=8,mem=42gb
+#PBS -l walltime=2:00:00,nodes=1:ppn=8,mem=42gb
 #PBS -N bismark
 #PBS -r n
 #PBS -m abe
@@ -50,9 +50,15 @@ mkdir -p bismark
 
 ########## Run #################
 
+# --multicore 2 run to instances of bismark to speed things up
+#(please note that a typical Bismark run will use several cores already
+#(Bismark itself, 2 or 4 threads for Bowtie/Bowtie2, Samtools, gzip etc...) and ~10-16GB of memory per thread depending on the choice of aligner and genome.
+# WARNING: Bismark Parallel is resource hungry!)
+
 bismark \
 --bowtie2 \
-${genome_reference} \
 --output_dir bismark \
+--multicore 2 \
+--genome ${genome_reference} \
 -1 ${read_folder}/${ID}_R1_001_val_1.fq \
 -2 ${read_folder}/${ID}_R2_001_val_2.fq
