@@ -3,7 +3,7 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 02-bismark_qsub.sh <sample_list.txt> <genome folder>"
+bash 02-bismark_qsub.sh <sample_list.txt> <genome folder> <read_folder>"
 
 #define step in the pipeline - should be the same name as the script
 step=02-bismark
@@ -11,7 +11,8 @@ step=02-bismark
 ######### Setup ################
 sample_list=$1
 genome_reference=$2
-if [ "$#" -lt "2" ]
+read_folder=$3
+if [ "$#" -lt "3" ]
 then
 echo $usage
 exit -1
@@ -68,7 +69,7 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},genome_reference=$genome_reference \
+-v LIST=${sample_list},genome_reference=$genome_reference,read_folder=$read_folder \
 $script_to_qsub
 
 # to run
