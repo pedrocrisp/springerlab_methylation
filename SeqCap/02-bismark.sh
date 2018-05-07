@@ -54,5 +54,5 @@ bismark \
 --bowtie2 \
 ${genome_reference} \
 --output_dir bismark \
--1 trimmed/${ID}_R1_001_val_1.fq \
--2 trimmed/${ID}_R2_001_val_2.fq
+-1 ${read_folder}/${ID}_R1_001_val_1.fq \
+-2 ${read_folder}/${ID}_R2_001_val_2.fq
