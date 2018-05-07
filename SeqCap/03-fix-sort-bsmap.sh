@@ -34,7 +34,8 @@ echo working dir is now $PWD
 ########## Modules #################
 
 #bsmap requires samtools < 1.0.0
-module load samtools/0.1.18
+# module load samtools/0.1.18 # no longer an available module 
+PATH=~/software/bsmap-2.74/samtools:$PATH
 
 ########## Set up dirs #################
 
