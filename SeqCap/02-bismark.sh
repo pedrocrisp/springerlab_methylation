@@ -69,7 +69,12 @@ bismark \
 -2 ${read_folder}/${ID}_R2_001_val_2.fq
 
 ### rename
-mv bismark_mapping/${ID}_R1_001_val_1_bismark_bt2_pe.bam bismark_mapping/${ID}_bismark_bt2_pe.bam
+# bam
+mv bismark_mapping/${ID}_R1_001_val_1_bismark_bt2_pe.bam \
+bismark_mapping/${ID}_bismark_bt2_pe.bam
+# report
+mv bismark_mapping/${ID}_R1_001_val_1_bismark_bt2_PE_report.txt \
+bismark_mapping/${ID}_bismark_bt2_PE_report.txt
 
 ########## extract methylation #######
 # This step extract methylation values
