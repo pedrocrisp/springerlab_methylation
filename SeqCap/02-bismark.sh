@@ -46,10 +46,13 @@ echo sample being mapped is $ID
 
 #make adaligned folder bsmaped
 cd analysis
-mkdir -p bismark
+mkdir -p bismark_mapping
+mkdir -p bismark_mC_summaries
 
 ########## Run #################
 
+########## bismark alignment #######
+# https://rawgit.com/FelixKrueger/Bismark/master/Docs/Bismark_User_Guide.html#appendix-ii-bismark
 # --multicore 2 run to instances of bismark to speed things up
 #(please note that a typical Bismark run will use several cores already
 #(Bismark itself, 2 or 4 threads for Bowtie/Bowtie2, Samtools, gzip etc...) and ~10-16GB of memory per thread depending on the choice of aligner and genome.
@@ -57,8 +60,31 @@ mkdir -p bismark
 
 bismark \
 --bowtie2 \
---output_dir bismark \
+--output_dir bismark_mapping \
 --multicore 2 \
+--basename ${ID} \
 --genome ${genome_reference} \
 -1 ${read_folder}/${ID}_R1_001_val_1.fq \
 -2 ${read_folder}/${ID}_R2_001_val_2.fq
+
+########## extract methylation #######
+# This step extract methylation values
+# makes a bedGraph
+# makes a genome coverage files
+# --include_overlap this includes the overlap portion of PE reads, this will be useful for call read specific methylation but should be disabled if calling DMRs etc
+# Please note that a typical process of extracting a BAM file and writing out .gz output streams will in fact use ~3 cores per value of --multicore <int> specified
+# the main memory sort buffer when sorting the methylation information, default 2G
+# --cytosine_report genome-wide methylation report for all cytosines in the genome
+#
+
+bismark_methylation_extractor \
+--gzip \
+--multicore 2 \
+--paired-end \
+--bedGraph \
+--buffer_size 10G \
+--cytosine_report \
+--include_overlap \
+--genome_folder ${genome_reference} \
+--output bismark_mC_summaries \
+bismark_mapping/${ID}_bismark_bt2_pe.bam
