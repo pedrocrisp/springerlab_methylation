@@ -57,15 +57,19 @@ mkdir -p bismark_mC_summaries
 #(please note that a typical Bismark run will use several cores already
 #(Bismark itself, 2 or 4 threads for Bowtie/Bowtie2, Samtools, gzip etc...) and ~10-16GB of memory per thread depending on the choice of aligner and genome.
 # WARNING: Bismark Parallel is resource hungry!)
+# Specifying --basename in conjuction with --multicore is currently not supported (but we are aiming to fix this soon). Please lose either --basename or --multicore to proceed
 
 bismark \
 --bowtie2 \
 --output_dir bismark_mapping \
 --multicore 2 \
---basename ${ID} \
+# --basename ${ID} \
 --genome ${genome_reference} \
 -1 ${read_folder}/${ID}_R1_001_val_1.fq \
 -2 ${read_folder}/${ID}_R2_001_val_2.fq
+
+### rename
+mv bismark_mapping/${ID}_R1_001_val_1_bismark_bt2_pe.bam bismark_mapping/${ID}_bismark_bt2_pe.bam
 
 ########## extract methylation #######
 # This step extract methylation values
