@@ -87,7 +87,7 @@ mv analysis/bsmapped_filtered/*.txt analysis/HsMetrics_deDups_logs/
 ###### BSMAPratio
 # move bigWigs out of the BSMAPratio folder so they can be copied separately
 mkdir -p analysis/BSMAPratio_bigWigs
-rsync -rhivPt analysis/BSMAPratio/*.bigWig analysis/BSMAPratio_bigWigs/
+mv -v analysis/BSMAPratio/*.bigWig analysis/BSMAPratio_bigWigs/
 # it is recommended that the bigwigs are coppied to s3 and deleted from home... too big otherwise, they can be regenerated if required
 
 # remaining files in BSMAPratio are quite large,
@@ -101,7 +101,7 @@ rm -rv analysis/BSMAPratio
 
 ###### tiles
 # I make tile bigwigs and also tile bed files, but I dont really use these
-# the bed files may be usefult but they need coverage filtering first anyway
+# the bed files may be usefull but they need coverage filtering first anyway
 # so delete both BUT IF I DO WANT THEM OMIT THIS OR RERUN THE 07-tiles step
 # the bg file is intermediate for making the bigWigs, it might also be useful for coverage analysis in the future FYI
 rm -rv analysis/tiles/*.bg
@@ -165,6 +165,11 @@ fi
     # s3cmd sync --verbose SeqCap_2_McGinnis/ s3://springer-pcrisp-seqcap/SeqCap_2_McGinnis/
     # 76 GB took just under 2 hr to sync ultimately
 
+
+    #get md5sum for each files
+    find $projectFolder -type f -exec md5sum {} \; > md5sum.txt
+
+    # sync
     s3cmd sync --verbose $projectFolder $s3_bucket
 
 else
