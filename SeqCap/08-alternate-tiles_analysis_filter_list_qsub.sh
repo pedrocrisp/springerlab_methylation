@@ -3,7 +3,7 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 10-tiles_analysis_filter_list_qsub.sh <sample_list.txt> <data_folder> <tile_list> <filter_suffix>
+bash 08-tiles_analysis_filter_list_qsub.sh <sample_list.txt> <data_folder> <tile_list> <filter_suffix>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/10-tiles_analysis_filter_list_qsub.sh \
@@ -17,7 +17,7 @@ analysis_02_tiles_SeqCap_meta_140_samples/chh_2x_cov_62_sample_tile_list.tsv \
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=10-tiles_analysis_filter_list
+step=08-alternate-tiles_analysis_filter_list
 
 ######### Setup ################
 sample_list=$1
