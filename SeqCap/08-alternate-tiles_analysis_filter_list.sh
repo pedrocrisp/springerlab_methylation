@@ -1,6 +1,6 @@
 #!/bin/bash -l
 #PBS -l walltime=1:00:00,nodes=1:ppn=1,mem=20gb
-#PBS -N tiles_analysis
+#PBS -N site_cov_tiles
 #PBS -r n
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
@@ -50,7 +50,7 @@ echo tile list is $tile_list
 
         #Run R moudle to:
         # 1. make CHH coverage files for summary stats analysis
-        R -f ~/gitrepos/springerlab_methylation/SeqCap/10-tiles_analysis_filter_list.R \
+        R -f ~/gitrepos/springerlab_methylation/SeqCap/08-alternate-tiles_analysis_filter_list.R \
         --args ${ID} $data_folder $tile_list $output_folder $minCHHs $minCHH_cov $minCHGs $minCHG_cov $minCGs $minCG_cov
 
 echo finished summarising
