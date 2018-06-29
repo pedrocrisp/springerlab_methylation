@@ -67,11 +67,12 @@ mC_tile_table <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.C
 # tile filter
 mC_tile_table_filtered <-
 mC_tile_table %>%
-  unite(tile, chr, start,end, sep=":") %>%
+  unite(tile, chr, start,end, sep=":", remove = F) %>%
   mutate(cov= CT/chh_sites) %>%
   { ifelse(Y == FALSE , ., inner_join(tile_list, "tile") ) }  %>%
   select(tile, ratio, chh_sites, cov) %>%
-  filter(chh_sites >= minCHHs, cov >= min_CHH_cov)
+  filter(chh_sites >= minCHHs, cov >= min_CHH_cov) %>%
+  select(chr, start, C, CT, chh_sites)
 
 mC_tile_table_filtered
 
@@ -100,7 +101,8 @@ mC_tile_table %>%
   mutate(cov= CT/cg_sites) %>%
   { ifelse(Y == FALSE , ., inner_join(tile_list, "tile") ) }  %>%
   select(tile, ratio, cg_sites, cov) %>%
-  filter(chg_sites >= minCGs, cov >= min_CH_cov)
+  filter(chg_sites >= minCGs, cov >= min_CG_cov) %>%
+  select(chr, start, C, CT, cg_sites)
 
 mC_tile_table_filtered
 
@@ -129,7 +131,8 @@ mC_tile_table %>%
   mutate(cov= CT/chg_sites) %>%
   { ifelse(Y == FALSE , ., inner_join(tile_list, "tile") ) }  %>%
   select(tile, ratio, chg_sites, cov) %>%
-  filter(chg_sites >= minCHGs, cov >= min_CHG_cov)
+  filter(chg_sites >= minCHGs, cov >= min_CHG_cov) %>%
+  select(chr, start, C, CT, chg_sites)
 
 mC_tile_table_filtered
 
