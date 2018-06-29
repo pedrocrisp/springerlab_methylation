@@ -31,14 +31,22 @@ minCG_cov <- args[10]
 minCG_cov
 
 #debugging
-#sample = "F4-16_F5-16_Index2_S35"
+#sample = "PAC004_root_HC_mother"
 #data_folder = "analysis/tiles"
-#tile_list = "analysis_02_tiles_SeqCap_meta_140_samples/chh_2x_cov_80_sample_tile_list.tsv"
+#tile_list = FALSE
 #output_folder = "analysis/tiles_filtered"
+#minCHHs <- 4
+#minCHH_cov <- 2
+#minCHGs <- 4
+#minCHG_cov <- 2
+#minCGs <- 4
+#minCG_cov <- 2
+
 
 ###########################
 #setup
 library(tidyverse)
+library(purrr)
 # disable scientific notation
 old.scipen <- getOption("scipen")
 options(scipen=999)
@@ -72,9 +80,8 @@ mC_tile_table_filtered <-
 mC_tile_table %>%
   unite(tile, chr, start,end, sep=":", remove = F) %>%
   mutate(cov= CT/chh_sites) %>%
-  { ifelse(tile_list == FALSE , ., inner_join(tile_list, "tile") ) }  %>%
-  select(tile, ratio, chh_sites, cov) %>%
-  filter(chh_sites >= minCHHs, cov >= min_CHH_cov) %>%
+  when(tile_list == FALSE ~ ., ~ inner_join(tile_list, "tile")) %>%
+  filter(chh_sites >= minCHHs, cov >= minCHH_cov) %>%
   select(chr, start, C, CT, chh_sites)
 
 mC_tile_table_filtered
@@ -102,9 +109,9 @@ mC_tile_table_filtered <-
 mC_tile_table %>%
   unite(tile, chr, start,end, sep=":") %>%
   mutate(cov= CT/cg_sites) %>%
-  { ifelse(tile_list == FALSE , ., inner_join(tile_list, "tile") ) }  %>%
+  when(tile_list == FALSE ~ ., ~ inner_join(tile_list, "tile")) %>%
   select(tile, ratio, cg_sites, cov) %>%
-  filter(chg_sites >= minCGs, cov >= min_CG_cov) %>%
+  filter(chg_sites >= minCGs, cov >= minCG_cov) %>%
   select(chr, start, C, CT, cg_sites)
 
 mC_tile_table_filtered
@@ -132,9 +139,9 @@ mC_tile_table_filtered <-
 mC_tile_table %>%
   unite(tile, chr, start,end, sep=":") %>%
   mutate(cov= CT/chg_sites) %>%
-  { ifelse(tile_list == FALSE , ., inner_join(tile_list, "tile") ) }  %>%
+  when(tile_list == FALSE ~ ., ~ inner_join(tile_list, "tile")) %>%
   select(tile, ratio, chg_sites, cov) %>%
-  filter(chg_sites >= minCHGs, cov >= min_CHG_cov) %>%
+  filter(chg_sites >= minCHGs, cov >= minCHG_cov) %>%
   select(chr, start, C, CT, chg_sites)
 
 mC_tile_table_filtered
