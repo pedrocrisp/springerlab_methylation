@@ -110,8 +110,7 @@ mC_tile_table %>%
   unite(tile, chr, start,end, sep=":") %>%
   mutate(cov= CT/cg_sites) %>%
   when(tile_list == FALSE ~ ., ~ inner_join(tile_list, "tile")) %>%
-  select(tile, ratio, cg_sites, cov) %>%
-  filter(chg_sites >= minCGs, cov >= minCG_cov) %>%
+  filter(cg_sites >= minCGs, cov >= minCG_cov) %>%
   select(chr, start, C, CT, cg_sites)
 
 mC_tile_table_filtered
@@ -140,7 +139,6 @@ mC_tile_table %>%
   unite(tile, chr, start,end, sep=":") %>%
   mutate(cov= CT/chg_sites) %>%
   when(tile_list == FALSE ~ ., ~ inner_join(tile_list, "tile")) %>%
-  select(tile, ratio, chg_sites, cov) %>%
   filter(chg_sites >= minCHGs, cov >= minCHG_cov) %>%
   select(chr, start, C, CT, chg_sites)
 
