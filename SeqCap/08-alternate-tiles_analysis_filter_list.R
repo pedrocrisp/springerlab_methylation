@@ -107,7 +107,7 @@ mC_tile_table <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.C
 # CHECK IF THIS SHOULD ALSO REQUIRE CG COVERAGE FILTER
 mC_tile_table_filtered <-
 mC_tile_table %>%
-  unite(tile, chr, start,end, sep=":") %>%
+  unite(tile, chr, start,end, sep=":", remove = F) %>%
   mutate(cov= CT/cg_sites) %>%
   when(tile_list == FALSE ~ ., ~ inner_join(tile_list, "tile")) %>%
   filter(cg_sites >= minCGs, cov >= minCG_cov) %>%
@@ -136,7 +136,7 @@ mC_tile_table <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.C
 # CHECK IF THIS SHOULD ALSO REQUIRE CHG COVERAGE FILTER
 mC_tile_table_filtered <-
 mC_tile_table %>%
-  unite(tile, chr, start,end, sep=":") %>%
+  unite(tile, chr, start,end, sep=":", remove = F) %>%
   mutate(cov= CT/chg_sites) %>%
   when(tile_list == FALSE ~ ., ~ inner_join(tile_list, "tile")) %>%
   filter(chg_sites >= minCHGs, cov >= minCHG_cov) %>%
