@@ -7,7 +7,10 @@
 # Make redundant comparison eg A vs B and B vs A (twice as big as necessary)
 
 # To call
-# R -f ~/gitrepos/springerlab_methylation/SeqCap/11a-make_DMR_test_table.R --args ,sample_list.txt>
+# R -f ~/gitrepos/springerlab_methylation/SeqCap/11a-make_DMR_test_table.R --args <sample_list.txt>
+
+library(tidyverse)
+library(tools)
 
 ############ read in file stack
   # ARGS
