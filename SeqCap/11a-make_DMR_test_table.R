@@ -24,10 +24,6 @@ sample_list_to_analyse
 
 sample_list_subset <- read_tsv(sample_list_to_analyse, col_names = c("sample"))
 
-# list the folder with the individual sample outout files output from the make ratios script, should end "_ratio_annotated.csv"
-data_path <- paste0(data_folder, "/")   # path to the data
-
-
 # sample combinations
 DE_test_combos <- as.tibble(t(combn(pull(sample_list_subset, sample), 2)))
 colnames(DE_test_combos) <- c("sample1", "sample2")
