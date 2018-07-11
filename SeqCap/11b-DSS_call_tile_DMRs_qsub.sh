@@ -13,7 +13,7 @@ analysis/tiles_filtered_4C_2x
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=11a-DSS_call_tile_DMRs
+step=11b-DSS_call_tile_DMRs
 
 ######### Setup ################
 sample_list=$1
