@@ -117,8 +117,9 @@ dmls_bed_summarised
 dmlTest_calls <- as.tibble(dmlTest) %>% left_join(dmls_tbl, by = colnames(dmlTest))
 dmlTest_calls
 
-### write DMR calls (large) file
-write_tsv(dmlTest_calls, paste0(outFolder, "/", contrast, "_", context, "_dmlTest_calls.tsv"))
+### write DMR calls (large) file - only retain mu1 and mu2 cut of ther columns to make file smaller
+dmlTest_calls_out <- dmlTest_calls %>% select(chr, pos, mu1, mu2)
+write_tsv(dmlTest_calls_out, paste0(outFolder, "/", contrast, "_", context, "_dmlTest_calls.tsv"))
 
 ### write only DMR tiles
 write_csv(dmls_tbl, paste0(outFolder, "/", contrast, "_", context, "_DMRs.csv"))
@@ -199,8 +200,9 @@ dmls_bed_summarised
 dmlTest_calls <- as.tibble(dmlTest) %>% left_join(dmls_tbl, by = colnames(dmlTest))
 dmlTest_calls
 
-### write DMR calls (large) file
-write_tsv(dmlTest_calls, paste0(outFolder, "/", contrast, "_", context, "_dmlTest_calls.tsv"))
+### write DMR calls (large) file - only retain mu1 and mu2 cut of ther columns to make file smaller
+dmlTest_calls_out <- dmlTest_calls %>% select(chr, pos, mu1, mu2)
+write_tsv(dmlTest_calls_out, paste0(outFolder, "/", contrast, "_", context, "_dmlTest_calls.tsv"))
 
 ### write only DMR tiles
 write_csv(dmls_tbl, paste0(outFolder, "/", contrast, "_", context, "_DMRs.csv"))
@@ -278,11 +280,12 @@ dmls_bed_summarised
 
 ####### 4. Make results files and write out tables
 
-dmlTest_calls <- as.tibble(dmlTest) %>% left_join(dmls_tbl, by = colnames(dmlTest))
+dmlTest_calls <- as.tibble(dmlTest) %>% left_join(dmls_tbl, by = colnames(dmlTest)) 
 dmlTest_calls
 
-### write DMR calls (large) file
-write_tsv(dmlTest_calls, paste0(outFolder, "/", contrast, "_", context, "_dmlTest_calls.tsv"))
+### write DMR calls (large) file - only retain mu1 and mu2 cut of ther columns to make file smaller
+dmlTest_calls_out <- dmlTest_calls %>% select(chr, pos, mu1, mu2)
+write_tsv(dmlTest_calls_out, paste0(outFolder, "/", contrast, "_", context, "_dmlTest_calls.tsv"))
 
 ### write only DMR tiles
 write_csv(dmls_tbl, paste0(outFolder, "/", contrast, "_", context, "_DMRs.csv"))
