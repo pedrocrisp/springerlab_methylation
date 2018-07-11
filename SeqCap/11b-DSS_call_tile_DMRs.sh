@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=1:00:00,nodes=1:ppn=1,mem=20gb
+#PBS -l walltime=2:00:00,nodes=1:ppn=1,mem=20gb
 #PBS -N DSS_DMRs
 #PBS -r n
 #PBS -m abe
