@@ -56,12 +56,12 @@ context = "CG"
 #######  read in the files
 sample1_data <- read_tsv(file.path(path_to_data_files, paste0(sample1, "_BSMAP_out.txt.100.", context, "_filtered.txt")), col_names = c("chr", "pos", "X", "N", "sites"), skip = 1)
 sample1_data <- sample1_data %>% select("chr", "pos", "N", "X", "sites")
-sample1_data <- sample1_data %>% filter(chr == "Chr01")
+# sample1_data <- sample1_data %>% filter(chr == "Chr01")
 sample1_data
 
 sample2_data <- read_tsv(file.path(path_to_data_files, paste0(sample2, "_BSMAP_out.txt.100.", context, "_filtered.txt")), col_names = c("chr", "pos", "X", "N", "sites"), skip = 1)
 sample2_data <- sample2_data %>% select("chr", "pos", "N", "X", "sites")
-sample2_data <- sample2_data %>% filter(chr == "Chr01")
+# sample2_data <- sample2_data %>% filter(chr == "Chr01")
 sample2_data
 
 #######  1. create an object of BSseq class (requires bsseq Bioconductor package)
@@ -134,7 +134,7 @@ CG_DMRs <- dmls_tbl %>% mutate(tile = paste0(chr, "_", pos), DMR = ifelse(diff >
 
 CG_mu <- dmls_tbl %>%
   mutate(tile = paste0(chr, "_", pos), DMR = ifelse(diff > 0, "hyper", "hypo")) %>%
-  mutate(DMR_type = paste0(context, ".", "DMR")) %>%
+  mutate(DMR_type = paste0(context, ".", DMR)) %>%
   select(tile, DMR_type, mu1, mu2)
 
 #######  #######
@@ -146,12 +146,12 @@ context = "CHG"
 #######  read in the files
 sample1_data <- read_tsv(file.path(path_to_data_files, paste0(sample1, "_BSMAP_out.txt.100.", context, "_filtered.txt")), col_names = c("chr", "pos", "X", "N", "sites"), skip = 1)
 sample1_data <- sample1_data %>% select("chr", "pos", "N", "X", "sites")
-sample1_data <- sample1_data %>% filter(chr == "Chr01")
+# sample1_data <- sample1_data %>% filter(chr == "Chr01")
 sample1_data
 
 sample2_data <- read_tsv(file.path(path_to_data_files, paste0(sample2, "_BSMAP_out.txt.100.", context, "_filtered.txt")), col_names = c("chr", "pos", "X", "N", "sites"), skip = 1)
 sample2_data <- sample2_data %>% select("chr", "pos", "N", "X", "sites")
-sample2_data <- sample2_data %>% filter(chr == "Chr01")
+# sample2_data <- sample2_data %>% filter(chr == "Chr01")
 sample2_data
 
 #######  1. create an object of BSseq class (requires bsseq Bioconductor package)
@@ -216,7 +216,7 @@ CHG_DMRs <- dmls_tbl %>% mutate(tile = paste0(chr, "_", pos), DMR = ifelse(diff 
 
 CHG_mu <- dmls_tbl %>%
   mutate(tile = paste0(chr, "_", pos), DMR = ifelse(diff > 0, "hyper", "hypo")) %>%
-  mutate(DMR_type = paste0(context, ".", "DMR")) %>%
+  mutate(DMR_type = paste0(context, ".", DMR)) %>%
   select(tile, DMR_type, mu1, mu2)
 
 #######  #######
@@ -228,12 +228,12 @@ context = "CHH"
 #######  read in the files
 sample1_data <- read_tsv(file.path(path_to_data_files, paste0(sample1, "_BSMAP_out.txt.100.", context, "_filtered.txt")), col_names = c("chr", "pos", "X", "N", "sites"), skip = 1)
 sample1_data <- sample1_data %>% select("chr", "pos", "N", "X", "sites")
-sample1_data <- sample1_data %>% filter(chr == "Chr01")
+# sample1_data <- sample1_data %>% filter(chr == "Chr01")
 sample1_data
 
 sample2_data <- read_tsv(file.path(path_to_data_files, paste0(sample2, "_BSMAP_out.txt.100.", context, "_filtered.txt")), col_names = c("chr", "pos", "X", "N", "sites"), skip = 1)
 sample2_data <- sample2_data %>% select("chr", "pos", "N", "X", "sites")
-sample2_data <- sample2_data %>% filter(chr == "Chr01")
+# sample2_data <- sample2_data %>% filter(chr == "Chr01")
 sample2_data
 
 #######  1. create an object of BSseq class (requires bsseq Bioconductor package)
@@ -488,6 +488,17 @@ pdf(paste0(outFolder_analysis, "/", contrast,"_DMRs_mC_values_distribution.pdf")
 ggplot(DMR_lists, aes(mC, colour = DMR_type)) +
   geom_density() +
   theme_minimal() +
-  labs(title = "DMRs_mC_values_distribution") +
+  labs(title = "DMRs mC values distribution") +
   scale_color_ptol()
+dev.off()
+
+DMR_lists_2 <- DMR_lists %>% separate(DMR_type, into = c("context", "direction"))
+
+pdf(paste0(outFolder_analysis, "/", contrast,"_DMRs_mC_values_distribution_facet.pdf"), width = 10, height = 7)
+ggplot(DMR_lists_2, aes(mC, colour = sample)) +
+  geom_density() +
+  theme_minimal() +
+  labs(title = "DMRs mC values distribution") +
+  scale_color_ptol() +
+  facet_grid(direction ~ context)
 dev.off()
