@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=12:00:00,nodes=1:ppn=1,mem=24gb
+#PBS -l walltime=24:00:00,nodes=1:ppn=1,mem=34gb
 #PBS -N fix-sort
 #PBS -r n
 #PBS -m abe
@@ -34,7 +34,7 @@ echo working dir is now $PWD
 ########## Modules #################
 
 #bsmap requires samtools < 1.0.0
-# module load samtools/0.1.18 # no longer an available module 
+# module load samtools/0.1.18 # no longer an available module
 PATH=~/software/bsmap-2.74/samtools:$PATH
 
 ########## Set up dirs #################
