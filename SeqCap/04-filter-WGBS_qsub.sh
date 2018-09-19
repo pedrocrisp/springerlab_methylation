@@ -15,8 +15,10 @@ step=04-filter-WGBS
 
 ######### Setup ################
 sample_list=$1
+max_insert_size=$2
+ref_seq_index=$3
 
-if [ "$#" -lt "1" ]
+if [ "$#" -lt "3" ]
 then
 echo $usage
 exit -1
@@ -72,5 +74,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list} \
+-v LIST=${sample_list},max_insert_size=$max_insert_size,ref_seq_index=$ref_seq_index \
 $script_to_qsub
