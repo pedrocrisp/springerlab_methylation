@@ -81,6 +81,7 @@ mkdir -p bsmapped_filtered
         O=bsmapped_filtered/${ID}_sorted_MarkDup.bam \
         METRICS_FILE=bsmapped_filtered/${ID}_MarkDupMetrics.txt \
         ASSUME_SORTED=true \
+        CREATE_INDEX=False \
         REMOVE_DUPLICATES=true
 
         # keep properly paired reads using bamtools package
