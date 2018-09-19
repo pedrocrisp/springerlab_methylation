@@ -72,12 +72,21 @@ mkdir -p bsmapped_filtered
         #OUTPUT=bsmapped/${ID}_sorted.bam \
         #SORT_ORDER=coordinate
 
+        # filter out reads with TLEN (PE insert size greater than $max_insert_size)
+        # this step is a bit of a waste considering it could be piped in the previous #03, oh well
+        # -t example -t ~/ws/refseqs/barley/Hordeum_vulgare.Hv_IBSC_PGSB_v2.dna.toplevel.fa.fai
+
+        samtools view bsmapped/${ID}_sorted.bam |
+        awk -v max_size="$max_insert_size" \
+        'function abs(v) {return v < 0 ? -v : v} abs($9) < max_size' |
+        samtools view -b -t $ref_seq_index > bsmapped_filtered/${ID}_sorted.bam
+
         #mark duplicates
         #requires sorted input - using samtools sort in bsmap step (co-ordinate sorted)
         # if co-ordinate sorted then pairs where the mate is unmapped or has secondary alignment are not marked as duplicate
         # ASSUME_SORTED=true because sorting performed with samtools but samtools doesnt seem to add this flag to the headder
         java -jar /home/springer/pcrisp/software/picard.jar MarkDuplicates \
-        I=bsmapped/${ID}_sorted.bam \
+        I=bsmapped_filtered/${ID}_sorted.bam \
         O=bsmapped_filtered/${ID}_sorted_MarkDup.bam \
         METRICS_FILE=bsmapped_filtered/${ID}_MarkDupMetrics.txt \
         ASSUME_SORTED=true \
