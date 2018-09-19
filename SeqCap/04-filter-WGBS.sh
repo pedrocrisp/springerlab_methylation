@@ -37,9 +37,7 @@ echo working dir is now $PWD
 module load java
 #module load bedtools
 module load bamtools
-#bsmap requires samtools < 1.0.0
-#module load samtools/0.1.18
-PATH=~/software/bsmap-2.74/samtools:$PATH
+module load samtools/1.7 
 
 ########## Set up dirs #################
 
