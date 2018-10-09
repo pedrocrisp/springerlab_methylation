@@ -22,7 +22,7 @@ fi
 fa=$1
 
 #basename
-fqname="$(basename $fa)"
+faname="$(basename $fa)"
 
 echo $faname
 
@@ -39,4 +39,4 @@ outputFile="${faname%%.*}_CHH.txt"
 cat $fa | seqkit locate -i -p "C[ACT][ACT]" | cut -f 1-2,4-6 > $outputFile
 
 # to run
-# find . -name "*.fastq." | parallel -j 20 bash ~/gitrepos/springerlab_methylation/utils/context_sites.sh {}
+# find . -name "*.fastq." | parallel -j 20 bash ~/gitrepos/springerlab_methylation/utils/context_sites.sh {} >> $(date +%Y%m%d-%H%M%S)_make_sites.log 2>&1
