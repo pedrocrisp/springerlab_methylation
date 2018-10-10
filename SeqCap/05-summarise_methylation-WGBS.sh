@@ -32,8 +32,9 @@ cd "$PBS_O_WORKDIR"
 echo working dir is now $PWD
 
 ########## Modules #################
-
-module load python2/2.7.8
+# python 2.7.8 no longer available
+# module load python2/2.7.8
+module load python2/2.7.12_anaconda4.2
 #module load java
 module load bedtools
 #module load bamtools
