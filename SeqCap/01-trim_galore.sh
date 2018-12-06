@@ -80,11 +80,12 @@ else
     --phred33 \
     --fastqc \
     --fastqc_args "--noextract --outdir $fastqcfolder" \
-    -o $trimmedfolder --paired reads/${ID}_R1_001.fastq
+    -o $trimmedfolder \
+    reads/${ID}_R1_001.fastq
 
     #compress original reads again
     gzip reads/${ID}_R1_001.fastq
 
-fi 
+fi
 
 echo Done trimming
