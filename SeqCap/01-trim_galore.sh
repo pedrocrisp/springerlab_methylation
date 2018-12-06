@@ -73,7 +73,7 @@ else
 echo "assuming single end"
 
 #uncompress reads because trim_galore throws the error `gzip: stdout: Broken pipe` if I input .gz files
-gunzip reads/${ID}_R1_001.fastq.gz
+# gunzip reads/${ID}_R1_001.fastq.gz
 
 ########## Run #################
 
