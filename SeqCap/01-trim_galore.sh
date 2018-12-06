@@ -59,11 +59,7 @@ gunzip reads/${ID}_R1_001.fastq.gz
 gunzip reads/${ID}_R2_001.fastq.gz
 
 ########## Run #################
-trim_galore \
---phred33 \
---fastqc \
---fastqc_args "--noextract --outdir $fastqcfolder" \
--o $trimmedfolder --paired reads/${ID}_R1_001.fastq reads/${ID}_R2_001.fastq
+trim_galore --phred33 --fastqc --fastqc_args "--noextract --outdir $fastqcfolder" -o $trimmedfolder --paired reads/${ID}_R1_001.fastq reads/${ID}_R2_001.fastq
 
 #compress original reads again
 gzip reads/${ID}_R1_001.fastq
@@ -73,7 +69,7 @@ else
 echo "assuming single end"
 
 #uncompress reads because trim_galore throws the error `gzip: stdout: Broken pipe` if I input .gz files
-# gunzip reads/${ID}_R1_001.fastq.gz
+gunzip reads/${ID}_R1_001.fastq.gz
 
 ########## Run #################
 
