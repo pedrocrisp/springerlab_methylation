@@ -72,8 +72,8 @@ gzip reads/${ID}_R2_001.fastq
 else
 echo "assuming single end"
 
-    #uncompress reads because trim_galore throws the error `gzip: stdout: Broken pipe` if I input .gz files
-#gunzip reads/${ID}_R1_001.fastq.gz
+#uncompress reads because trim_galore throws the error `gzip: stdout: Broken pipe` if I input .gz files
+gunzip reads/${ID}_R1_001.fastq.gz
 
     ########## Run #################
 trim_galore \
