@@ -77,8 +77,7 @@ echo "assuming single end"
 
 ########## Run #################
 
-trim_galore --phred33 --fastqc --fastqc_args "--noextract --outdir $fastqcfolder" \
--o $trimmedfolder reads/${ID}_R1_001.fastq
+trim_galore --phred33 --fastqc --fastqc_args "--noextract --outdir $fastqcfolder" -o $trimmedfolder reads/${ID}_R1_001.fastq
 
 #compress original reads again
 gzip reads/${ID}_R1_001.fastq
