@@ -94,7 +94,7 @@ else
 
     #compress original reads again
     gzip reads/${ID}_R1_001.fastq
-fi 
+fi
 
 
 ########## Run #################
@@ -107,7 +107,8 @@ trim_galore \
 --fastqc_args "--noextract --outdir $fastqcfolder" \
 --clip_R1 20 \
 --clip_R2 20 \
--o $trimmedfolder --paired reads/${ID}_R1_001.fastq reads/${ID}_R2_001.fastq
+-o $trimmedfolder \
+reads/${ID}_R1_001.fastq reads/${ID}_R2_001.fastq
 
 #compress original reads again
 gzip reads/${ID}_R1_001.fastq
