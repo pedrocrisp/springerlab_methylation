@@ -60,6 +60,11 @@ mkdir -p bsmapped
         # -p 8: 8 threads/cores
         # -q 20: trim to q20
 
+# check if single or paired end by looking for R2 file
+if [ -e "trimmed/${ID}_R2_001_val_2.fq" ]; then
+
+echo "paired reads"
+
 bsmap \
 -a trimmed/${ID}_R1_001_val_1.fq \
 -b trimmed/${ID}_R2_001_val_2.fq \
@@ -71,7 +76,19 @@ bsmap \
 -q 20 \
 -A $adapter_seq
 
-echo total reads in sam
+else
+echo "assuming single end"
 
-# consider calculating how many reads were used for mapping...
-# samtools view -c bsmapped/${ID}.sam
+bsmap \
+-a trimmed/${ID}_R1_*.fq \
+-d ${genome_reference} \
+-o bsmapped/${ID}.sam \
+-v 5 \
+-r 0 \
+-p 8 \
+-q 20 \
+-A $adapter_seq
+
+fi
+
+echo Done mapping
