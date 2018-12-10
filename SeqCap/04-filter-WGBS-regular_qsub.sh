@@ -6,8 +6,9 @@ usage="USAGE:
 bash 04-filter_qsub.sh <sample_list.txt> <paired_end>
 for example:
 bash \
-/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/04-filter_qsub.sh \
-single_sample.txt yes
+/home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/04-filter-WGBS-regular_qsub.sh \
+single_sample.txt \
+yes
 "
 
 #define stepo in the pipeline - should be the same name as the script
