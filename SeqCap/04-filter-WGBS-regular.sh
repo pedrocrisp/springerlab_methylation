@@ -52,6 +52,9 @@ echo sample being mapped is $ID
 cd analysis
 mkdir -p bsmapped_filtered
 
+if [ "$paired_end" == "yes" ]
+then
+
 ########## Run #################
 
         # fix improperly paird reads - specifically discordant read pairs that are incorrectly mraked as concordant by bsmap
@@ -102,3 +105,28 @@ mkdir -p bsmapped_filtered
         #index bam
         # index
         samtools index bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
+
+elif [ "$paired_end" == "no" ]
+then
+
+# remove duplicate
+java -jar /home/springer/pcrisp/software/picard.jar MarkDuplicates \
+I=bsmapped/${ID}_sorted.bam \
+O=bsmapped_filtered/${ID}_sorted_MarkDup.bam \
+METRICS_FILE=bsmapped_filtered/${ID}_MarkDupMetrics.txt \
+ASSUME_SORTED=true \
+CREATE_INDEX=False \
+REMOVE_DUPLICATES=true
+
+# rename to keep script naming convention consistent
+mv bsmapped_filtered/${ID}_sorted_MarkDup.bam bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
+
+# index
+samtools index bsmapped_filtered/${ID}_sorted_MarkDup_pairs_clipOverlap.bam
+
+
+else
+
+echo "library type not specified correctly, please indicate yes for PE or no for SE"
+
+fi
