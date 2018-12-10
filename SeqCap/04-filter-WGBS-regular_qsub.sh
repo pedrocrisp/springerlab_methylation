@@ -3,11 +3,11 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 04-filter_qsub.sh <sample_list.txt>
+bash 04-filter_qsub.sh <sample_list.txt> <paired_end>
 for example:
 bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/04-filter_qsub.sh \
-single_sample.txt
+single_sample.txt yes
 "
 
 #define stepo in the pipeline - should be the same name as the script
@@ -15,13 +15,14 @@ step=04-filter-WGBS-regular
 
 ######### Setup ################
 sample_list=$1
+paried_end=$2
 
-if [ "$#" -lt "1" ]
+if [ "$#" -lt "2" ]
 then
 echo $usage
 exit -1
 else
-echo "Submitting samples listed in '$sample_list' for trimming"
+echo "Submitting samples listed in '$sample_list' for filtering"
 cat $sample_list
 fi
 
@@ -72,5 +73,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list} \
+-v LIST=${sample_list},paried_end=$paried_end \
 $script_to_qsub
