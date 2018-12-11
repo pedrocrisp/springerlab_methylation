@@ -16,7 +16,7 @@ step=04-filter-WGBS-regular
 
 ######### Setup ################
 sample_list=$1
-paried_end=$2
+paired_end=$2
 
 if [ "$#" -lt "2" ]
 then
@@ -74,5 +74,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},paried_end=$paried_end \
+-v LIST=${sample_list},paired_end=$paired_end \
 $script_to_qsub
