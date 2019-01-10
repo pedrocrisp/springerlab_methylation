@@ -166,44 +166,44 @@ mkdir -p ConversionRate
         awk -F$"\\t" -v ID=$ID "$awk_make_bedGraph_subcontext" -
 
         #Make bigWigs per context
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CG.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_CG.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CHG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CHG.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_CHG.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CHH.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_CHH.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_CHH.bigWig"
 
         #Make bigWigs per CHG sub context
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CG.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CG.bigWig"
 
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CAG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CAG.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CAG.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CCG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CCG.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CCG.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTG.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CTG.bigWig"
 
         #Make bigWigs per CHH sub context
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CAA.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CAA.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CAA.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CAC.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CAC.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CAC.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CAT.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CAT.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CAT.bigWig"
 
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CCA.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CCA.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CCA.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CCC.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CCC.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CCC.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CCT.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CCT.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CCT.bigWig"
 
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTA.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTA.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CTA.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTC.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTC.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CTC.bigWig"
-        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+        bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bigWig"
 
         ########################
@@ -242,18 +242,18 @@ mkdir -p ConversionRate
 
                 ## Make bigWigs per context
                 # bigWigs for each individual induction with its own genome reference and plasmid
-                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CG.bedGraph" ${chrom_sizes_file} \
                 "BSMAPratio/${ID}_BSMAP_out_+_CG.bigWig"
-                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CHG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CHG.bedGraph" ${chrom_sizes_file} \
                 "BSMAPratio/${ID}_BSMAP_out_+_CHG.bigWig"
-                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CHH.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_+_CHH.bedGraph" ${chrom_sizes_file} \
                 "BSMAPratio/${ID}_BSMAP_out_+_CHH.bigWig"
 
-                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CG.bedGraph" ${chrom_sizes_file} \
                 "BSMAPratio/${ID}_BSMAP_out_-_CG.bigWig"
-                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CHG.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CHG.bedGraph" ${chrom_sizes_file} \
                 "BSMAPratio/${ID}_BSMAP_out_-_CHG.bigWig"
-                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CHH.bedGraph" ~/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
+                bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_-_CHH.bedGraph" ${chrom_sizes_file} \
                 "BSMAPratio/${ID}_BSMAP_out_-_CHH.bigWig"
 
         #remove bedGraph it is large and not really required
