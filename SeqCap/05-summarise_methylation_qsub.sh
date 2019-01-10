@@ -9,6 +9,7 @@ bash \
 /home/springer/pcrisp/gitrepos/springerlab_methylation/SeqCap/05-summarise_methylation_qsub.sh \
 single_sample.txt \
 /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa \
+/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.chrom.sizes \
 /home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
 "
 
@@ -18,8 +19,8 @@ step=05-summarise_methylation
 ######### Setup ################
 sample_list=$1
 genome_reference=$2
-#CalculateHsMetrics_reference=$3
-intersect_regions_ref=$3
+chrom_sizes_file=$3
+intersect_regions_ref=$4
 if [ "$#" -lt "3" ]
 then
 echo $usage
@@ -79,5 +80,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},genome_reference=$genome_reference,intersect_regions_ref=${intersect_regions_ref} \
+-v LIST=${sample_list},genome_reference=${genome_reference},chrom_sizes_file=${chrom_sizes_file},intersect_regions_ref=${intersect_regions_ref} \
 $script_to_qsub
