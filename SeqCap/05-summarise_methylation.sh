@@ -333,6 +333,8 @@ mkdir -p ConversionRate
         # *** Think about this method: it will be swayed by high count sites - should we average the ratios at each site?
         # Note that bsmap recomends using the eff_CT_counts (field #$7) which considers if there is a mismatch with the reverse strand. Check this.
         # However, Qing recommends just using the CT count (field #$9) becasue the reverse strand could equally be a sequencing error.
+
+        # output data columns "chr", "start", "stop", "context", "sites", "mC", "CT"
         awk \
         -F$"\\t" 'BEGIN {OFS = FS}
         {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8;
