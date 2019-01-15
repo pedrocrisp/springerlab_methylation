@@ -3,7 +3,7 @@
 set -xeuo pipefail
 
 usage="USAGE:
-bash 05-bowtie2_batch_qsub.sh <sample_list.txt> <reads_folder> <bt2_threads> <bt2_genome.fa> <multimapping_rate>"
+bash 05-bowtie2_batch_qsub.sh <sample_list.txt> <reads_folder> <bt2_threads> <bt2_genome.fa> <multimapping_rate> <MAPQ_threshold>"
 #eg /home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel.fa
 
 #define stepo in the pipeline - should be the same name as the script
@@ -15,7 +15,8 @@ reads_folder=$2
 bt2_threads=$3
 bt2_genome=$4
 multimapping_rate=$5
-if [ "$#" -lt "5" ]
+MAPQ_threshold=$6
+if [ "$#" -lt "6" ]
 then
 echo $usage
 exit -1
@@ -68,7 +69,7 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},reads_folder=$reads_folder,bt2_threads=$bt2_threads,bt2_genome=$bt2_genome,multimapping_rate=$multimapping_rate \
+-v LIST=${sample_list},reads_folder=$reads_folder,bt2_threads=$bt2_threads,bt2_genome=$bt2_genome,multimapping_rate=$multimapping_rate,MAPQ_threshold=$MAPQ_threshold \
 $script_to_qsub
 
 # to run
