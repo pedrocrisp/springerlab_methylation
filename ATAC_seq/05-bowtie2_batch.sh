@@ -128,8 +128,8 @@ fi
 
 
 ###### sort and index
-# -q 5 MAPQ >= 5
-samtools view -q 5 -b -@ 8 $outsam | samtools sort -m 8 -@ 8 -o $outbam
+# filtering: -q 10 is MAPQ >= 10; 1 in 10 chance mapping location is wrong for example
+samtools view -q $MAPQ_threshold -b -@ 8 $outsam | samtools sort -m 8 -@ 8 -o $outbam
 
 #Make an index of the sorted bam file
 samtools index ${outbam}
