@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=6:00:00,nodes=1:ppn=1,mem=50gb
+#PBS -l walltime=12:00:00,nodes=1:ppn=1,mem=50gb
 #PBS -N 05.2-analysis-contextMeans
 #PBS -r n
 #PBS -m abe
