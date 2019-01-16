@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=8:00:00,nodes=1:ppn=1,mem=50gb
+#PBS -l walltime=12:00:00,nodes=1:ppn=1,mem=80gb
 #PBS -N tiles_bigWigs
 #PBS -r n
 #PBS -m abe
