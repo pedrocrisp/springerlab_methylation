@@ -55,6 +55,7 @@ mkdir -p $outdir
 # run on default setting
 # requires a centers file generated with the script ~/software/hotspot2-2.1.1/scripts/extractCenterSites.sh
 # note that the chrom_sizes files is a bed file and requires start column
+# to see usage: bash ~/software/hotspot2-2.1.1/scripts/hotspot2.sh -h
 
 bash ~/software/hotspot2-2.1.1/scripts/hotspot2.sh \
 -c $chrom_sizes \
