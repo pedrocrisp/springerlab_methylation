@@ -60,5 +60,5 @@ mkdir -p $outdir
 bash ~/software/hotspot2-2.1.1/scripts/hotspot2.sh \
 -c $chrom_sizes \
 -C $centers_starch \
-${bam_folder}/${ID}_sorted.bam \
+${bam_folder}/${ID}*.bam \
 $outdir
