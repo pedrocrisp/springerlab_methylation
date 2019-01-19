@@ -45,6 +45,9 @@ ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 echo sample being mapped is $ID
 #sample_dir="${reads_folder}/${ID}"
 
+# enter analysis folder
+cd analysis
+
 # I just changed this bit to deal with nested and non-nested folder structures - it may break old analyses?...
 fastqs="$(find $reads_folder -type f -name ${ID}*.fq*)"
 # convert to array to count elements
