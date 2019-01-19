@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=24:00:00,nodes=1:ppn=6,mem=20gb
+#PBS -l walltime=24:00:00,nodes=1:ppn=6,mem=40gb
 #PBS -N hotspot2-peaks
 #PBS -r n
 #PBS -m abe
@@ -45,7 +45,7 @@ ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 echo sample being mapped is $ID
 #sample_dir="${reads_folder}/${ID}"
 
-#make adaligned folder bsmaped
+#make out folder
 cd analysis
 outdir=${bam_folder}_hotspot_peaks
 mkdir -p $outdir
