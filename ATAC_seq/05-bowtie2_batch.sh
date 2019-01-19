@@ -1,6 +1,5 @@
 #!/bin/bash -l
 #PBS -l walltime=48:00:00,nodes=1:ppn=8,mem=80gb
-#PBS -q ram256g
 #PBS -N bowtie2_batch
 #PBS -r n
 #PBS -m abe
