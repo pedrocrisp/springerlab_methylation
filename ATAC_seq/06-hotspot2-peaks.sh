@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -l walltime=24:00:00,nodes=1:ppn=6,mem=40gb
+#PBS -l walltime=48:00:00,nodes=1:ppn=8,mem=80gb
 #PBS -N hotspot2-peaks
 #PBS -r n
 #PBS -m abe
