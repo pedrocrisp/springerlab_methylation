@@ -335,6 +335,7 @@ mkdir -p ConversionRate
         # However, Qing recommends just using the CT count (field #$9) becasue the reverse strand could equally be a sequencing error.
 
         # output data columns "chr", "start", "stop", "context", "sites", "mC", "CT"
+        # note "sites" is sites with data, if C has no data it will not appear in the output, therefore not count towards the number of sites
         awk \
         -F$"\\t" 'BEGIN {OFS = FS}
         {mC[$14"\\t"$15"\\t"$16"\\t"$5] += $8;
