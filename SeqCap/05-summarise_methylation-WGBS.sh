@@ -1,9 +1,11 @@
 #!/bin/bash -l
-#PBS -l walltime=48:00:00,nodes=1:ppn=1,mem=80gb
+#PBS -l walltime=24:00:00,nodes=1:ppn=1,mem=60gb
 #PBS -N summarise_methylation-WGBS
 #PBS -r n
 #PBS -m abe
 #PBS -M pcrisp@umn.edu
+
+# for barley increase walltime to 48hr + 80 Gb
 
 ########## QC #################
 set -xeuo pipefail
