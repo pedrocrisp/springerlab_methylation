@@ -46,7 +46,8 @@ echo sample being mapped is $ID
 echo data folder is $data_folder
 echo tile list is $tile_list
 
-echo min A percent for CHH is $minCHH_A_percent and coverage $minCHH_GA_cov
+echo min A percent CHH is $minCHH_A_percent
+echo min CHH GA coverage $minCHH_GA_cov
 
 ########## Run #################
 
