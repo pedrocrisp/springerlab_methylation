@@ -69,7 +69,7 @@ for my $C (sort {$a <=> $b} keys %dat) {
 			my $cgfrac = ($dat{$C}->{$W}->{'CG'}->{'C'} / $dat{$C}->{$W}->{'CG'}->{'CT'});
 			print CGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\t", $cgfrac, "\t", $dat{$C}->{$W}->{'CG'}->{'G'}, "\t", $dat{$C}->{$W}->{'CG'}->{'GA'}, "\n";
 		}else{
-			print CGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\t", "\tNA", "\t", $dat{$C}->{$W}->{'CG'}->{'G'}, "\t", $dat{$C}->{$W}->{'CG'}->{'GA'}, "\n";
+			print CGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CG'}->{'CT'}, "\tNA", "\t", $dat{$C}->{$W}->{'CG'}->{'G'}, "\t", $dat{$C}->{$W}->{'CG'}->{'GA'}, "\n";
 		}
 
 		# CHG output
@@ -77,7 +77,7 @@ for my $C (sort {$a <=> $b} keys %dat) {
 			my $chgfrac = ($dat{$C}->{$W}->{'CHG'}->{'C'} / $dat{$C}->{$W}->{'CHG'}->{'CT'});
 			print CHGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'CT'}, "\t", $chgfrac, "\t", $dat{$C}->{$W}->{'CHG'}->{'G'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'GA'}, "\n";
 		}else{
-			print CHGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'CT'}, "\t", "\tNA", "\t", $dat{$C}->{$W}->{'CHG'}->{'G'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'GA'}, "\n";
+			print CHGOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHG'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'CT'}, "\tNA", "\t", $dat{$C}->{$W}->{'CHG'}->{'G'}, "\t", $dat{$C}->{$W}->{'CHG'}->{'GA'}, "\n";
 		}
 
 		# CHH output
@@ -85,7 +85,7 @@ for my $C (sort {$a <=> $b} keys %dat) {
 			my $chhfrac = ($dat{$C}->{$W}->{'CHH'}->{'C'} / $dat{$C}->{$W}->{'CHH'}->{'CT'});
 			print CHHOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHH'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'CT'}, "\t", $chhfrac, "\t", $dat{$C}->{$W}->{'CHH'}->{'G'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'GA'}, "\n";
 		}else{
-			print CHHOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHH'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'CT'}, "\t", "\tNA", "\t", $dat{$C}->{$W}->{'CHH'}->{'G'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'GA'}, "\n";
+			print CHHOUT $C, "\t", ($W * $WINDOW), "\t", (($W + 1) * $WINDOW) , "\t", $dat{$C}->{$W}->{'CHH'}->{'sites'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'C'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'CT'}, "\tNA", "\t", $dat{$C}->{$W}->{'CHH'}->{'G'}, "\t", $dat{$C}->{$W}->{'CHH'}->{'GA'}, "\n";
 		}
 
 	}

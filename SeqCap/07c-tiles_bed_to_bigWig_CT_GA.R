@@ -26,6 +26,11 @@ old.scipen <- getOption("scipen")
 options(scipen=999)
 ###########################
 
+# debugging
+# sample = "PAC002_sport_HC_USA_64_15"
+# data_folder = "analysis/tiles_CT_GA"
+# reference_tile_file = "/home/springer/pcrisp/ws/refseqs/apple/apple_GDDH13v1-1_100bp_tiles_zBased_sites.txt"
+  
 #reference used to make amendments
 reference_tiles <- read_tsv(reference_tile_file, col_names = TRUE,
                             cols(
@@ -47,10 +52,15 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X1 = col_character(),
                               X2 = col_integer(),
                               X3 = col_integer(),
-                              X4 = col_number(),
+                              X4 = col_integer(),
                               X5 = col_integer(),
-                              X6 = col_integer()
+                              X6 = col_integer(),
+                              X7 = col_double(),
+                              X8 = col_integer(),
+                              X9 = col_integer()
                             ))
+
+print(broken_bedGraph, n= 20)
 
 colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio", "G", "GA")
 #remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
@@ -82,9 +92,12 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X1 = col_character(),
                               X2 = col_integer(),
                               X3 = col_integer(),
-                              X4 = col_number(),
+                              X4 = col_integer(),
                               X5 = col_integer(),
-                              X6 = col_integer()
+                              X6 = col_integer(),
+                              X7 = col_double(),
+                              X8 = col_integer(),
+                              X9 = col_integer()
                             ))
 colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio", "G", "GA")
 #remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
@@ -116,9 +129,12 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X1 = col_character(),
                               X2 = col_integer(),
                               X3 = col_integer(),
-                              X4 = col_number(),
+                              X4 = col_integer(),
                               X5 = col_integer(),
-                              X6 = col_integer()
+                              X6 = col_integer(),
+                              X7 = col_double(),
+                              X8 = col_integer(),
+                              X9 = col_integer()
                             ))
 colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio", "G", "GA")
 #remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
