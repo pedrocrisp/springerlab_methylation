@@ -30,7 +30,6 @@ minCHGs=$7
 minCHG_cov=$8
 minCGs=$9
 minCG_cov=$10
-
 minCHH_A_percent=$11
 minCHH_GA_cov=$12
 minCHG_A_percent=$13
@@ -95,5 +94,5 @@ cat $0 > ${log_folder}/qsub_runner.log
 qsub -t $qsub_t \
 -o ${log_folder}/${step}_o \
 -e ${log_folder}/${step}_e \
--v LIST=${sample_list},data_folder=$data_folder,tile_list=$tile_list,filter_suffix=$filter_suffix,minCHHs=$minCHHs,minCHH_cov=$minCHH_cov,minCHGs=$minCHGs,minCHG_cov=$minCHG_cov,minCGs=$minCGs,minCG_cov=$minCG_cov,minCHH_A_percent=$minCHH_A_percent,minCHH_GA_cov=$minCHH_GA_cov,minCHG_A_percent=$minCHG_A_percent,minCHG_GA_cov=$minCHG_GA_cov,minCG_A_percent=$minCG_A_percent,minCG_GA_cov=$minCG_GA_cov \
+-v LIST=${sample_list},data_folder=${data_folder},tile_list=${tile_list},filter_suffix=${filter_suffix},minCHHs=${minCHHs},minCHH_cov=${minCHH_cov},minCHGs=${minCHGs},minCHG_cov=${minCHG_cov},minCGs=${minCGs},minCG_cov=${minCG_cov},minCHH_A_percent=${minCHH_A_percent},minCHH_GA_cov=${minCHH_GA_cov},minCHG_A_percent=${minCHG_A_percent},minCHG_GA_cov=${minCHG_GA_cov},minCG_A_percent=${minCG_A_percent},minCG_GA_cov=${minCG_GA_cov} \
 $script_to_qsub
