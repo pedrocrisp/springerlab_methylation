@@ -46,11 +46,15 @@ echo sample being mapped is $ID
 echo data folder is $data_folder
 echo tile list is $tile_list
 
+echo min A percent for CHH is $minCHH_A_percent and coverage $minCHH_GA_cov
+
 ########## Run #################
 
         #Run R moudle to:
         # 1. make CHH coverage files for summary stats analysis
         R -f ~/gitrepos/springerlab_methylation/SeqCap/08b-alternate-tiles_analysis_filter_list_CT_GA.R \
-        --args ${ID} $data_folder $tile_list $output_folder $minCHHs $minCHH_cov $minCHGs $minCHG_cov $minCGs $minCG_cov $minCHH_A_percent $minCHH_GA_cov $minCHG_A_percent $minCHG_GA_cov $minCG_A_percent $minCG_GA_cov
+        --args ${ID} $data_folder $tile_list $output_folder \
+        $minCHHs $minCHH_cov $minCHGs $minCHG_cov $minCGs $minCG_cov \
+        $minCHH_A_percent $minCHH_GA_cov $minCHG_A_percent $minCHG_GA_cov $minCG_A_percent $minCG_GA_cov
 
 echo finished summarising

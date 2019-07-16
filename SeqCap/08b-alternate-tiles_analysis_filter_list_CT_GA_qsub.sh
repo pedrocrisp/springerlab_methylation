@@ -37,6 +37,8 @@ minCHG_GA_cov=$14
 minCG_A_percent=$15
 minCG_GA_cov=$16
 
+echo $minCHH_A_percent
+echo $minCHH_GA_cov
 
 if [ "$#" -lt "16" ]
 then
