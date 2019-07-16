@@ -13,7 +13,7 @@ single_sample.txt \
 "
 
 #define stepo in the pipeline - should be the same name as the script
-step=07C-tiles_bed_to_bigWig_CT_GA
+step=07c-tiles_bed_to_bigWig_CT_GA
 
 ######### Setup ################
 sample_list=$1
