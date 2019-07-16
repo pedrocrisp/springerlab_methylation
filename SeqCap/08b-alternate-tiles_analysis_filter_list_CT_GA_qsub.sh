@@ -30,12 +30,12 @@ minCHGs=$7
 minCHG_cov=$8
 minCGs=$9
 minCG_cov=$10
-minCHH_A_percent=$11
-minCHH_GA_cov=$12
-minCHG_A_percent=$13
-minCHG_GA_cov=$14
-minCG_A_percent=$15
-minCG_GA_cov=$16
+minCHH_A_percent=${11}
+minCHH_GA_cov=${12}
+minCHG_A_percent=${13}
+minCHG_GA_cov=${14}
+minCG_A_percent=${15}
+minCG_GA_cov=${16}
 
 echo $minCHH_A_percent
 echo $minCHH_GA_cov
