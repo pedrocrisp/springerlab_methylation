@@ -47,10 +47,12 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X1 = col_character(),
                               X2 = col_integer(),
                               X3 = col_integer(),
-                              X4 = col_number()
+                              X4 = col_number(),
+                              X5 = col_integer(),
+                              X6 = col_integer()
                             ))
 
-colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio", "G", "GA")
 #remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
 broken_bedGraph <- na.omit(broken_bedGraph)
 
@@ -67,7 +69,7 @@ rm(fixed_bedGraph2)
 
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
-fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, sites_with_data, cg_sites) %>% arrange(chr, start)
+fixed_bedGraph %>% select(chr, start, end, C, CT, G, GA, ratio, sites_with_data, cg_sites) %>% arrange(chr, start)
 write.table(fixed_bedGraph3, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CG.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
 
@@ -80,9 +82,11 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X1 = col_character(),
                               X2 = col_integer(),
                               X3 = col_integer(),
-                              X4 = col_number()
+                              X4 = col_number(),
+                              X5 = col_integer(),
+                              X6 = col_integer()
                             ))
-colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio", "G", "GA")
 #remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
 broken_bedGraph <- na.omit(broken_bedGraph)
 
@@ -99,7 +103,7 @@ rm(fixed_bedGraph2)
 
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
-fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, sites_with_data, chg_sites) %>% arrange(chr, start)
+fixed_bedGraph %>% select(chr, start, end, C, CT, G, GA, ratio, sites_with_data, chg_sites) %>% arrange(chr, start)
 write.table(fixed_bedGraph3, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHG.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
 
@@ -112,9 +116,11 @@ broken_bedGraph <- read_tsv(paste0(data_folder, "/", sample, "_BSMAP_out.txt.100
                               X1 = col_character(),
                               X2 = col_integer(),
                               X3 = col_integer(),
-                              X4 = col_number()
+                              X4 = col_number(),
+                              X5 = col_integer(),
+                              X6 = col_integer()
                             ))
-colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio")
+colnames(broken_bedGraph) <- c("chr", "start_zBased", "broken_end", "sites_with_data", "C", "CT", "ratio", "G", "GA")
 #remove NAs - this is necessary because the output from the perl script is any tile with data in any context per sample
 broken_bedGraph <- na.omit(broken_bedGraph)
 
@@ -131,6 +137,6 @@ rm(fixed_bedGraph2)
 
 #convert to one-based coordinate .txt file and sort
 fixed_bedGraph3 <-
-fixed_bedGraph %>% select(chr, start, end, C, CT, ratio, sites_with_data, chh_sites) %>% arrange(chr, start)
+fixed_bedGraph %>% select(chr, start, end, C, CT, G, GA, ratio, sites_with_data, chh_sites) %>% arrange(chr, start)
 write.table(fixed_bedGraph3, paste0(data_folder, "/", sample, "_BSMAP_out.txt.100.CHH.fixed.sorted.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 rm(fixed_bedGraph3)
