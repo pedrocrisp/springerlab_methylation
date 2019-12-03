@@ -114,13 +114,13 @@ samples.txt \
 /home/springer/pcrisp/ws/refseqs/maize/BSseqcapv2_specific_regions.bed
 ```
 
-output sites file: in folder BSMAPratio/*BSMAP_out.txt
+output sites file: in folder BSMAPratio/...BSMAP_out.txt
 
 chr     start end     strand  context ratio   eff_CT_count    C_count CT_count        rev_G_count     rev_GA_count    CI_lower        CI_upper
 1       489     490     +       CHG     0.250   8.00    2       8       0       0       0.071   0.591
 1       490     491     +       CG      0.875   8.00    7       8       0       0       0.529   0.978
 
-output capture or target list summary: in folder OnTargetCoverage/*_BSMAP_out_ontarget_mC.txt
+output capture or target list summary: in folder OnTargetCoverage/...BSMAP_out_ontarget_mC.txt
 Note: "sites" is sites with data, if C has no data it will not appear in the output, therefore not count towards the number of sites
 
 <chr> <start> <stop> <context> <sites> <mC> <CT>
