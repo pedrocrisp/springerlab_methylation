@@ -60,7 +60,7 @@ module load bedtools/2.27.1
 
 cd ~/ws/refseqs/sorghum/sites
 
-genome=Sbicolor_454_v3.0.1
+genome=$genome_prefix
 echo $genome
 
 bedtools getfasta -fi ../${genome}.fa \
