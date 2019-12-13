@@ -58,8 +58,6 @@ R -f ~/gitrepos/springerlab_methylation/utils/create_genome_tile_mC_counts_tiles
 
 module load bedtools/2.27.1
 
-cd ~/ws/refseqs/sorghum/sites
-
 genome=$genome_prefix
 echo $genome
 
