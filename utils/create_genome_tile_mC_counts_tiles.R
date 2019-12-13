@@ -22,7 +22,7 @@ options(scipen=999)
 
 # use data table to make 100 bp tile reference
 # genome = "Sbicolor_454_v3.0.1"
-chrom.sizes_file <- read_tsv(paste0("../", genome, "chrom.sizes"), col_names = c("chr", "size"))
+chrom.sizes_file <- read_tsv(paste0("../", genome, ".chrom.sizes"), col_names = c("chr", "size"))
 
 # # This method creates a whole tile at the end of the chromosomes, eventhough it will often be a partial tile. 
 # # This tile get omitted in the next step by bedtools getfasta because it is beyond the end of the chromosome
