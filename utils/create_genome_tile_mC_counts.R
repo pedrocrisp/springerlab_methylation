@@ -19,6 +19,30 @@ library(tidyverse)
 old.scipen <- getOption("scipen")
 options(scipen=999)
 library(ggplot2)
+library(ggthemes)
+
+text_size_theme_8 <- theme(axis.text=element_text(size=8),
+                           axis.title=element_text(size=8),
+                           axis.text.x=element_text(angle = 45, hjust = 1),
+                           legend.title=element_text(size=8),
+                           legend.text=element_text(size=8))
+
+# text sizes
+text_size_theme_8_labels <- theme(axis.text=element_text(size=8),
+                                  axis.title=element_text(size=8),
+                                  axis.text.x=element_text(angle = 45, hjust = 1),
+                                  legend.title=element_text(size=8),
+                                  legend.text=element_text(size=8),
+                                  panel.background = element_rect(fill = "transparent") # bg of the panel
+                                  , plot.background = element_rect(fill = "transparent", color = NA) # bg of the plot
+                                  , panel.grid.major = element_blank() # get rid of major grid
+                                  , panel.grid.minor = element_blank() # get rid of minor grid
+                                  , legend.background = element_rect(fill = "transparent") # get rid of legend bg
+                                  , legend.box.background = element_rect(fill = "transparent")) # get rid of legend panel bg
+# magic geom_text conversion ratio
+# https://stackoverflow.com/questions/17311917/ggplot2-the-unit-of-size
+label_size = 25.4/72 * 8
+
 ###########################
 
 #########  3. Merge in C sites data ##########
@@ -209,7 +233,7 @@ reference_tiles_C_sites_bed
 #  9 Chr00   800   900       NA         4        26    NA
 # 10 Chr00   900  1000       NA         4        31    NA
 
-unique(reference_tiles_C_sites_bed$chr)
+# unique(reference_tiles_C_sites_bed$chr)
 
 # replace NAs with 0
 
@@ -298,7 +322,7 @@ reference_tiles_sites <- reference_tiles_sites %>%
   mutate(chr = factor(chr, levels = unique(chr))) %>%
   arrange(chr, start)
 
-unique(reference_tiles_sites$chr)
+# unique(reference_tiles_sites$chr)
 
 #write the one-based txt file
 write.table(reference_tiles_sites, paste0(genome, "_100bp_tiles_zBased_sites_counts_Ns.txt"), sep = "\t", quote = F, row.names = F)
@@ -330,6 +354,8 @@ summary_distro <- reference_tiles_2_bed %>%
   group_by(motif, sites) %>%
   summarise(freq = n())
 
+summary_distro
+
 write.table(summary_distro, paste0(genome, "_sites_counts_Ns_summary_distro.txt"), sep = "\t", quote = F, row.names = F, col.names = T)
 
 
@@ -339,7 +365,7 @@ g <- ggplot(summary_distro, aes(x = sites, y = freq, colour = motif)) +
   geom_line() +
   theme_minimal()
 
-g
+# g
 
 pdf(paste0(outFolder, "/summary_distro_line.pdf"), h = 3, w = 8)
 print(g)
@@ -366,14 +392,14 @@ g <- ggplot(plot_data, aes(x = motif, y = freq, fill = sites_range)) +
   scale_fill_viridis_d(option = "B", begin = 0.2) +
   theme_minimal()
 
-g
+# g
 
 pdf(paste0(outFolder, "/summary_distro_stack_bar.pdf"), h = 4, w = 5)
 print(g)
 dev.off()
 
 
-reference_tiles <- read_tsv(paste0(genome, "_tiles_zBased_sites.txt"), col_names = TRUE,
+reference_tiles <- read_tsv(paste0(genome, "_100bp_tiles_zBased_sites_counts.txt"), col_names = TRUE,
                             cols(
                               chr = col_character(),
                               start = col_integer(),
@@ -408,7 +434,7 @@ g <- ggplot(gather_Cs_summary, aes(x = factor(Cs), y = n_Cs, fill = context)) +
   labs(x = "number of Cs", y = "Number of tiles") +
   NULL
 
-print(g)
+# print(g)
 
 pdf(paste0(outFolder, "Cs_per_context_per_tile.pdf"), h = 4, w = 5)
 print(g)
@@ -416,7 +442,6 @@ dev.off()
 
 ######################
 # check distribution of zero site among tiles
-
 
 reference_tiles_zeros <- reference_tiles %>%
   mutate(CG = ifelse(cg_sites > 0, "CG", ""),
@@ -477,7 +502,7 @@ g <- ggplot(reference_tiles_zeros_summary_plot, aes(x = tile_sites, y = percenta
   geom_text(aes(label=percentage, vjust=-0.25), size = label_size) +
   text_size_theme_8_labels 
 
-g
+# g
 
 ggsave(paste0(outFolder, "/two_or_more_site_distribution.pdf"), h=4, w = 3)
 
@@ -511,7 +536,7 @@ g <- ggplot(reference_tiles_zeros_summary_plot, aes(x = tile_sites, y = percenta
   geom_text(aes(label=percentage, vjust=-0.25), size = label_size) +
   text_size_theme_8_labels 
 
-g
+# g
 
 ggsave(paste0(outFolder, "/four_or_more_site_distribution.pdf"), h=4, w = 3)
 
