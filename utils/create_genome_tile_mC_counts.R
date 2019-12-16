@@ -163,6 +163,7 @@ write.table(reference_tiles_2_bed, paste0(genome, "_100bp_tiles_zBased_sites_cou
 ## 4. Ref inc Ns - Reformat and merge in with whole tile file
 
 #########  4. Merge in C sites data ##########
+# genome = "Bdistachyon_314_v3.0"
 
 reference_tiles <- read_tsv(paste0(genome, "_100bp_tiles_zBased.txt"), col_names = TRUE,
                             cols(
@@ -333,7 +334,6 @@ write.table(reference_tiles_sites, paste0(genome, "_100bp_tiles_zBased_sites_cou
 reference_tiles_2_bed <- select(reference_tiles_sites, chr, start_zBased, end, cg_sites, chg_sites, chh_sites, N)
 
 write.table(reference_tiles_2_bed, paste0(genome, "_100bp_tiles_zBased_sites_counts_Ns.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
-
 
 ##############
 ##############
