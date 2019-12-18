@@ -91,7 +91,7 @@ mv -v analysis/BSMAPratio/*.bigWig analysis/BSMAPratio_bigWigs/
 # it is recommended that the bigwigs are coppied to s3 and deleted from home... too big otherwise, they can be regenerated if required
 
 # remaining files in BSMAPratio are quite large,
-# it seems to make more sense to delete this folder now and leep the bams (haf the size of *BSMAP_out.txt)
+# it seems to make more sense to delete this folder now and keep the bams (half the size of *BSMAP_out.txt)
 # ie these files could be easily recreated from bams
 # *BSMAP_out.bg
 # *BSMAP_out_subcontext.txt
