@@ -53,6 +53,8 @@ text_size_theme_8 <- theme(axis.text=element_text(size=8),
                            legend.title=element_text(size=8),
                            legend.text=element_text(size=8))
 
+sample_to_crunch
+
 ###########################
 # Module #1
 ###########################
@@ -63,6 +65,7 @@ dir.create(folder_prefix, showWarnings = F)
 
 out_dir = paste0(folder_prefix, "/mC_UMT_annotation")
 dir.create(out_dir, showWarnings = F)
+out_dir
 
 out_dir_beds = paste0(folder_prefix, "/mC_UMT_annotation_beds")
 dir.create(out_dir_beds, showWarnings = F)
@@ -105,6 +108,8 @@ CG <- read_tsv(paste0("tiles/", sample_to_crunch, "_BSMAP_out.txt.100.CG.fixed.s
   CT = col_integer(),
   ratio = col_double(),
   cg_sites = col_integer())) %>% mutate(cov = CT/cg_sites)
+
+CG
 
 g <- ggplot(CG, aes(x = cov)) +
   geom_density() +
