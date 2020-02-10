@@ -9,8 +9,8 @@
 args <- commandArgs(trailingOnly=TRUE)
 print(args)
 # trailingOnly=TRUE means that only your arguments are returned
-species_folder <- args[1]
-sample_list <- args[2]
+reference_100bp_tiles <- args[1]
+sample_to_crunch <- args[2]
 annotation_suffix <- args[3]
 chrom_sizes_path <- args[4]
 coverage_filter_min <- args[5]
@@ -20,19 +20,19 @@ UMR_percent <- args[8]
 
 ######## de bug
 # args
-sample_to_crunch = "Sbicolor_SRR3286309"
-reference_100bp_tiles = "~/ws/refseqs/sorghum/sites/Sbicolor_454_v3.0.1_100bp_tiles_zBased_sites_counts.txt"
+#reference_100bp_tiles = "~/ws/refseqs/sorghum/sites/Sbicolor_454_v3.0.1_100bp_tiles_zBased_sites_counts.txt"
+#sample_to_crunch = "Sbicolor_SRR3286309"
 
 # filter args
-coverage_filter_min = 3
-site_filter_min = 2
-MR_percent = 0.4
-UMR_percent = 0.1
-annotation_suffix = paste0("_mC_domains_II", 
-                           "_cov_",coverage_filter_min, 
-                           "_sites_",site_filter_min, 
-                           "_MR_",MR_percent,
-                           "_UMR_",UMR_percent)
+#coverage_filter_min = 3
+#site_filter_min = 2
+#MR_percent = 0.4
+#UMR_percent = 0.1
+#annotation_suffix = paste0("_mC_domains_II", 
+#                           "_cov_",coverage_filter_min, 
+#                           "_sites_",site_filter_min, 
+#                           "_MR_",MR_percent,
+#                           "_UMR_",UMR_percent)
 ########
 ###########################
 library(tidyverse)
