@@ -17,10 +17,10 @@ reference_100bp_tiles <- args[1]
 sample_to_crunch <- args[2]
 annotation_suffix <- args[3]
 chrom_sizes_path <- args[4]
-coverage_filter_min <- args[5]
-site_filter_min <- args[6]
-MR_percent <- args[7]
-UMR_percent <- args[8]
+coverage_filter_min <- as.double(args[5])
+site_filter_min <- as.double(args[6])
+MR_percent <- as.double(args[7])
+UMR_percent <- as.double(args[8])
 
 ######## de bug
 # args
