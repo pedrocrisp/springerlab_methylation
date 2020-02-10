@@ -38,6 +38,7 @@ module load R/3.3.2
 #get job ID
 #use sed, -n supression pattern space, then 'p' to print item number {PBS_ARRAYID} eg 2 from {list}
 ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
+sample_to_crunch=$ID
 
 echo sample being mapped is $ID
 
