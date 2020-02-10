@@ -40,7 +40,6 @@ module load R/3.3.2
 ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 
 echo sample being mapped is $ID
-echo genome is $genome_prefix
 
 mkdir -p sites
 cd sites
@@ -75,7 +74,7 @@ module load bedtools
 
 less ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_UMTs.bed
 echo ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_UMTs.bed
-# 
+#
 sort -k1,1 -k2,2n ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_UMTs.bed > ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_UMTs_sorted.bed
 
 bedtools merge -i ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_UMTs_sorted.bed > ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_UMTs_sorted_merge.bed
@@ -128,14 +127,14 @@ bedtools closest \
 # less ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/NDs_Olap_UMTs.bed
 
 # Read into R and filter to NDs with distance 1 and two closest tiles. Adjacent tiles have a distance of 1
-# Add a size colum 
+# Add a size colum
 # and also a column for their co-ordinates
 # remove black listed regions on second pass
 R -f ~/gitrepos/springerlab_methylation/SeqCap/21-call-umrs_mod3.R \
 --args $reference_100bp_tiles $sample_list $annotation_suffix $chrom_sizes_path $coverage_filter_min $site_filter_min $MR_percent $UMR_percent
 
 ### Merge NDs inbetween UMTs
-# combine files and sort 
+# combine files and sort
 cat \
 ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_UMTs_merge_size_sorted.bed \
 ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_NDs_between_UMTs.bed \
@@ -144,8 +143,8 @@ ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunc
 # less ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/input.bed
 # q
 
-# merge making a delimited list of cols 4 and 5 - 
-# col 4 this mark tiles with NDs in them and also retain metafeatures for subsequent filtering for distal tiles and 
+# merge making a delimited list of cols 4 and 5 -
+# col 4 this mark tiles with NDs in them and also retain metafeatures for subsequent filtering for distal tiles and
 # col 5 this is the siz of the tile - I want to filter after merging to mark any tile that is more than 30% (?) NDs - probably have to work backwards to un merge these???
 
 bedtools merge -i ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/input.bed \
@@ -168,7 +167,7 @@ R -f ~/gitrepos/springerlab_methylation/SeqCap/21-call-umrs_mod4.R \
 
 ### Merge filtered NDs inbetween UMTs
 
-# combine files and sort 
+# combine files and sort
 cat \
 ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_UMTs_merge_size_sorted.bed \
 ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunch}_NDs_between_UMTs_pct_filtered.bed \
@@ -176,8 +175,8 @@ ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/${sample_to_crunc
 
 # less ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/input2.bed
 # q
-# merge making a delimited list of cols 4 and 5 - 
-# col 4 this mark tiles with NDs in them and also retain metafeatures for subsequent filtering for distal tiles and 
+# merge making a delimited list of cols 4 and 5 -
+# col 4 this mark tiles with NDs in them and also retain metafeatures for subsequent filtering for distal tiles and
 # col 5 this is the siz of the tile - I want to filter after merging to mark any tile that is more than 30% (?) NDs - probably have to work backwards to un merge these???
 
 bedtools merge -i ${sample_to_crunch}${annotation_suffix}/mC_UMT_annotation_beds/input2.bed \
