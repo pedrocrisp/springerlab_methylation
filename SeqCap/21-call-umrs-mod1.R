@@ -5,6 +5,10 @@
 #2020-20-7
 #R script to call UMRs using a 100bp tile
 
+# Notes
+# Currently this script removes the organelles by using filter(!chr %in% c("Mt", "Pt")) - this may not catch all organelles 
+# post filtering may be required to remove organelles or other undesired contigs
+
 #Sample selection #####
 args <- commandArgs(trailingOnly=TRUE)
 print(args)
@@ -32,7 +36,7 @@ annotation_suffix = paste0("_mC_domains_II",
                            "_cov_",coverage_filter_min, 
                            "_sites_",site_filter_min, 
                            "_MR_",MR_percent,
-                           "_UTR_",UMR_percent)
+                           "_UMR_",UMR_percent)
 ########
 ###########################
 library(tidyverse)
@@ -185,6 +189,7 @@ print(merged_mC, n = 20)
 
 # remove organelles
 merged_mC %>% distinct(chr)
+merged_mC %>% distinct(chr) %>% filter(grepl(paste("M", "P", sep = "|"), chr))
 merged_mC_sans_orgs <- merged_mC %>% filter(!chr %in% c("Mt", "Pt")) 
 
 merged_mC_sans_orgs
@@ -345,5 +350,34 @@ write.table(mC_domains2, paste0(out_dir_beds,"/", sample_to_crunch, "_mC_domains
                                 "_sites_",site_filter_min, 
                                 "_MR_",MR_percent,
                                 "_UMR_",UMR_percent,".txt"), sep = "\t", quote = F, row.names = F, col.names = T)
+
+
+## Make UMT and ND only bed files
+# make UMR only bedfile
+mC_domains2 %>% distinct(chr)
+
+############# UMTs
+# subset to UMTs
+mC_domains2 %>% distinct(domain)
+UMT_only <- mC_domains2 %>% 
+  filter(domain == "Unmethylated") %>%
+  mutate(start = start-1) %>%
+  select(chr:end, domain)
+UMT_only
+# 1,071,742
+
+write.table(UMT_only, paste0(out_dir_beds, "/",sample_to_crunch, "_UMTs.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
+
+############# Missing data nd no sites
+# subset to NDs
+ND_only <- mC_domains2 %>% 
+  filter(domain %in% c("Missing_Data", "no_sites")) %>%
+  mutate(start = start-1) %>%
+  select(chr:end, domain)
+ND_only
+# 3,372,705
+
+write.table(ND_only, paste0(out_dir_beds, "/", sample_to_crunch, "_NDs.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
+
 
 
