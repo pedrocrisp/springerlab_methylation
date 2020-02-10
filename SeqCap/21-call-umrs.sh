@@ -41,9 +41,6 @@ ID="$(/bin/sed -n ${PBS_ARRAYID}p ${LIST})"
 
 echo sample being mapped is $ID
 
-mkdir -p sites
-cd sites
-
 annotation_suffix=_mC_domains_II_cov_5_sites_2_MR_${MR_percent}_UMR_${UMR_percent}
 
 ########## Run MODULE 1 DOMAINS #################
