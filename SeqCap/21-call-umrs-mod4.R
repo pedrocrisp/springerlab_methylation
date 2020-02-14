@@ -214,9 +214,11 @@ ND_between_UMTs <- ND_overlaps %>%
 max(ND_between_UMTs$size)
 # 100?
 
+print0("ND between UMRs passed pct filtering to be merged with UMRs: #")
 ND_between_UMTs
 # 55477
 
+print0("ND between UMRs passed pct filtering to be merged with UMRs: MB")
 ND_between_UMTs %>% summarise(MB = sum(size)/1000000)
 
 write.table(ND_between_UMTs, paste0(out_dir_beds, "/", sample_to_crunch, "_NDs_between_UMTs_pct_filtered.bed"), sep = "\t", quote = F, row.names = F, col.names = F)

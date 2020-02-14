@@ -152,8 +152,10 @@ write.table(ND_overlaps_sizes_pct_size, paste0(out_dir_beds, "/", sample_to_crun
 
 # total UMR MB calculation
 
-ND_overlaps_sizes_pct_size %>% group_by(size_cat) %>% summarise(MB = sum(size)/1000000)
+summary_out <- ND_overlaps_sizes_pct_size %>% group_by(size_cat) %>% summarise(MB = sum(size)/1000000)
+write.table(summary_out, paste0(out_dir, "/", sample_to_crunch, "_UMTs_merge_NDs_filtered_size_summary.tsv"), sep = "\t", quote = F, row.names = F, col.names = T)
 
+summary_out
 # large - 86.8 (maize 95.9 MB)
 # med - 36.1 (maize 27.2 MB)
 # small - 18.0
