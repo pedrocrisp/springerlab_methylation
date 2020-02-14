@@ -115,11 +115,11 @@ g <- ND_between_UMTs %>% filter(size < 1000) %>%
 
 ggsave(plot = g, filename = paste0(out_dir, "/ND_inbetweens_size_density.pdf"), h = 3, w = 3)
 
-print0("ND between UMRs to be tested for merging with UMRs: #")
+print(paste0("ND between UMRs to be tested for merging with UMRs: #"))
 ND_between_UMTs
 # 55477
 
-print0("D between UMRs to be tested for merging with UMRs: MB")
+print(paste0("D between UMRs to be tested for merging with UMRs: MB"))
 ND_between_UMTs %>% summarise(MB = sum(size)/1000000)
 
 write.table(ND_between_UMTs, paste0(out_dir_beds, "/", sample_to_crunch, "_NDs_between_UMTs.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
