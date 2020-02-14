@@ -142,23 +142,16 @@ ND_overlaps_sizes_pct_size <- ND_overlaps_sizes_pct %>%
   mutate(ID = ifelse(size_cat == "small", "UMT", paste("UMR", 1:n(), sep = "_")))
 
 #size summary
-ND_overlaps_sizes_pct_size %>% group_by(size_cat) %>% summarise(n = n()) %>% mutate(pct = n/sum(n)*100)
+summary_out <- ND_overlaps_sizes_pct_size %>% group_by(size_cat) %>% summarise(n = n(), MB = sum(size)/1000000) %>% mutate(pct = n/sum(n)*100)
 # 56% small
+write.table(summary_out, paste0(out_dir, "/", sample_to_crunch, "_UMTs_merge_NDs_filtered_size_summary_pct.tsv"), sep = "\t", quote = F, row.names = F, col.names = T)
+
+summary_out
 
 ND_overlaps_sizes_pct_size %>% filter(size_cat == "small") %>% summarise(n = n())
 
 # write output
 write.table(ND_overlaps_sizes_pct_size, paste0(out_dir_beds, "/", sample_to_crunch, "_UMTs_merge_NDs_filtered_size.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
-
-# total UMR MB calculation
-
-summary_out <- ND_overlaps_sizes_pct_size %>% group_by(size_cat) %>% summarise(MB = sum(size)/1000000)
-write.table(summary_out, paste0(out_dir, "/", sample_to_crunch, "_UMTs_merge_NDs_filtered_size_summary.tsv"), sep = "\t", quote = F, row.names = F, col.names = T)
-
-summary_out
-# large - 86.8 (maize 95.9 MB)
-# med - 36.1 (maize 27.2 MB)
-# small - 18.0
 
 ND_overlaps_sizes_pct_size %>% filter(!size_cat == "small") %>% summarise(MB = sum(size)/1000000)
 # 118
@@ -168,6 +161,21 @@ ND_overlaps_sizes_pct_size %>% filter(!size_cat == "small") %>% summarise(MB = s
 UMR_only_out <- ND_overlaps_sizes_pct_size %>%
   filter(UMT_cat == "UMR")
 # 112,872
+
+# Can I pull genome size measure here?
+# read in domains summary
+domains <- read_tsv(paste0(out_dir, "/", sample_to_crunch, annotation_suffix, "_freq.tsv"), col_names =T)
+domains_slim <- domains %>% mutate(category = "whole_genome") %>% select(category, domain, total, MB)
+
+# read in ND tiles used summary
+ND <- read_tsv(paste0(out_dir, "/", sample_to_crunch, "_NDs_between_UMTs_pct_filtered_summary.tsv"), col_names =T)
+ND_slim <- ND %>% mutate(category = "ND_merged_in", domain = "ND") %>% rename(total = ND_passed_filtering_for_merging) %>% select(category, domain, total, MB)
+# calculate 
+
+summary_out <- UMR_only_out %>% summarise(total = n(), MB = sum(size)/1000000) %>% mutate(category = "UMR", domain = "UMR") %>% select(category, domain, total, MB)
+summary_out_genome <- summary_out %>% bind_rows(domains_slim, ND_slim)
+summary_out_genome
+write.table(summary_out_genome, paste0(out_dir, "/", sample_to_crunch, "_UMR_and_genome_summary_MB.tsv"), sep = "\t", quote = F, row.names = F, col.names = T)
 
 # write
 write.table(UMR_only_out, paste0(out_dir_beds, "/", sample_to_crunch, "_UMRs.bed"), sep = "\t", quote = F, row.names = F, col.names = F)

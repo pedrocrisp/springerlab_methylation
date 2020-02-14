@@ -46,7 +46,7 @@ annotation_suffix=_mC_domains_II_cov_${coverage_filter_min}_sites_${site_filter_
 
 ########## Run MODULE 1 DOMAINS #################
 
-# Run R module to creat 100bp tile bed file
+# Run R module to Call mC domains vII
 R -f ~/gitrepos/springerlab_methylation/SeqCap/21-call-umrs-mod1.R \
 --args $reference_100bp_tiles $ID $annotation_suffix $chrom_sizes_path $coverage_filter_min $site_filter_min $MR_percent $UMR_percent
 

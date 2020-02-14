@@ -221,5 +221,9 @@ ND_between_UMTs
 print(paste0("ND between UMRs passed pct filtering to be merged with UMRs: MB"))
 ND_between_UMTs %>% summarise(MB = sum(size)/1000000)
 
+ND_between_UMTs_summary <- ND_between_UMTs %>% summarise(ND_passed_filtering_for_merging = n(), MB = sum(size)/1000000)
+ND_between_UMTs_summary
+write.table(ND_between_UMTs_summary, paste0(out_dir, "/", sample_to_crunch, "_NDs_between_UMTs_pct_filtered_summary.tsv"), sep = "\t", quote = F, row.names = F, col.names = T)
+
 write.table(ND_between_UMTs, paste0(out_dir_beds, "/", sample_to_crunch, "_NDs_between_UMTs_pct_filtered.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
 

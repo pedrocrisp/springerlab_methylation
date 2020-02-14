@@ -85,5 +85,9 @@ mC_domains_merge <- mC_domains_merge %>%
          size = end-start,
          location = paste0(chr, ":", start, ":", end))
 
+UMT_summary <- mC_domains_merge %>% summarise(total_merged_UMT = n(), total_MB = sum(size)/1000000)
+UMT_summary
+write.table(UMT_summary, paste0(out_dir, "/", sample_to_crunch, "_UMTs_merge_total_MB_summary.tsv"), sep = "\t", quote = F, row.names = F, col.names = T)
+
 write.table(mC_domains_merge, paste0(out_dir_beds, "/", sample_to_crunch, "_UMTs_merge_size.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
 

@@ -119,8 +119,12 @@ print(paste0("ND between UMRs to be tested for merging with UMRs: #"))
 ND_between_UMTs
 # 55477
 
-print(paste0("D between UMRs to be tested for merging with UMRs: MB"))
+print(paste0("ND between UMRs to be tested for merging with UMRs: MB"))
 ND_between_UMTs %>% summarise(MB = sum(size)/1000000)
+
+ND_between_UMTs_summary <- ND_between_UMTs %>% summarise(total_merged_NDs_for_testing = n(), MB = sum(size)/1000000)
+ND_between_UMTs_summary
+write.table(ND_between_UMTs_summary, paste0(out_dir, "/", sample_to_crunch, "_NDs_between_UMTs_summary.tsv"), sep = "\t", quote = F, row.names = F, col.names = T)
 
 write.table(ND_between_UMTs, paste0(out_dir_beds, "/", sample_to_crunch, "_NDs_between_UMTs.bed"), sep = "\t", quote = F, row.names = F, col.names = F)
 
