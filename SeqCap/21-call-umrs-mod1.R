@@ -279,7 +279,7 @@ mC_domains_freq <- mC_domains2 %>%
          MB = total*100/1000000)
 mC_domains_freq
 
-write.table(mC_domains_freq, paste0(out_dir,"/", sample_to_crunch, "_", annotation_suffix,
+write.table(mC_domains_freq, paste0(out_dir,"/", sample_to_crunch, annotation_suffix,
                                     "_freq.tsv"), sep = "\t", quote = F, row.names = F, col.names = T)
 
 # plot
