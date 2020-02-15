@@ -24,19 +24,19 @@ UMR_percent <- as.double(args[8])
 
 ######## de bug
 # args
-reference_100bp_tiles = "/home/springer/pcrisp/ws/refseqs/maize/sites/Zea_mays.AGPv4_100bp_tiles_zBased_sites_counts.txt"
-sample_to_crunch = "generations_merged"
-
-# filter args
-coverage_filter_min = 3
-site_filter_min = 2
-MR_percent = 0.4
-UMR_percent = 0.1
-annotation_suffix = paste0("_mC_domains_II",
-                          "_cov_",coverage_filter_min,
-                          "_sites_",site_filter_min,
-                          "_MR_",MR_percent,
-                          "_UMR_",UMR_percent)
+# reference_100bp_tiles = "/home/springer/pcrisp/ws/refseqs/maize/sites/Zea_mays.AGPv4_100bp_tiles_zBased_sites_counts.txt"
+# sample_to_crunch = "generations_merged"
+# 
+# # filter args
+# coverage_filter_min = 3
+# site_filter_min = 2
+# MR_percent = 0.4
+# UMR_percent = 0.1
+# annotation_suffix = paste0("_mC_domains_II",
+#                           "_cov_",coverage_filter_min,
+#                           "_sites_",site_filter_min,
+#                           "_MR_",MR_percent,
+#                           "_UMR_",UMR_percent)
 ########
 ###########################
 library(tidyverse)
