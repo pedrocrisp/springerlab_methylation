@@ -97,7 +97,7 @@ bedtools closest \
 
 
 ########## R module to parse overlaps #################
-R -f ~/gitrepos/springerlab_methylation/utils/90-annotate_genomic-features.R \
+R -f ~/gitrepos/springerlab_methylation/utils/90-annotate-genomic-features.R \
 --args $sample_name $outputFile $reference_annotation_mame $summary_output_folder
 
 # to run
