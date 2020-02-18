@@ -24,10 +24,10 @@ summary_output_folder <- args[4]
 
 ######## de bug
 # args
-sample_prefix <- "Sbicolor_SRR3286309_UMRs_6col"
-inputFile <- "Sbicolor_SRR3286309_UMRs_6col_olap_gene_v1.bed"
-reference_annotation_mame= "gene_v1"
-summary_output_folder="~/ws/analysis/ongoing/mC_sorghum/analysis/Sbicolor_SRR3286309_mC_domains_II_cov_3_sites_2_MR_0.4_UMR_0.1/mC_UMT_annotation"
+# sample_prefix <- "Sbicolor_SRR3286309_UMRs_6col"
+# inputFile <- "Sbicolor_SRR3286309_UMRs_6col_olap_gene_v1.bed"
+# reference_annotation_mame= "gene_v1"
+# summary_output_folder="~/ws/analysis/ongoing/mC_sorghum/analysis/Sbicolor_SRR3286309_mC_domains_II_cov_3_sites_2_MR_0.4_UMR_0.1/mC_UMT_annotation"
 # 
 
 ########
@@ -45,8 +45,6 @@ text_size_theme_8 <- theme(axis.text=element_text(size=8),
                            axis.text.x=element_text(angle = 45, hjust = 1),
                            legend.title=element_text(size=8),
                            legend.text=element_text(size=8))
-
-sample_name
 
 ###########################
 # Module #1
