@@ -59,13 +59,13 @@ summary_output_folder=$4
 umr_sample_prefix="$(basename $umr_bed_file)"
 echo $umr_sample_prefix
 
-umr_outputFile="${umr_sample_prefix%%.*}_access.bed"
+umr_outputFile="${umr_sample_prefix%%.*}_access"
 echo $umr_outputFile
 
 acr_sample_prefix="$(basename $acr_bed_file)"
 echo $acr_sample_prefix
 
-acr_outputFile="${acr_sample_prefix%%.*}_meth.bed"
+acr_outputFile="${acr_sample_prefix%%.*}_meth"
 echo $acr_outputFile
 
 mkdir -p logs
@@ -85,11 +85,11 @@ bedtools closest \
 -t all \
 -D b \
 -g $chrom_sizes_file \
-> tmp_${acr_outputFile}
+> tmp_${acr_outputFile}.bed
 
 ########## R module to parse ACR annotation output #################
 R -f ~/gitrepos/springerlab_methylation/utils/91-overlap-UMR-ACR-R1.R \
---args $acr_outputFile $summary_output_folder $acr_sample_prefix
+--args $acr_outputFile $summary_output_folder
 
 ########## overlaps UMR annotation #################
 
@@ -101,11 +101,11 @@ bedtools closest \
 -t all \
 -D b \
 -g $chrom_sizes_file \
-> tmp_${umr_outputFile}
+> tmp_${umr_outputFile}.bed
 
 ########## R module to parse UMR annotation output #################
 R -f ~/gitrepos/springerlab_methylation/utils/91-overlap-UMR-ACR-R2.R \
---args $umr_outputFile $summary_output_folder $umr_sample_prefix
+--args $umr_outputFile $summary_output_folder
 
 # to run
 # bash ~/gitrepos/springerlab_methylation/utils/91-overlap-UMR-ACR.sh \

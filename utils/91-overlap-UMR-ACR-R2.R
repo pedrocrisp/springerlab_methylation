@@ -15,7 +15,6 @@ print(args)
 # sample_name <- args[1]
 inputFile <- args[1]
 summary_output_folder <- args[2]
-outputFile <- args[3]
 
 ######## de bug
 # args
@@ -45,7 +44,7 @@ text_size_theme_8 <- theme(axis.text=element_text(size=8),
 ###########################
 
 
-overlaps <- read_tsv(paste0("tmp_", inputFile),
+overlaps <- read_tsv(paste0("tmp_", inputFile, ".bed"),
                      col_names = c("chr", "start", "end", "feature", "ID", "optional",
                                    "b_chr", "b_start", "b_end", "b_summit", "b_location", "b_cat", "distance"), 
                      cols(chr = col_character(),
@@ -69,7 +68,7 @@ overlaps_distinct_collapsed %>% group_by(chr, start) %>% summarise(n = n()) %>% 
 overlaps_distinct_collapsed
 # 21,267
 
-write.table(overlaps_distinct_collapsed, inputFile, sep = "\t", quote = F, row.names = F, col.names = F)
+write.table(overlaps_distinct_collapsed, paste0(inputFile, ".bed"), sep = "\t", quote = F, row.names = F, col.names = F)
 
 overlaps_distinct_collapsed_filtered_summary <- overlaps_distinct_collapsed %>% 
   group_by(accessibility) %>% 
@@ -83,6 +82,6 @@ overlaps_distinct_collapsed_filtered_summary
 # 1 non_UMR      1804       5.62
 # 2 UMR         30307      94.4 
 
-write_tsv(overlaps_distinct_collapsed_filtered_summary, paste0(summary_output_folder, "/", outputFile, "access_summary.tsv"))
+write_tsv(overlaps_distinct_collapsed_filtered_summary, paste0(summary_output_folder, "/", inputFile, "_summary.tsv"))
 
 
