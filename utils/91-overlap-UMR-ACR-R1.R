@@ -15,6 +15,7 @@ print(args)
 # sample_name <- args[1]
 inputFile <- args[1]
 summary_output_folder <- args[2]
+outputFile <- args[3]
 
 ######## de bug
 # args
@@ -80,5 +81,5 @@ overlaps_distinct_collapsed_filtered_summary
 # 1 non_UMR      1804       5.62
 # 2 UMR         30307      94.4 
 
-write_tsv(overlaps_distinct_collapsed_filtered_summary, paste0(summary_output_folder, "/", inputFile, "_summary.tsv"))
+write_tsv(overlaps_distinct_collapsed_filtered_summary, paste0(summary_output_folder, "/", outputFile, "meth_summary.tsv"))
 
