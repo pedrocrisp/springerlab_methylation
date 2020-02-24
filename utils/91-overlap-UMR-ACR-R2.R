@@ -58,7 +58,7 @@ overlaps
 # I think most of the multi-overlaps will be at distance zero - this pipeline is mainly aimed at resolving that. Its possible some will be due to a peak being exactally the same length between an upstrea and downstream gene, but I might just pick one for these because I think they will be rare
 # get distinct tile + feature rows
 overlaps_distinct_collapsed <- overlaps %>%
-  mutate(accessibility = ifelse(distance == 0, "aACR", "iACR")) %>%
+  mutate(accessibility = ifelse(distance == 0, "aUMR", "iUMR")) %>%
   select(chr, start, end, feature, ID, optional, accessibility) %>%
   distinct()
 # 32,620 
