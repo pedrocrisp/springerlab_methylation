@@ -88,7 +88,7 @@ bedtools closest \
 > tmp_${acr_outputFile}
 
 ########## R module to parse ACR annotation output #################
-R -f ~/gitrepos/springerlab_methylation/utils/91-overlap-UMR-ACR_R1.R \
+R -f ~/gitrepos/springerlab_methylation/utils/91-overlap-UMR-ACR-R1.R \
 --args $acr_outputFile $summary_output_folder
 
 ########## overlaps UMR annotation #################
@@ -104,7 +104,7 @@ bedtools closest \
 > tmp_${umr_outputFile}
 
 ########## R module to parse UMR annotation output #################
-R -f ~/gitrepos/springerlab_methylation/utils/91-overlap-UMR-ACR_R2.R \
+R -f ~/gitrepos/springerlab_methylation/utils/91-overlap-UMR-ACR-R2.R \
 --args $umr_outputFile $summary_output_folder
 
 # to run
