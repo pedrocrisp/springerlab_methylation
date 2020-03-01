@@ -265,7 +265,7 @@ mkdir -p ConversionRate
 
         #remove bedGraph it is large and not really required
         # keep bigWigs
-        # rm -rv BSMAPratio/${ID}*.bedGraph
+        rm -rv BSMAPratio/${ID}*.bedGraph
 
         ########################
 
