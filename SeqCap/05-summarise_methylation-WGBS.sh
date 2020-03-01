@@ -209,6 +209,10 @@ mkdir -p ConversionRate
         bedGraphToBigWig "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bedGraph" ${chrom_sizes_file} \
         "BSMAPratio/${ID}_BSMAP_out_subcontext_CTT.bigWig"
 
+        #remove bedGraph it is large and not really required
+        # keep bigWigs
+        rm -rv BSMAPratio/${ID}*.bedGraph
+
         ########################
                 ## Now make stranded bigWigs for IGV
                 # make both sets, decided later which is prefered
@@ -261,7 +265,7 @@ mkdir -p ConversionRate
 
         #remove bedGraph it is large and not really required
         # keep bigWigs
-        rm -rv BSMAPratio/${ID}*.bedGraph
+        # rm -rv BSMAPratio/${ID}*.bedGraph
 
         ########################
 
