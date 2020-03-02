@@ -55,18 +55,30 @@ summary_output_folder=$4
 # chrom_sizes_file=~/ws/refseqs/sorghum/Sbicolor_454_v3.0.1_sorted.chrom.sizes
 # summary_output_folder=~/ws/analysis/ongoing/mC_sorghum/analysis/Sbicolor_SRR3286309_mC_domains_II_cov_3_sites_2_MR_0.4_UMR_0.1/mC_UMT_annotation
 
-#basename
-umr_sample_prefix="$(basename $umr_bed_file)"
-echo $umr_sample_prefix
+tmp_umr_sample_prefix="$(basename $umr_bed_file)"
+umr_sample_prefix="${tmp_umr_sample_prefix%%.*}"
 
-umr_outputFile="${umr_sample_prefix%%.*}_access"
+tmp_acr_sample_prefix="$(basename $acr_bed_file)"
+acr_sample_prefix="${tmp_acr_sample_prefix%%.*}"
+
+# optput file names
+umr_outputFile=${umr_sample_prefix}_olap_${acr_sample_prefix}
 echo $umr_outputFile
-
-acr_sample_prefix="$(basename $acr_bed_file)"
-echo $acr_sample_prefix
-
-acr_outputFile="${acr_sample_prefix%%.*}_meth"
+acr_outputFile=${acr_sample_prefix}_olap_${umr_sample_prefix}
 echo $acr_outputFile
+
+#basename
+#umr_sample_prefix="$(basename $umr_bed_file)"
+#echo $umr_sample_prefix
+
+#umr_outputFile="${umr_sample_prefix%%.*}_access"
+#echo $umr_outputFile
+
+#acr_sample_prefix="$(basename $acr_bed_file)"
+#echo $acr_sample_prefix
+
+#acr_outputFile="${acr_sample_prefix%%.*}_meth"
+#echo $acr_outputFile
 
 mkdir -p logs
 
