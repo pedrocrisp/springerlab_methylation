@@ -61,7 +61,7 @@ overlaps_distinct_collapsed <- overlaps %>%
   select(chr, start, end, summit, location, cat, methylation) %>%
   distinct() %>%
   group_by(chr, start, end) %>%
-  summarise(methylation2 = paste(methylation, collapse = "_"))
+  summarise(methylation2 = paste(methylation, collapse = "_")) %>%
   distinct()
 # methylation2 
   
