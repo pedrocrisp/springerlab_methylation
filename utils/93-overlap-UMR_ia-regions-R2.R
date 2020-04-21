@@ -58,7 +58,7 @@ overlaps
 # get distinct tile + feature rows
 overlaps_distinct_collapsed <- overlaps %>%
   mutate(overlap = ifelse(distance == 0, UMR_type, "no_overlap")) %>%
-  select(chr, start, end, feature, ID, overlap) %>%
+  select(chr, start, end, feature, ID, UMR_type, overlap) %>%
   distinct()
 # 32,620 
 
@@ -70,8 +70,9 @@ overlaps_distinct_collapsed
 write.table(overlaps_distinct_collapsed, paste0(inputFile, ".bed"), sep = "\t", quote = F, row.names = F, col.names = F)
 
 overlaps_distinct_collapsed_filtered_summary <- overlaps_distinct_collapsed %>% 
-  group_by(overlap) %>% 
+  group_by(overlap, UMR_type) %>% 
   summarise(n = n()) %>%
+  group_by(UMR_type) %>%
   mutate(percentage = n/sum(n)*100)
 
 overlaps_distinct_collapsed_filtered_summary
