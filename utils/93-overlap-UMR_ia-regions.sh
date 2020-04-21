@@ -48,12 +48,12 @@ chrom_sizes_file=$3
 summary_output_folder=$4
 
 # debug
-cd ~/ws/analysis/ongoing/UMRs_maize/analysis/generations_merged_mC_domains_II_cov_3_sites_2_MR_0.4_UMR_0.1/mC_UMT_annotation_beds
-sample_name=generations_merged
-umr_bed_file=generations_merged_UMRs_access_6col.bed
-acr_bed_file=~/ws/analysis/ongoing/UMRs_maize/ChIP_data/DAP_seq_27_TFs_Galli2018_Ricci2019.bed
-chrom_sizes_file=/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel_sorted.chrom.sizes
-summary_output_folder=~/ws/analysis/ongoing/UMRs_maize/analysis/generations_merged_mC_domains_II_cov_3_sites_2_MR_0.4_UMR_0.1/mC_UMT_annotation
+#cd ~/ws/analysis/ongoing/UMRs_maize/analysis/generations_merged_mC_domains_II_cov_3_sites_2_MR_0.4_UMR_0.1/mC_UMT_annotation_beds
+#sample_name=generations_merged
+#umr_bed_file=generations_merged_UMRs_access_6col.bed
+#acr_bed_file=~/ws/analysis/ongoing/UMRs_maize/ChIP_data/DAP_seq_27_TFs_Galli2018_Ricci2019.bed
+#chrom_sizes_file=/home/springer/pcrisp/ws/refseqs/maize/Zea_mays.AGPv4.dna.toplevel_sorted.chrom.sizes
+#summary_output_folder=~/ws/analysis/ongoing/UMRs_maize/analysis/generations_merged_mC_domains_II_cov_3_sites_2_MR_0.4_UMR_0.1/mC_UMT_annotation
 
 tmp_umr_sample_prefix="$(basename $umr_bed_file)"
 umr_sample_prefix="${tmp_umr_sample_prefix%%.*}"
