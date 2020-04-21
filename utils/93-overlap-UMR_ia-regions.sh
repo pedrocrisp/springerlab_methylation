@@ -16,7 +16,7 @@ set -x
 # Column3: stop
 # Column4: name (or other desired info) eg UMR or ACR
 # Column5: optional eg ID eg UMR_21
-# Column6: optional eg size
+# Column6: UMR type - this is the key grouping column
 
 # Output
 # Column1: chromosome
