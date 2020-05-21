@@ -271,6 +271,14 @@ TOTAL_READS=$(grep 'Total number of sequences analysed:' $i | cut -d " " -f 6)
 echo -e "$SAMPLE\t$TOTAL_READS"
 done > total_reads_summary.tsv
 
+d logs/..._01-trim_galore_swift
+
+for i in $(ls 01-trim_galore_swift_e*); do
+SAMPLE=$(grep '+ ID=' $i | cut -d "=" -f 2)
+TOTAL_READS=$(grep 'Total number of sequences analysed:' $i | cut -d " " -f 6)
+echo -e "$SAMPLE\t$TOTAL_READS"
+done > total_reads_summary.tsv
+
 ```
 
 ## Bsmap Scraper
