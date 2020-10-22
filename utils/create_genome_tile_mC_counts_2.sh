@@ -49,7 +49,7 @@ cd sites
 
 # Run R module to creat 100bp tile bed file
 # This module now take an existing interval file and parses that the runs the rest of the pipeline
-R -f ~/gitrepos/springerlab_methylation/utils/create_genome_tile_mC_counts_tiles.R \
+R -f ~/gitrepos/springerlab_methylation/utils/create_genome_tile_mC_counts_2_tiles.R \
 --args $genome_prefix
 
 ##########              #################
@@ -141,7 +141,7 @@ csvtk -t freq -k -f 1,2 > ${genome}_100bp_tiles_sites_Ns.tsv
 ##########              #################
 
 # Run R module to count sites in each 100 bp tile
-R -f ~/gitrepos/springerlab_methylation/utils/create_genome_tile_mC_counts.R \
+R -f ~/gitrepos/springerlab_methylation/utils/create_genome_tile_mC_counts_2.R \
 --args $genome_prefix
 
 echo finished summarising
