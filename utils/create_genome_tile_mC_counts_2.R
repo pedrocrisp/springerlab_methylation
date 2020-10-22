@@ -238,7 +238,8 @@ reference_tiles_C_sites_bed
 
 # replace NAs with 0
 
-reference_tiles_C_sites_bed <- reference_tiles_C_sites_bed %>% replace(., is.na(.), 0)
+reference_tiles_C_sites_bed <- reference_tiles_C_sites_bed %>% replace(., is.na(.), 0) %>%
+mutate( N = if("N" %in% colnames(.)) N else c(0))
 
 reference_tiles_C_sites_bed %>% group_by(N) %>% summarise(tile_Ns = n())
 
