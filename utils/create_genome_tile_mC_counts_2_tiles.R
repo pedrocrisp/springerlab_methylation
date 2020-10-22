@@ -21,7 +21,7 @@ options(scipen=999)
 ###########################
 
 # read in bed file
-reference_tiles <- <- read_tsv(paste0("../", genome, ".bed"), col_names = c("chr", "start", "end"))
+reference_tiles <- read_tsv(paste0("../", genome, ".bed"), col_names = c("chr", "start", "end"))
 reference_tiles_2 <- reference_tiles %>%
   mutate(start_zBased = start-1)
 
