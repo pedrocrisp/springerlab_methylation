@@ -62,7 +62,7 @@ module load bedtools/2.27.1
 genome=$genome_prefix
 echo $genome
 
-bedtools getfasta -fi ../${genome}.fa \
+bedtools getfasta -fi $genome_reference \
 -bed ${genome}_100pb_tiles_for_sites_calc.bed \
 > ${genome}_100bp_tiles.fa
 
